@@ -1,9 +1,14 @@
+import './header.scss';
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faGripLines } from '@fortawesome/free-solid-svg-icons';
+
+import Button from './Button.jsx';
 
 function Header() {
     return (
-        <nav>
-            <ul>
+        <nav className="main-menu">
+            <ul className="menu">
                 <li>
                     <Link to="/">ArtisansHub</Link>
                 </li>
@@ -17,12 +22,19 @@ function Header() {
                     <Link to="/">Contact</Link>
                 </li>
             </ul>
-            <ul>
+            <ul className="">
                 <li>
-                    <Link to="/connexion">Connexion</Link>
+                    <Button link="/connexion" className="btn-secondary">
+                        Se connecter
+                    </Button>
                 </li>
                 <li>
-                    <Link to="/inscription">Créer un compte</Link>
+                    <Button link="/inscription" className="btn-primary">
+                        Créer un compte
+                    </Button>
+                </li>
+                <li>
+                    <FontAwesomeIcon icon={faGripLines} />
                 </li>
             </ul>
         </nav>

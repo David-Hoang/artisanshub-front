@@ -1,0 +1,7 @@
+@use "../assets/scss/variables" as mxn;
+@use "../assets/scss/mixins" as var;
+
+nav ul {
+    list-style: none;
+    padding-left: 0;
+}

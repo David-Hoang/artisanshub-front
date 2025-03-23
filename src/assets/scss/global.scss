@@ -1,4 +1,5 @@
-$text-black : #18181b;
+@use "mixins" as mxn;
+@use 'variables' as var;
 
 :root {
     //Font setting
@@ -26,5 +27,13 @@ $text-black : #18181b;
 
 body {
     margin: 0;
-    color : $text-black;
+    color : var.$text-black;
+}
+
+.btn-primary {
+    @include mxn.btn('primary');
+}
+
+.btn-secondary {
+    @include mxn.btn
 }

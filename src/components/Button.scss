@@ -1,0 +1,10 @@
+@use "../assets/scss/mixins" as mxn;
+@use "../assets/scss/variables" as var;
+
+.btn-primary {
+    @include mxn.btn("primary");
+}
+
+.btn-secondary {
+    @include mxn.btn("secondary");
+}
