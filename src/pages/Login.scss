@@ -1,0 +1,52 @@
+@use "../assets/scss/variables" as var;
+@use "../assets/scss/mixins" as mxn;
+@use "../assets/scss/extends" as ext;
+
+main {
+    background-color : var.$tiertiary;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding : 1rem;
+
+    & form.login-form {
+        @extend .shadow-thin;
+
+        background-color: var.$full-white;
+        padding : 2.5rem;
+        border : 1px #e6e6e6 solid ;
+        border-radius: var.$rounded-md;
+
+        max-width : 28rem;
+
+        display : flex;
+        flex-direction: column;
+        gap : 2rem;
+
+        & div.login-header {
+            display: flex;
+            flex-direction: column;
+            gap : var.$gap-sm;
+
+            & h1 {
+                font-size : var.$txt-2xl;
+                font-weight: 400;
+                text-align: center;
+            }
+
+            & h2 {
+                font-size : var.$txt-base;
+                font-weight: 400;
+                text-align: center;
+                color : var.$gray;
+            }
+        }
+
+        & div.login-input{
+            display: flex;
+            flex-direction: column;
+            gap : var.$gap-sm;
+        }
+    }
+}

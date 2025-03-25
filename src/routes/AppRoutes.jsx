@@ -1,15 +1,21 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Homepage from "../pages/Homepage";
+import { Routes, Route } from "react-router-dom";
 import Register from "../pages/Register";
+import App from "../App";
 import Login from "../pages/Login";
+import Header from "../components/Header.jsx";
+import Footer from '../components/Footer.jsx';
 
 function AppRouters() {
     return (
-        <Routes>
-            <Route path="/" element={<Homepage />} />
-            <Route path="/inscription" element={<Register />} />
-            <Route path="/connexion" element={<Login />} />
-        </Routes>
+        <>
+            <Header />
+            <Routes>
+                <Route path="/" element={<App />} />
+                <Route path="/inscription" element={<Register />} />
+                <Route path="/connexion" element={<Login />} />
+            </Routes>
+            <Footer />
+        </>
     );
 }
 

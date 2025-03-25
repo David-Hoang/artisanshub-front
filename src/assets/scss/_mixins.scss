@@ -1,28 +1,33 @@
 @use "variables" as var;
+@use "extends" as ext;
 
-@mixin btn ($color : primary){
-    padding : 0.6rem 1.2rem;
-    border : none;
+@mixin btn ($color : primary, $fs : var.$txt-base){
+    padding : 0.6rem;
+
+    font-size : $fs;
+
     border-radius: var.$rounded-md;
 
     transition-duration: 0.1s;
     transition-property: background-color;
+
+    cursor: pointer;
+
     @if $color == primary {
         background : var.$primary;
-        color : var.$text-white;
+        color : var.$full-white;
+        border : none;
         &:hover {
             background: rgba(var.$primary, 0.8);
         }
+
     } @else if $color == secondary {
         background : var.$secondary;
-        color : var.$text-black;
+        color : var.$black;
+        border : 1px #e6e6e6 solid;
         &:hover {
             background: rgba(var.$secondary-hover, 0.8);
         }
-    }
-}
 
-@mixin flexCol {
-    display : flex;
-    flex-direction: column;
+    }
 }

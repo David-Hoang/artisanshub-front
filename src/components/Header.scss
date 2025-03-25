@@ -1,7 +1,80 @@
-@use "../assets/scss/variables" as mxn;
-@use "../assets/scss/mixins" as var;
+@use "../assets/scss/variables" as var;
+@use "../assets/scss/mixins" as mxn;
+@use "../assets/scss/extends" as ext;
 
-nav ul {
-    list-style: none;
-    padding-left: 0;
+header {
+    height : 4rem;
+
+    display : flex;
+    align-items: center;
+    justify-content: center;
+
+    & nav.main-menu{
+        width: 100%;
+        max-width: var.$bp-xl;
+        padding : 0 2rem;
+
+        display : flex;
+        align-items: center;
+        justify-content: space-between;
+
+        & div.logo-menu {
+            
+            display : flex;
+            align-items: center;
+            gap : var.$gap-base;
+            
+            & a.logo-name {
+                font-size : var.$txt-2xl;
+                font-weight : 700;
+                text-decoration: none;
+                letter-spacing: 0.1rem;
+
+                &:visited {
+                    color : var.$black;
+                }
+            }
+
+            & ul.menu {
+                display : none;
+                
+                @media screen and (min-width : var.$bp-md) {
+                    
+                    display: flex;
+                    list-style: none;
+                    padding-left: 0;
+                    align-items: center;
+                    gap: var.$gap-xl;
+
+            
+                    & li a {
+                        font-size : var.$txt-sm;
+                        text-decoration: none;
+                        color : var.$gray;
+                        &:visited {
+                            color : var.$gray;
+                        }
+                    }
+                }
+            }
+        }
+
+        & ul.auth-btn {
+            display : none;
+            list-style: none;
+            padding-left: 0;
+
+            @media screen and (min-width : var.$bp-md) {
+                display: flex;
+                align-items: center;
+                gap : var.$gap-xl;
+            }
+        }
+
+        & button.toggle-menu {
+            @media screen and (min-width : var.$bp-md) {
+                display : none;
+            }
+        }
+    }
 }

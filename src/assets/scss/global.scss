@@ -1,5 +1,6 @@
-@use "mixins" as mxn;
 @use 'variables' as var;
+@use "mixins" as mxn;
+@use "extends" as ext;
 
 :root {
     //Font setting
@@ -27,13 +28,15 @@
 
 body {
     margin: 0;
-    color : var.$text-black;
-}
+    color : var.$black;
 
-.btn-primary {
-    @include mxn.btn('primary');
-}
+    & #root {
+        display : flex;
+        flex-direction: column;
+        min-height: 100vh;
 
-.btn-secondary {
-    @include mxn.btn
+        & main {
+            flex-grow: 1;
+        }
+    }
 }

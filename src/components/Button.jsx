@@ -1,17 +1,19 @@
 import './Button.scss';
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-function Button({children, link, className}) {
+function Button({children, className, link, ...props}) {
+    let navigate = useNavigate();
+
     return (
-        link ? 
-            <Link to={link}>
-                <button type="button" className={className}>
-                    {children}
-                </button>
-            </Link>
-        :
-        <button className="btn">
+        <button 
+            className={className}
+            type="button" 
+            onClick={link ? () => navigate(link) : props.onClick} 
+            {...props}
+        >
+            
             {children}
+
         </button>
     );
 }
