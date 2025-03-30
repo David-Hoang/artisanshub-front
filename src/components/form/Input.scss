@@ -1,6 +1,6 @@
-@use "../assets/scss/variables" as var;
-@use "../assets/scss/mixins" as mxn;
-@use "../assets/scss/extends" as ext;
+@use "../../assets/scss/variables" as var;
+@use "../../assets/scss/mixins" as mxn;
+@use "../../assets/scss/extends" as ext;
 
 div.input-wrapper {
     display: flex;
@@ -9,6 +9,7 @@ div.input-wrapper {
 
     & label {
         font-size : var.$txt-sm;
+        font-weight: 500;
     }
 
     & input {

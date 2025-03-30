@@ -3,9 +3,15 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGripLines } from '@fortawesome/free-solid-svg-icons';
 
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext.jsx";
+
 import Button from './Button.jsx';
 
 function Header() {
+
+    const {isLogged, handleLogout} = useContext(AuthContext)
+    
     return (
         <header>
             <nav className="main-menu">
@@ -26,16 +32,30 @@ function Header() {
                 </div>
 
                 <ul className="auth-btn">
-                    <li>
-                        <Button link="/connexion" className="btn-secondary">
-                            Se connecter
-                        </Button>
-                    </li>
-                    <li>
-                        <Button link="/inscription" className="btn-primary">
-                            Créer un compte
-                        </Button>
-                    </li>
+                    { isLogged ? (
+                        <>
+                            <li>
+                                <Button link="/connexion" className="btn-secondary">
+                                    Mon profil
+                                </Button>
+                            </li>
+                            <li>
+                                <Button className="btn-primary" onClick={handleLogout}>
+                                    Déconnexion
+                                </Button>
+                            </li>
+                        </>
+                    )
+                    : ( 
+                        <>
+                            <li>
+                                <Link to="/connexion" className="a-btn-secondary">Se connecter</Link>
+                            </li>
+                            <li>
+                                <Link to="/inscription" className="a-btn-primary">S'inscrire</Link>
+                            </li>
+                        </>
+                    )}
                 </ul>
 
                 <Button className="toggle-menu">

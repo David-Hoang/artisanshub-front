@@ -1,34 +1,28 @@
-import Button from "../components/Button.jsx";
-import Input from "../components/Input.jsx";
 import "./Login.scss";
 
-import axios from "axios";
-import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useState, useContext } from "react";
+import { AuthContext } from "../context/AuthContext.jsx";
+
+import SpinLoader from "../components/form/SpinLoader.jsx";
+import Button from "../components/Button.jsx";
+import Input from "../components/form/Input.jsx";
+import Error from "../components/Error.jsx";
+
 
 function Login() {
-    const apiBase = import.meta.env.VITE_MAIN_API_URI;
+    const {handleLogin, errorEmail, errorPassword, errorMessage, isLoading} = useContext(AuthContext);
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const fetching = await axios.post(apiBase + "/api/login", {
-                    email,
-                    password,
-                })
-                console.log(fetching.data);
-        } catch (error) {
-            console.log(error);
-        }
-    };
+    const [formLogin, setFormLogin] = useState({
+        email : "",
+        password : ""
+    })
 
     return (
         <main>
-            <form onSubmit={handleSubmit} className="login-form">
+            <form onSubmit={(e) => handleLogin(e, formLogin)} className="login-form">
                 <div className="login-header">
-                    <h1>Connecter vous à ArtisansHub</h1>
+                    <h1>Connectez vous à ArtisansHub</h1>
                     <h2>Entrez vos identifiants</h2>
                 </div>
 
@@ -38,24 +32,38 @@ function Login() {
                         id="email"
                         type="email"
                         placeholder="john.doe@gmail.com"
+                        autoComplete="off"
                         onChange={(e) => {
-                            setEmail(e.target.value);
+                            setFormLogin({...formLogin, email : e.target.value})
                         }}
                     />
+                    {errorEmail && <Error>{errorEmail}</Error>}
 
                     <Input
                         label="Mot de passe"
                         id="password"
                         type="password"
                         onChange={(e) => {
-                            setPassword(e.target.value);
+                            setFormLogin({...formLogin, password : e.target.value})
                         }}
                     />
+
+                    {errorPassword && <Error>{errorPassword}</Error>}
                 </div>
 
-                <Button className="btn-primary" type="submit">
-                    Se connecter
+                <Button className="btn-primary" type="submit" disabled={isLoading}>
+                    {isLoading ? (
+                            <SpinLoader />
+                        ) : (
+                            <>
+                                Se connecter
+                            </>
+                        ) 
+                    }
                 </Button>
+                {errorMessage && <Error>{errorMessage}</Error>}
+                <p>Vous n'avez pas de compte ? <Link to="/inscription">Créez-en un !</Link></p>
+
             </form>
         </main>
     );

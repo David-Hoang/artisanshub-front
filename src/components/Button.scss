@@ -3,10 +3,10 @@
 @use "../assets/scss/extends" as ext;
 
 
-.btn-primary {
-    @include mxn.btn("primary", var.$txt-xs);
+button.btn-primary {
+    @include mxn.btn("primary", var.$txt-sm);
 }
 
-.btn-secondary {
-    @include mxn.btn("secondary", var.$txt-xs);
+button.btn-secondary {
+    @include mxn.btn("secondary", var.$txt-sm);
 }

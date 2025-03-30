@@ -3,16 +3,19 @@
 @use "../assets/scss/extends" as ext;
 
 header {
-    height : 4rem;
-
     display : flex;
     align-items: center;
     justify-content: center;
+    z-index: 10;
+
+    -webkit-box-shadow: 0 -1px 3px rgba(57, 63, 72, 0.3);
+    -moz-box-shadow: 0 -1px 3px rgba(57, 63, 72, 0.3);
+    box-shadow: 0 -1px 3px rgba(57, 63, 72, 0.3);
 
     & nav.main-menu{
         width: 100%;
         max-width: var.$bp-xl;
-        padding : 0 2rem;
+        padding : 1.5rem 2rem;
 
         display : flex;
         align-items: center;
@@ -25,10 +28,11 @@ header {
             gap : var.$gap-base;
             
             & a.logo-name {
-                font-size : var.$txt-2xl;
+                font-size : var.$txt-3xl;
                 font-weight : 700;
                 text-decoration: none;
                 letter-spacing: 0.1rem;
+                color : var.$black;
 
                 &:visited {
                     color : var.$black;
@@ -48,7 +52,7 @@ header {
 
             
                     & li a {
-                        font-size : var.$txt-sm;
+                        font-size : var.$txt-base;
                         text-decoration: none;
                         color : var.$gray;
                         &:visited {
@@ -63,6 +67,14 @@ header {
             display : none;
             list-style: none;
             padding-left: 0;
+
+            & a.a-btn-secondary {
+                @include mxn.a-btn("secondary", var.$txt-sm);
+            }
+
+            & a.a-btn-primary {
+                @include mxn.a-btn("primary", var.$txt-sm);
+            }
 
             @media screen and (min-width : var.$bp-md) {
                 display: flex;

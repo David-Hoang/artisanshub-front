@@ -1,14 +1,19 @@
+import "./assets/scss/global.scss";
+
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router";
 
-import './assets/scss/global.scss';
 import AppRouters from "./routes/AppRoutes.jsx";
 
+import { AuthController } from "./context/AuthContext.jsx";
+
 createRoot(document.getElementById("root")).render(
-    <StrictMode>
+    // <StrictMode>
         <BrowserRouter>
-            <AppRouters />
+            <AuthController>
+                <AppRouters />
+            </AuthController>
         </BrowserRouter>
-    </StrictMode>
+    // </StrictMode>
 );

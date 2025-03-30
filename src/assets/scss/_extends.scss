@@ -1,9 +1,9 @@
 @use "./variables" as var;
 
 .main-input {
-    padding : 0.6rem 1rem;
+    padding : 0.5rem 1rem;
     border : 1px #e6e6e6 solid ;
-    border-radius: var.$rounded-md;
+    border-radius: var.$rounded-lg;
 }
 
 .shadow-thin {

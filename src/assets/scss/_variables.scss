@@ -15,7 +15,9 @@ $bp-xl : 80rem; /* 1280px pc */
 $bp-2xl : 96rem; /* 1536px wide screen*/
 
 //radius
-$rounded-md : 0.375rem; /* 4px */
+$rounded-sm : 0.25rem; /* 4px */
+$rounded-md : 0.375rem; /* 6px */
+$rounded-lg : 0.5rem; /* 8px */
 
 //typography
 $txt-xs: 0.75rem; /* 12px */

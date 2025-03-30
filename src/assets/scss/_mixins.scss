@@ -1,12 +1,48 @@
 @use "variables" as var;
 @use "extends" as ext;
 
-@mixin btn ($color : primary, $fs : var.$txt-base){
-    padding : 0.6rem;
+@mixin btn ($color : primary, $fs : var.$txt-sm){
+    font-family: "Nunito", Avenir, Helvetica, Arial, sans-serif;
+    padding : 0.5rem 1rem;
 
     font-size : $fs;
+    font-weight : 500;
+    border-radius: var.$rounded-lg;
 
-    border-radius: var.$rounded-md;
+    transition-duration: 0.1s;
+    transition-property: background-color;
+
+    cursor: pointer;
+
+    @if $color == primary {
+        background-color : var.$primary;
+        color : var.$full-white;
+        border : 1px var.$primary solid;
+        &:hover {
+            background: rgba(var.$primary, 0.8);
+        }
+
+    } @else if $color == secondary {
+        background-color : var.$secondary;
+        color : var.$black;
+        border : 1px #e6e6e6 solid;
+        &:hover {
+            background: rgba(var.$secondary-hover, 0.8);
+        }
+
+    }
+}
+
+@mixin a-btn ($color : primary, $fs : var.$txt-sm){
+    padding : 0.5rem 1rem;
+
+    display: inline-block;
+
+    font-size : $fs;
+    font-weight : 500;
+    text-decoration: none;
+
+    border-radius: var.$rounded-lg;
 
     transition-duration: 0.1s;
     transition-property: background-color;
