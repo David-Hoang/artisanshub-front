@@ -15,6 +15,8 @@ main {
         flex-direction: column;
         gap : 2rem;
 
+        max-width: 34rem;
+
         & div.register-header {
             display: flex;
             flex-direction: column;
@@ -37,26 +39,37 @@ main {
         & div.register-roles {
             display : flex;
             flex-direction: column;
-            gap : var.$gap-sm;
-
-            @media screen and (min-width : var.$bp-sm) {
-                flex-direction: row;
-                justify-content: center;
-                gap : var.$gap-xl;
-            }
-
-            & div.radio-wrapper {
+            gap : var.$gap-xs;
+            & div.choice-role{
                 display : flex;
-                align-items: center;
-                gap : var.$gap-xs;
-                
-                & input, label {
-                    cursor: pointer;
+                flex-direction: column;
+                gap : var.$gap-sm;
+
+                @media screen and (min-width : var.$bp-sm) {
+                    flex-direction: row;
+                    justify-content: center;
+                    gap : var.$gap-xl;
                 }
 
-                & label {
-                    font-size : var.$txt-sm;
-                    font-weight: 500;
+                & div.radio-wrapper {
+                    display : flex;
+                    align-items: center;
+                    gap : var.$gap-xs;
+                    
+                    & input, label {
+                        cursor: pointer;
+                    }
+
+                    & label {
+                        font-size : var.$txt-sm;
+                        font-weight: 500;
+                    }
+                }
+            }
+            
+            @media screen and (min-width : var.$bp-sm) {
+                & div.error-wrapper{
+                    align-self: center;
                 }
             }
         }
@@ -66,11 +79,12 @@ main {
             flex-direction: column;
             gap : var.$gap-base;
             width: 100%;
+
             @media screen and (min-width : var.$bp-sm) {
                 flex-direction: row;
             }
 
-            & div.input-wrapper {
+            & div.wrapper {
                 width: 100%;
             }
 
@@ -83,6 +97,10 @@ main {
             
             @media screen and (min-width : var.$bp-sm) {
                 flex-direction: row;
+            }
+
+            & div.wrapper {
+                width: 100%;
             }
 
             & div.input-wrapper {
@@ -99,7 +117,7 @@ main {
                 flex-direction: row;
             }
 
-            & div.input-wrapper {
+            & div.wrapper {
                 width: 100%;
             }
         }
@@ -113,7 +131,7 @@ main {
                 flex-direction: row;
             }
 
-            & div.input-wrapper {
+            & div.wrapper {
                 width: 100%;
             }
         }
@@ -121,28 +139,35 @@ main {
         & div.register-region {
             display: flex;
             flex-direction: column;
-            gap : var.$gap-base;
+            gap : var.$gap-xs;
             padding: 1rem 0;
 
-            @media screen and (min-width : var.$bp-sm) {
-                flex-direction: row;
-                align-items: center;
+            & div.select-wrapper {
+                display: flex;
+                flex-direction: column;
+                gap : var.$gap-base;
+
+                @media screen and (min-width : var.$bp-sm) {
+                    flex-direction: row;
+                    align-items: center;
+                }
+
+                & label {
+                    font-size : var.$txt-sm;
+                    font-weight: 500;
+                }
+
+                & #regions {
+                    padding: 0.5rem 1rem;
+                    background-color : var.$secondary;
+                    color : var.$black;
+                    border : 1px #e6e6e6 solid;
+                    border-radius: var.$rounded-lg;
+                    cursor: pointer;
+                    width: 100%;
+                }
             }
 
-            & label {
-                font-size : var.$txt-sm;
-                font-weight: 500;
-            }
-
-            & #regions {
-                padding: 0.5rem 1rem;
-                background-color : var.$secondary;
-                color : var.$black;
-                border : 1px #e6e6e6 solid;
-                border-radius: var.$rounded-lg;
-                cursor: pointer;
-                width: 100%;
-            }
         }
 
         & p {

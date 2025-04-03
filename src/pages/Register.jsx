@@ -24,7 +24,6 @@ function Register() {
             console.log(error);
         }
     }
-    console.log(errorFormRegister);
     
     useEffect(() => {
         fetchRegions()
@@ -39,56 +38,85 @@ function Register() {
                 </div>
 
                 <div className="register-roles">
-                    <div className="radio-wrapper">
-                        <input type="radio" name="role" id="client" value="client" onChange={(e) => { setFormRegister({...formRegister, role : e.target.value}) }} />
-                        <label htmlFor="client">Je suis un client</label>
+                    <div className="choice-role">
+                        <div className="radio-wrapper">
+                            <input type="radio" name="role" id="client" value="client" onChange={(e) => { setFormRegister({...formRegister, role : e.target.value}) }} />
+                            <label htmlFor="client">Je suis un client</label>
+                        </div>
+                        
+                        <div className="radio-wrapper">
+                            <input type="radio" name="role" id="craftsman" value="craftsman" onChange={(e) => { setFormRegister({...formRegister, role : e.target.value}) }} />
+                            <label htmlFor="craftsman">Je suis un artisan</label>
+                        </div>
                     </div>
-                    
-                    <div className="radio-wrapper">
-                        <input type="radio" name="role" id="craftsman" value="craftsman" onChange={(e) => { setFormRegister({...formRegister, role : e.target.value}) }} />
-                        <label htmlFor="craftsman">Je suis un artisan</label>
-                    </div>
+                    {errorFormRegister.role && <Error>{errorFormRegister.role}</Error>}
                 </div>
-                {errorFormRegister.role && <Error>{errorFormRegister.role}</Error>}
 
                 <div className="register-name">
-                    <Input label="Nom*" id="last_name" type="text" placeholder="Doe" autoComplete="off"
-                        onChange={(e) => { setFormRegister({...formRegister, last_name : e.target.value}) }}/>
-                    <Input label="Prénom*" id="first_name" type="text" placeholder="John" autoComplete="off"
-                        onChange={(e) => { setFormRegister({...formRegister, first_name : e.target.value}) }}/>
+                    <div className="wrapper">
+                        <Input label="Nom*" id="last_name" type="text" placeholder="Doe" autoComplete="off"
+                            onChange={(e) => { setFormRegister({...formRegister, last_name : e.target.value}) }}/>
+                        {errorFormRegister.last_name && <Error>{errorFormRegister.last_name}</Error>}
+                    </div>
+                    <div className="wrapper">
+                        <Input label="Prénom*" id="first_name" type="text" placeholder="John" autoComplete="off"
+                            onChange={(e) => { setFormRegister({...formRegister, first_name : e.target.value}) }}/>
+                        {errorFormRegister.first_name && <Error>{errorFormRegister.first_name}</Error>}
+                    </div>
                 </div>
 
                 <div className="register-contact">
-                    <Input label="Téléphone*" id="phone" type="phone"
-                        onChange={(e) => { setFormRegister({...formRegister, phone : e.target.value}) }}/>
+                    <div className="wrapper">
+                        <Input label="Téléphone*" id="phone" type="phone"
+                            onChange={(e) => { setFormRegister({...formRegister, phone : e.target.value}) }}/>
+                        {errorFormRegister.phone && <Error>{errorFormRegister.phone}</Error>}
+                    </div>
                     <Input label="Pseudo" id="username" type="text"
                         onChange={(e) => { setFormRegister({...formRegister, username : e.target.value}) }}/>
                 </div>
 
                 <div className="register-auth">
-                    <Input label="Email*" id="email" type="email" placeholder="john.doe@gmail.com"
-                        onChange={(e) => { setFormRegister({...formRegister, email : e.target.value}) }}/>
-                    <Input label="Mot de passe*" id="password" type="password"
-                        onChange={(e) => { setFormRegister({...formRegister, password : e.target.value}) }}/>
+                    <div className="wrapper">
+                        <Input label="Email*" id="email" type="email" placeholder="john.doe@gmail.com"
+                            onChange={(e) => { setFormRegister({...formRegister, email : e.target.value}) }}/>
+                        {errorFormRegister.email && <Error>{errorFormRegister.email}</Error>}
+                    </div>
+                    <div className="wrapper">
+                        <Input label="Mot de passe*" id="password" type="password"
+                            onChange={(e) => { setFormRegister({...formRegister, password : e.target.value}) }}/>
+                        {errorFormRegister.password && <Error>{errorFormRegister.password}</Error>}
+                    </div>
                 </div>
 
                 <div className="register-location">
-                    <Input label="Ville*" id="city" type="text"
-                        onChange={(e) => { setFormRegister({...formRegister, city : e.target.value}) }}/>
-                    <Input label="Code postal*" id="zipcode" type="text"
-                        onChange={(e) => { setFormRegister({...formRegister, zipcode : e.target.value}) }}/>
+                    <div className="wrapper">
+                        <Input label="Ville*" id="city" type="text"
+                            onChange={(e) => { setFormRegister({...formRegister, city : e.target.value}) }}/>
+                        {errorFormRegister.city && <Error>{errorFormRegister.city}</Error>}
+                    </div>
+
+                    <div className="wrapper">
+                        <Input label="Code postal*" id="zipcode" type="text"
+                            onChange={(e) => { setFormRegister({...formRegister, zipcode : e.target.value}) }}/>
+                        {errorFormRegister.zipcode && <Error>{errorFormRegister.zipcode}</Error>}
+                    </div>
+
                 </div>
                 
                 <div className="register-region">
-                    <label htmlFor="regions">Region*</label>
-                    <select name="region" id="regions" onChange={(e) => { setFormRegister({...formRegister, region : e.target.value}) }}>
-                        <option value="">Sélectionnez votre région</option>
-                        {regions && 
-                            regions.map( (region, key) => (
-                                <option key={key} value={region}>{region}</option>
-                            ))
-                        }
-                    </select>
+                    <div className="select-wrapper">
+                        <label htmlFor="regions">Region*</label>
+                        <select name="region" id="regions" onChange={(e) => { setFormRegister({...formRegister, region : e.target.value}) }}>
+                            <option value="">Sélectionnez votre région</option>
+                            {regions &&
+                                regions.map( (region, key) => (
+                                    <option key={key} value={region}>{region}</option>
+                                ))
+                            }
+                        </select>
+                    </div>
+                    {errorFormRegister.region && <Error>{errorFormRegister.region}</Error>}
+
                 </div>
                 
                 <Button type="submit" className="btn-primary">

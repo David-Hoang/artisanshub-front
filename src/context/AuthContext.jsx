@@ -122,8 +122,10 @@ export const AuthController = ({ children }) => {
     const handleRegister = async (e) => {
         e.preventDefault();
 
-        setErrorFormRegister({ first_name: "", last_name: "", email: "", username: "", password: "", phone: "", city: "", region: "", zipcode: ""});
+        //Reset errors
+        setErrorFormRegister({ first_name: "", last_name: "", email: "", password: "", phone: "", city: "", region: "", zipcode: ""});
 
+        //Validation : Get formRegister and return object of error if no value in input
         const validateInputs = Object.entries(formRegister).reduce((acc, [key, value]) => {
             if (!value) {
                 switch (key) {
@@ -137,7 +139,7 @@ export const AuthController = ({ children }) => {
                         acc[key] = "Veuillez renseigner votre adresse email.";
                         break;
                     case "role":
-                        acc[key] = "Veuillez choisir votre profil";
+                        acc[key] = "Veuillez sélectionner votre profil.";
                         break;
                     case "password":
                         acc[key] = "Veuillez renseigner un mot de passe.";
@@ -149,23 +151,21 @@ export const AuthController = ({ children }) => {
                         acc[key] = "Veuillez renseigner votre ville.";
                         break;
                     case "region":
-                        acc[key] = "Veuillez séléectionner votre région.";
+                        acc[key] = "Veuillez sélectionner votre région.";
                         break;
                     case "zipcode":
                         acc[key] = "Veuillez renseigner votre code postal.";
                         break;
                     default:
-                        acc[key] = "Ce champs est requis."
                         break;
                 }
-            } else {
-                acc[key] = ""; // Sinon, pas d'erreur
             }
             return acc;
         }, {});
-    
-        if(Object.values(validateInputs).some((error) => error !== "")) {
-            setErrorFormRegister(validateInputs);
+
+        //Check if there is at least 1 error
+        if(Object.keys(validateInputs).length > 0){
+            setErrorFormRegister(validateInputs)
             return;
         }
 
@@ -173,9 +173,9 @@ export const AuthController = ({ children }) => {
 
         try {
             const register = await axios.post(apiBase + "/api/register", formRegister);
-
+            
             if(register.status === 201){
-                let userToken = response.data.token;
+                let userToken = register.data.token;
                 localStorage.setItem("artisansHubUserToken", userToken);
                 setIsLogged(true);
                 setIsLoading(true);
@@ -183,7 +183,16 @@ export const AuthController = ({ children }) => {
             }
         } catch (error) {
             setIsLoading(false);
-            console.log(error.response);
+
+            // console.log(error);
+            const { status, data } = error.response;
+
+            if(status === 422) {
+                console.log(data.errors.phone);
+                // const getErrors = Object.entries(data.errors).reduce
+                // setErrorFormRegister()
+            }
+            
         } finally {
             setIsLoading(false);
         }
@@ -209,7 +218,7 @@ export const AuthController = ({ children }) => {
                 errorMessage,
 
                 isLoading
-            }}
+                }}
             >
             {/* Force not return the children before the end of loading */}
             {!controllerLoading && children} 
