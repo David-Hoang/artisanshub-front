@@ -1,0 +1,92 @@
+@use "../assets/scss/variables" as var;
+@use "../assets/scss/mixins" as mxn;
+@use "../assets/scss/extends" as ext;
+
+header {
+    display : flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+
+    -webkit-box-shadow: 0 -1px 3px rgba(57, 63, 72, 0.3);
+    -moz-box-shadow: 0 -1px 3px rgba(57, 63, 72, 0.3);
+    box-shadow: 0 -1px 3px rgba(57, 63, 72, 0.3);
+
+    & nav.main-menu{
+        width: 100%;
+        max-width: var.$bp-xl;
+        padding : 1.5rem 2rem;
+
+        display : flex;
+        align-items: center;
+        justify-content: space-between;
+
+        & div.logo-menu {
+            
+            display : flex;
+            align-items: center;
+            gap : var.$gap-base;
+            
+            & a.logo-name {
+                font-size : var.$txt-3xl;
+                font-weight : 700;
+                text-decoration: none;
+                letter-spacing: 0.1rem;
+                color : var.$black;
+
+                &:visited {
+                    color : var.$black;
+                }
+            }
+
+            & ul.menu {
+                display : none;
+                
+                @media screen and (min-width : var.$bp-md) {
+                    
+                    display: flex;
+                    list-style: none;
+                    padding-left: 0;
+                    align-items: center;
+                    gap: var.$gap-xl;
+
+            
+                    & li a {
+                        font-size : var.$txt-base;
+                        text-decoration: none;
+                        color : var.$gray;
+                        &:visited {
+                            color : var.$gray;
+                        }
+                    }
+                }
+            }
+        }
+
+        & ul.auth-btn {
+            display : none;
+            list-style: none;
+            padding-left: 0;
+
+            & a.a-btn-secondary {
+                @include mxn.a-btn("secondary", var.$txt-sm);
+            }
+
+            & a.a-btn-primary {
+                @include mxn.a-btn("primary", var.$txt-sm);
+            }
+
+            @media screen and (min-width : var.$bp-md) {
+                display: flex;
+                align-items: center;
+                gap : var.$gap-xl;
+            }
+        }
+
+        & button.toggle-menu {
+            @media screen and (min-width : var.$bp-md) {
+                display : none;
+            }
+        }
+    }
+}

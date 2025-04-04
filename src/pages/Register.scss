@@ -1,0 +1,180 @@
+@use "../assets/scss/variables" as var;
+@use "../assets/scss/mixins" as mxn;
+@use "../assets/scss/extends" as ext;
+
+main {
+
+    & form.register-form {
+        @extend .shadow-thin;
+        background-color: var.$full-white;
+        padding : 2.5rem;
+        border : 1px #e6e6e6 solid ;
+        border-radius: var.$rounded-lg;
+
+        display : flex;
+        flex-direction: column;
+        gap : 2rem;
+
+        width: 34rem;
+
+        & div.register-header {
+            display: flex;
+            flex-direction: column;
+            gap : var.$gap-sm;
+
+            & h1 {
+                font-size : var.$txt-2xl;
+                font-weight: 600;
+                text-align: center;
+            }
+
+            & h2 {
+                font-size : var.$txt-base;
+                font-weight: 400;
+                text-align: center;
+                color : var.$gray;
+            }
+        }
+
+        & div.register-roles {
+            display : flex;
+            flex-direction: column;
+            gap : var.$gap-xs;
+            & div.choice-role{
+                display : flex;
+                flex-direction: column;
+                gap : var.$gap-sm;
+
+                @media screen and (min-width : var.$bp-sm) {
+                    flex-direction: row;
+                    justify-content: center;
+                    gap : var.$gap-xl;
+                }
+
+                & div.radio-wrapper {
+                    display : flex;
+                    align-items: center;
+                    gap : var.$gap-xs;
+                    
+                    & input, label {
+                        cursor: pointer;
+                    }
+
+                    & label {
+                        font-size : var.$txt-sm;
+                        font-weight: 500;
+                    }
+                }
+            }
+            
+            @media screen and (min-width : var.$bp-sm) {
+                & div.error-wrapper{
+                    align-self: center;
+                }
+            }
+        }
+
+        & div.register-name {
+            display : flex;
+            flex-direction: column;
+            gap : var.$gap-base;
+            width: 100%;
+
+            @media screen and (min-width : var.$bp-sm) {
+                flex-direction: row;
+            }
+
+            & div.wrapper {
+                width: 100%;
+            }
+
+        }
+
+        & div.register-contact {
+            display : flex;
+            flex-direction: column;
+            gap : var.$gap-base;
+            
+            @media screen and (min-width : var.$bp-sm) {
+                flex-direction: row;
+            }
+
+            & div.wrapper {
+                width: 100%;
+            }
+
+            & div.input-wrapper {
+                width: 100%;
+            }
+        }
+
+        & div.register-auth {
+            display : flex;
+            flex-direction: column;
+            gap : var.$gap-base;
+            
+            @media screen and (min-width : var.$bp-sm) {
+                flex-direction: row;
+            }
+
+            & div.wrapper {
+                width: 100%;
+            }
+        }
+
+        & div.register-location {
+            display : flex;
+            flex-direction: column;
+            gap : var.$gap-base;
+            
+            @media screen and (min-width : var.$bp-sm) {
+                flex-direction: row;
+            }
+
+            & div.wrapper {
+                width: 100%;
+            }
+        }
+
+        & div.register-region {
+            display: flex;
+            flex-direction: column;
+            gap : var.$gap-xs;
+            padding: 1rem 0;
+
+            & div.select-wrapper {
+                display: flex;
+                flex-direction: column;
+                gap : var.$gap-base;
+
+                @media screen and (min-width : var.$bp-sm) {
+                    flex-direction: row;
+                    align-items: center;
+                }
+
+                & label {
+                    font-size : var.$txt-sm;
+                    font-weight: 500;
+                }
+
+                & #regions {
+                    padding: 0.5rem 1rem;
+                    background-color : var.$secondary;
+                    color : var.$black;
+                    border : 1px #e6e6e6 solid;
+                    border-radius: var.$rounded-lg;
+                    cursor: pointer;
+                    width: 100%;
+                }
+            }
+
+        }
+
+        & p {
+            font-size: var.$txt-sm;
+            & a {
+                color : var.$primary;
+            }
+        }
+    }
+}

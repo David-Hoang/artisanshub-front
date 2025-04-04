@@ -1,0 +1,19 @@
+@use "../../assets/scss/variables" as var;
+@use "../../assets/scss/mixins" as mxn;
+@use "../../assets/scss/extends" as ext;
+
+div.input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap : var.$gap-sm;
+
+    & label {
+        font-size : var.$txt-sm;
+        font-weight: 500;
+    }
+
+    & input {
+        @extend .main-input;
+    }
+
+}
