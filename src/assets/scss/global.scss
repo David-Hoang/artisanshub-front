@@ -26,6 +26,10 @@
     box-sizing: border-box;
 }
 
+input::placeholder {
+    color : rgba(var.$black, 0.2);
+}
+
 a:visited {
     color : var.$black;
 }

@@ -31,7 +31,7 @@ export const AuthController = ({ children }) => {
         zipcode : "",
     })
 
-    const [errorFormRegister, setErrorFormRegister] = useState({
+    const defaultErrorForm = {
         first_name : "",
         last_name : "",
         email : "",
@@ -41,7 +41,9 @@ export const AuthController = ({ children }) => {
         city : "",
         region : "",
         zipcode : "",
-    })
+    };
+
+    const [errorFormRegister, setErrorFormRegister] = useState(defaultErrorForm);
     
     useEffect(() => {
         const token = localStorage.getItem("artisansHubUserToken");
@@ -123,8 +125,8 @@ export const AuthController = ({ children }) => {
         e.preventDefault();
 
         //Reset errors
-        setErrorFormRegister({ first_name: "", last_name: "", email: "", password: "", phone: "", city: "", region: "", zipcode: ""});
-
+        setErrorFormRegister(defaultErrorForm);
+        
         //Validation : Get formRegister and return object of error if no value in input
         const validateInputs = Object.entries(formRegister).reduce((acc, [key, value]) => {
             if (!value) {
@@ -178,19 +180,21 @@ export const AuthController = ({ children }) => {
                 let userToken = register.data.token;
                 localStorage.setItem("artisansHubUserToken", userToken);
                 setIsLogged(true);
-                setIsLoading(true);
                 navigate('/');
             }
         } catch (error) {
-            setIsLoading(false);
 
-            // console.log(error);
             const { status, data } = error.response;
 
             if(status === 422) {
-                console.log(data.errors.phone);
-                // const getErrors = Object.entries(data.errors).reduce
-                // setErrorFormRegister()
+                // Convert the array of error into an object
+                const getErrors = Object.entries(data.errors).reduce((validateError, validate) => {
+                    validateError[validate[0]] = validate[1][0];
+                    return validateError;
+                }, {})
+                setErrorFormRegister(getErrors);
+            }else {
+                setErrorMessage("Une erreur est survenue durant la création de votre compte.")
             }
             
         } finally {
