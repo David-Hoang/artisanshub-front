@@ -22,12 +22,12 @@ export const AuthController = ({ children }) => {
         first_name : "",
         last_name : "",
         email : "",
-        username : null,
-        role : null,
+        username : "",
+        role : "",
         password : "",
         phone : "",
         city : "",
-        region : null,
+        region : "",
         zipcode : "",
     })
 
