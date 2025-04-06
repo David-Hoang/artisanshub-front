@@ -1,3 +1,124 @@
 @use "../assets/scss/variables" as var;
 @use "../assets/scss/mixins" as mxn;
 @use "../assets/scss/extends" as ext;
+
+footer {
+    background-color: #374151;
+    color : var.$full-white;
+
+    display : flex;
+    justify-content : center;
+
+    & div.footer-wrapper {
+        max-width: var.$bp-xl;
+        padding : 3rem 2rem;
+
+        display : flex;
+        flex-direction: column;
+        gap : 2.5rem;
+        
+        & div.footer-main-section {
+            display : flex;
+            flex-direction: column;
+            gap : 2.5rem;
+
+            & div.footer-about-us, div.footer-list {
+                text-align: center;
+                & h4 {
+                    padding-bottom: 0.3rem;
+                }
+                & p {
+                    font-size: var.$txt-sm;
+                    color : rgba(var.$full-white, 0.5);
+                }
+            }
+
+            & div.footer-list {
+                display : flex;
+                justify-content: space-evenly;
+                
+                & div ul {
+                    display : flex;
+                    flex-direction: column;
+                    & li a {
+                        color : rgba(var.$full-white, 0.5);
+                        font-size: var.$txt-sm;
+
+                        &:hover {
+                            color : var.$full-white;
+                            transition: all 0.1s;
+                        }
+
+                    }
+                }
+            }
+
+        }
+
+        & div.footer-social {
+        display : flex;
+        justify-content : center;
+        
+            & ul{
+                display : flex;
+                align-items: center;
+                gap : 2rem;
+
+                & li a {
+                    display : flex ;
+                    align-items: center;
+                    justify-content: center;
+                    font-size : var.$txt-lg;
+                    color : var.$full-white;
+
+                    border : var.$full-white 1px solid;
+                    
+                    border-radius: 100%;
+                    width : 2.25rem;
+                    height : 2.25rem;
+
+                    &:hover {
+                        color : var.$gray;
+                        transition: all 0.1s;
+                    }
+                }
+            }
+        }
+        
+        & div.footer-signature {
+            font-size: var.$txt-sm;
+            text-align: center;
+            color : rgba(var.$full-white, 0.5);
+
+        }
+
+        @media screen and (min-width : var.$bp-md) {
+
+            & div.footer-main-section {
+                flex-direction: row;
+
+                & div.footer-about-us {
+                    text-align: start;
+                }
+
+                & div.footer-about-us{
+                    width : 40%
+                }
+
+                & div.footer-list {
+                    flex-direction: row;
+                    width: 60%;
+
+                    & div ul {
+                        align-items: start;
+                    }
+                }
+
+                & div.footer-about-us, div.footer-list {
+                    text-align: start;
+                }
+            }
+        }
+    }
+
+}

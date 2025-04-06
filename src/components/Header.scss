@@ -30,13 +30,7 @@ header {
             & a.logo-name {
                 font-size : var.$txt-3xl;
                 font-weight : 700;
-                text-decoration: none;
                 letter-spacing: 0.1rem;
-                color : var.$black;
-
-                &:visited {
-                    color : var.$black;
-                }
             }
 
             & ul.menu {
@@ -65,8 +59,6 @@ header {
 
         & ul.auth-btn {
             display : none;
-            list-style: none;
-            padding-left: 0;
 
             & a.a-btn-secondary {
                 @include mxn.a-btn("secondary", var.$txt-sm);

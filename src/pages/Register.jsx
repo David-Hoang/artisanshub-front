@@ -14,7 +14,7 @@ import SpinLoader from "../components/form/SpinLoader.jsx";
 function Register() {
     const apiBase = import.meta.env.VITE_MAIN_API_URI;
     const {handleRegister, isLoading, formRegister, setFormRegister, errorFormRegister, errorMessage} = useContext(AuthContext);
-    const [regions, setRegions] = useState(null);
+    const [regions, setRegions] = useState([]);
 
     const fetchRegions = async () => {
         try {
