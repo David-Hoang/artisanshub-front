@@ -5,7 +5,8 @@
 main {
 
     & form.register-form {
-        @extend .shadow-thin;
+        @include mxn.shadow-thin;
+
         background-color: var.$full-white;
         padding : 2.5rem;
         border : 1px #e6e6e6 solid ;

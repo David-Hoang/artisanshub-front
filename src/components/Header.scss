@@ -21,43 +21,48 @@ header {
         align-items: center;
         justify-content: space-between;
 
-        & div.logo-menu {
-            
+        & div.desktop-list {
             display : flex;
             align-items: center;
-            gap : var.$gap-base;
-            
-            & a.logo-name {
+
+            & a.desktop-logo-menu {
                 font-size : var.$txt-3xl;
                 font-weight : 700;
                 letter-spacing: 0.1rem;
+
+                display : flex;
+                
+                & img.desktop-main-logo{
+                    width : 2.4rem;
+                    height : auto;
+                    transform: translate(-1px, -9px);
+                }
             }
 
-            & ul.menu {
+            & ul.desktop-menu-nav {
                 display : none;
-                
+    
                 @media screen and (min-width : var.$bp-md) {
-                    
                     display: flex;
                     list-style: none;
                     padding-left: 0;
                     align-items: center;
-                    gap: var.$gap-xl;
-
-            
-                    & li a {
-                        font-size : var.$txt-base;
-                        text-decoration: none;
-                        color : var.$gray;
-                        &:visited {
-                            color : var.$gray;
-                        }
-                    }
+                    gap: var.$gap-sm;
                 }
+                @media screen and (min-width : var.$bp-lg) {
+                    gap: var.$gap-xl;
+                }
+            }
+            @media screen and (min-width : var.$bp-md) {
+                gap: var.$gap-sm;
+            }
+
+            @media screen and (min-width : var.$bp-lg) {
+                gap: var.$gap-xl;
             }
         }
 
-        & ul.auth-btn {
+        & div.desktop-auth-btn {
             display : none;
 
             & a.a-btn-secondary {
@@ -71,14 +76,112 @@ header {
             @media screen and (min-width : var.$bp-md) {
                 display: flex;
                 align-items: center;
-                gap : var.$gap-xl;
+                gap: var.$gap-sm;
+            }
+
+            @media screen and (min-width : var.$bp-lg) {
+                gap: var.$gap-xl;
             }
         }
 
         & button.toggle-menu {
+            @include mxn.btn('secondary');
+
+            cursor: pointer;
+
             @media screen and (min-width : var.$bp-md) {
                 display : none;
             }
         }
     }
+
+    & div.mobile-menu {
+        position : fixed;
+        background-color: rgba(#000000, 0.35);
+        inset : 0;
+
+        cursor: pointer;
+
+        @media screen and (min-width : var.$bp-md) {
+            display : none;
+        }
+
+        & div.mobile-list {
+            box-shadow: 0px 3px 8px 6px rgba(0,0,0,0.24);
+            position : absolute;
+            background-color: var.$full-white;
+            height: 98vh;
+            width: 300px;
+            animation : mobile-slider-in 0.3s ease-out;
+            right : 1vw;
+            top : 1vh;
+            border-radius: var.$rounded-lg;
+
+            cursor: default;
+
+            display : flex;
+            flex-direction: column;
+            justify-content: center;
+            gap : 2rem;
+
+            padding: 3rem 1rem;
+
+            & button.close-mobile-menu {
+                @include mxn.btn('secondary');
+                position : absolute;
+                right : 1rem;
+                top : 0.85rem;
+            }
+            & div.mobile-logo-wrapper {
+                display : flex;
+                justify-content: center;
+
+                & a.mobile-logo-menu {
+                    font-size : var.$txt-3xl;
+                    font-weight : 700;
+                    letter-spacing: 0.1rem;
+    
+                    display : flex;
+                    
+                    & img.mobile-main-logo{
+                        width : 2.4rem;
+                        height : auto;
+                        transform: translate(-1px, -9px);
+                    }
+                }
+            }
+
+            & ul.mobile-menu-nav {
+                flex-grow: 1;
+
+                display: flex;
+                flex-direction: column;
+                align-items: end;
+                justify-content: center;
+                list-style: none;
+                padding-left: 0;
+                gap: 2rem;
+            }
+
+            & div.mobile-auth-btn {
+                display : flex;
+                gap : 0.5rem;
+
+                & a.a-btn-secondary {
+                    @include mxn.a-btn("secondary", var.$txt-sm);
+                    width : 100%
+                }
+    
+                & a.a-btn-primary {
+                    @include mxn.a-btn("primary", var.$txt-sm);
+                    width : 100%
+                }
+            }
+        }
+    }
+}
+
+@keyframes mobile-slider-in {
+    from {right : -300px}
+    to {right : 1vw}
 }
