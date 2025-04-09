@@ -13,7 +13,7 @@ div.input-wrapper {
     }
 
     & input {
-        @extend .main-input;
+        @include mxn.default-input;
     }
 
 }

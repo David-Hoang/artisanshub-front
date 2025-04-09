@@ -1,13 +1,1 @@
 @use "./variables" as var;
-
-.main-input {
-    padding : 0.5rem 1rem;
-    border : 1px #e6e6e6 solid ;
-    border-radius: var.$rounded-lg;
-}
-
-.shadow-thin {
-    box-shadow: 
-    rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
-    rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
-}
