@@ -14,6 +14,9 @@ function Header() {
 
     const {isLogged, handleLogout} = useContext(AuthContext);
     const [toggleMobileMenu, setToggleMobileMenu] = useState(false);
+
+    const openMobileMenu = () => setToggleMobileMenu(true);
+    const closeMobileMenu = () => setToggleMobileMenu(false);
     
     return (
         <header>
@@ -27,19 +30,15 @@ function Header() {
                     </Link>
 
                     <ul className="desktop-menu-nav">
-                        <NavMenu />
+                        <NavMenu closeMobileMenu/>
                     </ul>
                 </div>
 
                 <div className="desktop-auth-btn">
                     { isLogged ? (
                         <>
-                            <Button link="/connexion" className="btn-secondary">
-                                Mon profil
-                            </Button>
-                            <Button className="btn-primary" onClick={handleLogout}>
-                                Déconnexion
-                            </Button>
+                            <Link to="/dashboard" className="a-btn-secondary" onClick={closeMobileMenu}>Dashboard</Link>
+                            <Button className="btn-primary" onClick={handleLogout}>Déconnexion</Button>
                         </>
                     )
                     : ( 
@@ -50,14 +49,14 @@ function Header() {
                     )}
                 </div>
 
-                <Button className="toggle-menu" onClick={e => setToggleMobileMenu(!toggleMobileMenu)}>
+                <Button className="toggle-menu" onClick={openMobileMenu}>
                     <FontAwesomeIcon icon={faGripLines} />
                 </Button>
             </nav>
             { toggleMobileMenu &&
-                <div className="mobile-menu" onClick={e => setToggleMobileMenu(!toggleMobileMenu)}>
+                <div className="mobile-menu" onClick={closeMobileMenu}>
                     <div className="mobile-list" onClick={e => e.stopPropagation()}>
-                        <Button className="close-mobile-menu" onClick={e => setToggleMobileMenu(!toggleMobileMenu)}>
+                        <Button className="close-mobile-menu" onClick={closeMobileMenu}>
                             <FontAwesomeIcon icon={faXmark} />
                         </Button>
                         
@@ -76,17 +75,13 @@ function Header() {
                         <div className="mobile-auth-btn">
                             { isLogged ? (
                                 <>
-                                    <Button link="/connexion" className="btn-secondary">
-                                        Mon profil
-                                    </Button>
-                                    <Button className="btn-primary" onClick={handleLogout}>
-                                        Déconnexion
-                                    </Button>
+                                    <Link to="/dashboard" className="a-btn-secondary" onClick={closeMobileMenu}>Dashboard</Link>
+                                    <Button className="btn-primary" onClick={handleLogout}>Déconnexion</Button>
                                 </>
                             ) : ( 
                                 <>
-                                    <Link to="/connexion" className="a-btn-secondary">Se connecter</Link>
-                                    <Link to="/inscription" className="a-btn-primary">S'inscrire</Link>
+                                    <Link to="/connexion" className="a-btn-secondary" onClick={closeMobileMenu}>Se connecter</Link>
+                                    <Link to="/inscription" className="a-btn-primary" onClick={closeMobileMenu}>S'inscrire</Link>
                                 </>
                             )}
                         </div>
