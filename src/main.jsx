@@ -4,7 +4,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router";
 
-import AppRouters from "./routes/AppRoutes.jsx";
+import App from "./App.jsx";
 
 import { AuthController } from "./context/AuthContext.jsx";
 
@@ -12,7 +12,7 @@ createRoot(document.getElementById("root")).render(
     // <StrictMode>
         <BrowserRouter>
             <AuthController>
-                <AppRouters />
+                <App />
             </AuthController>
         </BrowserRouter>
     // </StrictMode>
