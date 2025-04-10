@@ -1,17 +1,17 @@
 import './NavMenu.scss';
 import { Link } from "react-router-dom";
 
-function NavMenu() {
+function NavMenu(closeMobileMenu) {
     return ( 
         <>
             <li>
-                <Link to="/">Accueil</Link>
+                <Link to="/" onClick={closeMobileMenu}>Accueil</Link>
             </li>
             <li>
-                <Link to="/">Trouver mon artisan</Link>
+                <Link to="/" onClick={closeMobileMenu}>Trouver mon artisan</Link>
             </li>
             <li>
-                <Link to="/">Contact</Link>
+                <Link to="/" onClick={closeMobileMenu}>Contact</Link>
             </li>
         </>
     );

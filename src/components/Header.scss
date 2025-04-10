@@ -124,7 +124,7 @@ header {
             justify-content: center;
             gap : 2rem;
 
-            padding: 3rem 1rem;
+            padding: 3rem 1rem 1.5rem 1rem;
 
             & button.close-mobile-menu {
                 @include mxn.btn('secondary');
