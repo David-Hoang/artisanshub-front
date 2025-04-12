@@ -1,13 +1,13 @@
 import './Header.scss';
-import mainLogo from '../assets/img/logo/logo-192x192.png';
+import mainLogo from '../../assets/img/logo/logo-192x192.png';
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGripLines, faXmark } from '@fortawesome/free-solid-svg-icons';
 
 import { useContext, useState } from "react";
-import { AuthContext } from "../context/AuthContext.jsx";
+import { AuthContext } from "../../context/AuthContext.jsx";
 
-import Button from './Button.jsx';
+import Button from '../Button.jsx';
 import NavMenu from './NavMenu.jsx';
 
 function Header() {

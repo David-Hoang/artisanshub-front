@@ -1,6 +1,6 @@
-@use "../assets/scss/variables" as var;
-@use "../assets/scss/mixins" as mxn;
-@use "../assets/scss/extends" as ext;
+@use "../../assets/scss/variables" as var;
+@use "../../assets/scss/mixins" as mxn;
+@use "../../assets/scss/extends" as ext;
 
 footer {
     background-color: #374151;
@@ -10,7 +10,7 @@ footer {
     justify-content : center;
 
     & div.footer-wrapper {
-        max-width: var.$bp-xl;
+        max-width: var.$bp-2xl;
         padding : 3rem 2rem;
 
         display : flex;
@@ -48,7 +48,6 @@ footer {
                             color : var.$full-white;
                             transition: all 0.1s;
                         }
-
                     }
                 }
             }

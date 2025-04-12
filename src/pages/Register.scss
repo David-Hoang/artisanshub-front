@@ -2,7 +2,11 @@
 @use "../assets/scss/mixins" as mxn;
 @use "../assets/scss/extends" as ext;
 
-main {
+main.main-register {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding : 4rem 1.5rem;
 
     & form.register-form {
         @include mxn.shadow-thin;

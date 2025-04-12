@@ -1,6 +1,6 @@
-@use "../assets/scss/variables" as var;
-@use "../assets/scss/mixins" as mxn;
-@use "../assets/scss/extends" as ext;
+@use "../../assets/scss/variables" as var;
+@use "../../assets/scss/mixins" as mxn;
+@use "../../assets/scss/extends" as ext;
 
 header {
     display : flex;
@@ -14,7 +14,7 @@ header {
 
     & nav.main-menu{
         width: 100%;
-        max-width: var.$bp-xl;
+        max-width: var.$bp-2xl;
         padding : 1.5rem 2rem;
 
         display : flex;
