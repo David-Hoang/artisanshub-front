@@ -7,15 +7,16 @@ main.main-home {
     flex-direction: column;
     align-items: center;
 
-
     & section.hero {
+
+        width : 100%;
 
         @media screen and (min-width : var.$bp-lg) {
             max-width: var.$bp-2xl;
             
             display : flex;
             align-items: center;
-            padding : 1.5rem 1.5rem 0 1.5rem;
+            padding : 1.5rem 2rem 0 2rem;
         }
 
         & div.hero-content {
@@ -23,8 +24,6 @@ main.main-home {
             flex-direction: column;
             align-items: center;
             gap : var.$gap-base;
-
-            padding : 1.5rem 2rem;
 
             & h1 {
                 font-size: var.$txt-4xl;
@@ -39,16 +38,20 @@ main.main-home {
             & h1, h2 {
                 line-height: 1.2;
                 text-align: center;
-                max-width: 35rem;
             }
 
             @media screen and (max-width : var.$bp-lg) {
+
+                padding : 1.5rem 2rem;
+
                 & h1, h2 {
+                    max-width: 35rem;
                     text-align: center;
                 }
             }
 
             @media screen and (min-width : var.$bp-lg) {
+                width : 40%;
                 gap : var.$gap-xl;
 
                 & h1 {
@@ -94,7 +97,11 @@ main.main-home {
         }
 
         & div.hero-img{
-            
+            width : 100%;
+            @media screen and (min-width : var.$bp-lg) {
+                width : 60%;
+            }
+
             & img{
                 object-fit: cover;
                 width: 100vw;
@@ -107,8 +114,8 @@ main.main-home {
                 @media screen and (min-width : var.$bp-lg) {
                     width : 100%;
                     height : 35rem;
-                    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 30%);
-                    mask-image: linear-gradient(to right, transparent 0%, black 30%);
+                    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 40%);
+                    mask-image: linear-gradient(to right, transparent 0%, black 40%);
 
                     border-top-right-radius: var.$rounded-lg;;
                     border-bottom-right-radius: var.$rounded-lg;
@@ -120,8 +127,10 @@ main.main-home {
 
     & div.content {
         max-width: var.$bp-2xl;
+        width : 100%;
 
         display: flex;
         flex-direction: column;
+        padding: 1.5rem 2rem;
     }
 }

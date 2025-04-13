@@ -146,33 +146,6 @@ main.main-register {
             flex-direction: column;
             gap : var.$gap-xs;
             padding: 1rem 0;
-
-            & div.select-wrapper {
-                display: flex;
-                flex-direction: column;
-                gap : var.$gap-base;
-
-                @media screen and (min-width : var.$bp-sm) {
-                    flex-direction: row;
-                    align-items: center;
-                }
-
-                & label {
-                    font-size : var.$txt-sm;
-                    font-weight: 500;
-                }
-
-                & #regions {
-                    padding: 0.5rem 1rem;
-                    background-color : var.$secondary;
-                    color : var.$black;
-                    border : 1px #e6e6e6 solid;
-                    border-radius: var.$rounded-lg;
-                    cursor: pointer;
-                    width: 100%;
-                }
-            }
-
         }
 
         & p {

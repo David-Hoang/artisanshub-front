@@ -7,6 +7,7 @@ import axios from 'axios';
 
 import Button from "../components/Button.jsx";
 import Input from "../components/form/Input.jsx";
+import Select from "../components/form/Select.jsx";
 import Error from "../components/Error.jsx";
 import SpinLoader from "../components/form/SpinLoader.jsx";
 
@@ -19,7 +20,9 @@ function Register() {
     const fetchRegions = async () => {
         try {
             const response = await axios.get(apiBase + "/api/enums/regions");
-            setRegions(response.data.regions)
+            if(response.status === 200){
+                setRegions(response.data.regions)
+            }
         } catch (error) {
             console.log(error);
         }
@@ -116,19 +119,13 @@ function Register() {
                 </div>
                 
                 <div className="register-region">
-                    <div className="select-wrapper">
-                        <label htmlFor="regions">Region*</label>
-                        <select name="region" id="regions"
-                            value={formRegister.region}
-                            onChange={(e) => { setFormRegister({...formRegister, region : e.target.value}) }}>
-                            <option value="">Sélectionnez votre région</option>
-                            {regions &&
-                                regions.map( (region, key) => (
-                                    <option key={key} value={region}>{region}</option>
-                                ))
-                            }
-                        </select>
-                    </div>
+                    <Select 
+                        label="Region*"
+                        id="region"
+                        placeholder="Sélectionnez votre région"
+                        datas={regions}
+                        value={formRegister.region}
+                        onChange={(e) => { setFormRegister({...formRegister, region : e.target.value}) }}/>
                     {errorFormRegister.region && <Error>{errorFormRegister.region}</Error>}
 
                 </div>
