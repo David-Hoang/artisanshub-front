@@ -89,7 +89,7 @@ main.main-home {
 
                     a.a-btn-secondary,
                     a.a-btn-primary {
-                        width: fit-content;
+                        width: 15rem;
                     }
                 }
             }
@@ -133,5 +133,84 @@ main.main-home {
         flex-direction: column;
         gap : 3rem;
         padding: 0 2rem 2rem;
+    }
+
+    div.content-work {
+        background-color: var.$full-white;
+        display : flex;
+        flex-direction: column;
+        align-items: center;
+        width : 100%;
+
+        section.work-section{
+            max-width: var.$bp-2xl;
+            display : flex;
+            flex-direction: column;
+            gap : 4rem;
+
+            padding : 5rem 2rem;
+
+            div.work-title{
+                h2 {
+                    font-size: var.$txt-3xl;
+                    font-weight: 800;
+                }
+                h3 {
+                    font-size: var.$txt-xl;
+                    color : var.$gray;
+                }
+
+                h2, h3 {
+                    text-align: center;
+                }
+                @media screen and (min-width : var.$bp-md) {
+                    h2 {
+                        font-size: var.$txt-4xl;
+                    }
+                }
+            }
+
+            div.step-container {
+                display : grid;
+                gap: 4rem;
+                grid-template-columns: 1fr;
+
+
+                @media screen and (min-width : var.$bp-lg) {
+                    grid-template-columns: repeat(3, 1fr);
+                }
+
+                div.step-item{
+                    display : flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap : var.$gap-base;
+
+                    h2.step-title{
+                        font-size : var.$txt-lg
+                    }
+
+                    h2.step-title,
+                    p {
+                        text-align: center;
+                    }
+
+                    div.step-bg {
+                        background: var.$gray;
+                        width: 5rem;
+                        height : 5rem;
+                        border-radius: var.$rounded-full;
+                        display : flex;
+                        align-items: center;
+                        justify-content: center;
+
+                        svg.step-icon {
+                            color : var.$full-white;
+                            font-size: var.$txt-2xl;
+                        }
+                    }
+                }
+            }
+        }
     }
 }

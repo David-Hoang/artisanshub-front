@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const JobsCatContext = createContext();
 
-export const JobsCatController = ({children}) => {
+export const JobsCatProvider = ({children}) => {
     
     const apiBase = import.meta.env.VITE_MAIN_API_URI;
     const [controllerLoading, setControllerLoading] = useState(true);
