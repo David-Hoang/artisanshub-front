@@ -6,14 +6,17 @@ import { BrowserRouter } from "react-router";
 
 import App from "./App.jsx";
 
-import { AuthController } from "./context/AuthContext.jsx";
+import { AuthProvider } from "./context/AuthContext.jsx";
+import { JobsCatProvider } from "./context/JobsCatContext.jsx";
 
 createRoot(document.getElementById("root")).render(
     // <StrictMode>
         <BrowserRouter>
-            <AuthController>
-                <App />
-            </AuthController>
+            <AuthProvider>
+                <JobsCatProvider>
+                    <App />
+                </JobsCatProvider>
+            </AuthProvider>
         </BrowserRouter>
     // </StrictMode>
 );

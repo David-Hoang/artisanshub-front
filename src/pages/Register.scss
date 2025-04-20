@@ -2,9 +2,13 @@
 @use "../assets/scss/mixins" as mxn;
 @use "../assets/scss/extends" as ext;
 
-main {
+main.main-register {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding : 4rem 1.5rem;
 
-    & form.register-form {
+    form.register-form {
         @include mxn.shadow-thin;
 
         background-color: var.$full-white;
@@ -14,22 +18,22 @@ main {
 
         display : flex;
         flex-direction: column;
-        gap : 2rem;
+        gap : var.$gap-2xl;
 
         width: 34rem;
 
-        & div.register-header {
+        div.register-header {
             display: flex;
             flex-direction: column;
             gap : var.$gap-sm;
 
-            & h1 {
+            h1 {
                 font-size : var.$txt-2xl;
                 font-weight: 600;
                 text-align: center;
             }
 
-            & h2 {
+            h2 {
                 font-size : var.$txt-base;
                 font-weight: 400;
                 text-align: center;
@@ -37,11 +41,11 @@ main {
             }
         }
 
-        & div.register-roles {
+        div.register-roles {
             display : flex;
             flex-direction: column;
             gap : var.$gap-xs;
-            & div.choice-role{
+            div.choice-role{
                 display : flex;
                 flex-direction: column;
                 gap : var.$gap-sm;
@@ -52,16 +56,16 @@ main {
                     gap : var.$gap-xl;
                 }
 
-                & div.radio-wrapper {
+                div.radio-wrapper {
                     display : flex;
                     align-items: center;
                     gap : var.$gap-xs;
                     
-                    & input, label {
+                    input, label {
                         cursor: pointer;
                     }
 
-                    & label {
+                    label {
                         font-size : var.$txt-sm;
                         font-weight: 500;
                     }
@@ -69,13 +73,13 @@ main {
             }
             
             @media screen and (min-width : var.$bp-sm) {
-                & div.error-wrapper{
+                div.error-wrapper{
                     align-self: center;
                 }
             }
         }
 
-        & div.register-name {
+        div.register-name {
             display : flex;
             flex-direction: column;
             gap : var.$gap-base;
@@ -85,13 +89,13 @@ main {
                 flex-direction: row;
             }
 
-            & div.wrapper {
+            div.wrapper {
                 width: 100%;
             }
 
         }
 
-        & div.register-contact {
+        div.register-contact {
             display : flex;
             flex-direction: column;
             gap : var.$gap-base;
@@ -100,16 +104,16 @@ main {
                 flex-direction: row;
             }
 
-            & div.wrapper {
+            div.wrapper {
                 width: 100%;
             }
 
-            & div.input-wrapper {
+            div.input-wrapper {
                 width: 100%;
             }
         }
 
-        & div.register-auth {
+        div.register-auth {
             display : flex;
             flex-direction: column;
             gap : var.$gap-base;
@@ -118,12 +122,12 @@ main {
                 flex-direction: row;
             }
 
-            & div.wrapper {
+            div.wrapper {
                 width: 100%;
             }
         }
 
-        & div.register-location {
+        div.register-location {
             display : flex;
             flex-direction: column;
             gap : var.$gap-base;
@@ -132,48 +136,21 @@ main {
                 flex-direction: row;
             }
 
-            & div.wrapper {
+            div.wrapper {
                 width: 100%;
             }
         }
 
-        & div.register-region {
+        div.register-region {
             display: flex;
             flex-direction: column;
             gap : var.$gap-xs;
             padding: 1rem 0;
-
-            & div.select-wrapper {
-                display: flex;
-                flex-direction: column;
-                gap : var.$gap-base;
-
-                @media screen and (min-width : var.$bp-sm) {
-                    flex-direction: row;
-                    align-items: center;
-                }
-
-                & label {
-                    font-size : var.$txt-sm;
-                    font-weight: 500;
-                }
-
-                & #regions {
-                    padding: 0.5rem 1rem;
-                    background-color : var.$secondary;
-                    color : var.$black;
-                    border : 1px #e6e6e6 solid;
-                    border-radius: var.$rounded-lg;
-                    cursor: pointer;
-                    width: 100%;
-                }
-            }
-
         }
 
-        & p {
+        p {
             font-size: var.$txt-sm;
-            & a {
+            a {
                 color : var.$primary;
             }
         }

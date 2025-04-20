@@ -44,18 +44,14 @@ body {
     margin: 0;
     color : var.$black;
 
-    & #root {
+    #root {
         display : flex;
         flex-direction: column;
         min-height: 100vh;
 
-        & main {
+        main {
             flex-grow: 1;
             background-color : var.$tiertiary;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding : 4rem 1.5rem;
         }
     }
 }

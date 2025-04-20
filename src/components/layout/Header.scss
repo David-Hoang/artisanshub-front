@@ -1,6 +1,6 @@
-@use "../assets/scss/variables" as var;
-@use "../assets/scss/mixins" as mxn;
-@use "../assets/scss/extends" as ext;
+@use "../../assets/scss/variables" as var;
+@use "../../assets/scss/mixins" as mxn;
+@use "../../assets/scss/extends" as ext;
 
 header {
     display : flex;
@@ -12,34 +12,34 @@ header {
     -moz-box-shadow: 0 -1px 3px rgba(57, 63, 72, 0.3);
     box-shadow: 0 -1px 3px rgba(57, 63, 72, 0.3);
 
-    & nav.main-menu{
+    nav.main-menu{
         width: 100%;
-        max-width: var.$bp-xl;
+        max-width: var.$bp-2xl;
         padding : 1.5rem 2rem;
 
         display : flex;
         align-items: center;
         justify-content: space-between;
 
-        & div.desktop-list {
+        div.desktop-list {
             display : flex;
             align-items: center;
 
-            & a.desktop-logo-menu {
+            a.desktop-logo-menu {
                 font-size : var.$txt-3xl;
                 font-weight : 700;
                 letter-spacing: 0.1rem;
 
                 display : flex;
                 
-                & img.desktop-main-logo{
+                img.desktop-main-logo{
                     width : 2.4rem;
                     height : auto;
                     transform: translate(-1px, -9px);
                 }
             }
 
-            & ul.desktop-menu-nav {
+            ul.desktop-menu-nav {
                 display : none;
     
                 @media screen and (min-width : var.$bp-md) {
@@ -62,14 +62,14 @@ header {
             }
         }
 
-        & div.desktop-auth-btn {
+        div.desktop-auth-btn {
             display : none;
 
-            & a.a-btn-secondary {
+            a.a-btn-secondary {
                 @include mxn.a-btn("secondary", var.$txt-sm);
             }
 
-            & a.a-btn-primary {
+            a.a-btn-primary {
                 @include mxn.a-btn("primary", var.$txt-sm);
             }
 
@@ -84,7 +84,7 @@ header {
             }
         }
 
-        & button.toggle-menu {
+        button.toggle-menu {
             @include mxn.btn('secondary');
 
             cursor: pointer;
@@ -95,7 +95,7 @@ header {
         }
     }
 
-    & div.mobile-menu {
+    div.mobile-menu {
         position : fixed;
         background-color: rgba(#000000, 0.35);
         inset : 0;
@@ -106,7 +106,7 @@ header {
             display : none;
         }
 
-        & div.mobile-list {
+        div.mobile-list {
             box-shadow: 0px 3px 8px 6px rgba(0,0,0,0.24);
             position : absolute;
             background-color: var.$full-white;
@@ -122,21 +122,21 @@ header {
             display : flex;
             flex-direction: column;
             justify-content: center;
-            gap : 2rem;
+            gap : var.$gap-2xl;
 
             padding: 3rem 1rem 1.5rem 1rem;
 
-            & button.close-mobile-menu {
+            button.close-mobile-menu {
                 @include mxn.btn('secondary');
                 position : absolute;
                 right : 1rem;
                 top : 0.85rem;
             }
-            & div.mobile-logo-wrapper {
+            div.mobile-logo-wrapper {
                 display : flex;
                 justify-content: center;
 
-                & a.mobile-logo-menu {
+                a.mobile-logo-menu {
                     font-size : var.$txt-3xl;
                     font-weight : 700;
                     letter-spacing: 0.1rem;
@@ -151,7 +151,7 @@ header {
                 }
             }
 
-            & ul.mobile-menu-nav {
+            ul.mobile-menu-nav {
                 flex-grow: 1;
 
                 display: flex;
@@ -160,21 +160,21 @@ header {
                 justify-content: center;
                 list-style: none;
                 padding-left: 0;
-                gap: 2rem;
+                gap : var.$gap-2xl;
             }
 
-            & div.mobile-auth-btn {
+            div.mobile-auth-btn {
                 display : flex;
-                gap : 0.5rem;
+                gap : var.$gap-sm;
 
-                & a.a-btn-secondary {
+                a.a-btn-secondary {
                     @include mxn.a-btn("secondary", var.$txt-sm);
-                    width : 100%
+                    width : 100%;
                 }
     
-                & a.a-btn-primary {
+                a.a-btn-primary {
                     @include mxn.a-btn("primary", var.$txt-sm);
-                    width : 100%
+                    width : 100%;
                 }
             }
         }

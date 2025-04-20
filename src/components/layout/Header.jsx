@@ -1,13 +1,13 @@
 import './Header.scss';
-import mainLogo from '../assets/img/logo/logo-192x192.png';
+import mainLogo from '../../assets/img/logo/logo-192x192.png';
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGripLines, faXmark } from '@fortawesome/free-solid-svg-icons';
 
 import { useContext, useState } from "react";
-import { AuthContext } from "../context/AuthContext.jsx";
+import { AuthContext } from "../../context/AuthContext.jsx";
 
-import Button from './Button.jsx';
+import Button from '../Button.jsx';
 import NavMenu from './NavMenu.jsx';
 
 function Header() {
@@ -49,12 +49,22 @@ function Header() {
                     )}
                 </div>
 
-                <Button className="toggle-menu" onClick={openMobileMenu}>
+                <Button className="toggle-menu"
+                        onClick={openMobileMenu}
+                        aria-expanded={toggleMobileMenu}
+                        aria-controls="mobile-menu"
+                        aria-label="Ouvrir le menu principal"
+                    >
                     <FontAwesomeIcon icon={faGripLines} />
                 </Button>
             </nav>
             { toggleMobileMenu &&
-                <div className="mobile-menu" onClick={closeMobileMenu}>
+                <div className="mobile-menu"
+                    role="dialog"
+                    aria-modal="true"
+                    aria-label="Menu principal"
+                    onClick={closeMobileMenu}
+                    >
                     <div className="mobile-list" onClick={e => e.stopPropagation()}>
                         <Button className="close-mobile-menu" onClick={closeMobileMenu}>
                             <FontAwesomeIcon icon={faXmark} />
