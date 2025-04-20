@@ -6,7 +6,7 @@
 section.home-jobs-categories{
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    gap: var.$gap-3xl;
 
     div.jobs-category-title {
             

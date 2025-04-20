@@ -17,7 +17,7 @@ main.main-login {
 
         display : flex;
         flex-direction: column;
-        gap : 2rem;
+        gap : var.$gap-2xl;
 
         div.login-header {
             display: flex;

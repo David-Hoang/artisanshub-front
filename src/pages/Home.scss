@@ -6,7 +6,7 @@ main.main-home {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap : 3rem;
+    gap : var.$gap-3xl;
 
     section.hero {
         width : 100%;
@@ -131,7 +131,7 @@ main.main-home {
 
         display: flex;
         flex-direction: column;
-        gap : 3rem;
+        gap : var.$gap-3xl;
         padding: 0 2rem 2rem;
     }
 
@@ -146,7 +146,7 @@ main.main-home {
             max-width: var.$bp-2xl;
             display : flex;
             flex-direction: column;
-            gap : 4rem;
+            gap : var.$gap-4xl;
 
             padding : 5rem 2rem;
 
@@ -172,7 +172,7 @@ main.main-home {
 
             div.step-container {
                 display : grid;
-                gap: 4rem;
+                gap : var.$gap-4xl;
                 grid-template-columns: 1fr;
 
 

@@ -122,7 +122,7 @@ header {
             display : flex;
             flex-direction: column;
             justify-content: center;
-            gap : 2rem;
+            gap : var.$gap-2xl;
 
             padding: 3rem 1rem 1.5rem 1rem;
 
@@ -160,12 +160,12 @@ header {
                 justify-content: center;
                 list-style: none;
                 padding-left: 0;
-                gap: 2rem;
+                gap : var.$gap-2xl;
             }
 
             div.mobile-auth-btn {
                 display : flex;
-                gap : 0.5rem;
+                gap : var.$gap-sm;
 
                 a.a-btn-secondary {
                     @include mxn.a-btn("secondary", var.$txt-sm);

@@ -61,7 +61,7 @@ footer {
             ul{
                 display : flex;
                 align-items: center;
-                gap : 2rem;
+                gap: var.$gap-2xl;
 
                 li a {
                     display : flex ;
