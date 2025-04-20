@@ -9,8 +9,9 @@ export const AuthController = ({ children }) => {
     let navigate = useNavigate();
 
     const [controllerLoading, setControllerLoading] = useState(true);
+
     const [isLogged, setIsLogged] = useState(false);
-    const [authUser, setAuthUser] = useState(null);
+    const [userDatas, setUserDatas] = useState(null);
 
     const [isLoading, setIsLoading] = useState(false);
 
@@ -46,11 +47,21 @@ export const AuthController = ({ children }) => {
     const [errorFormRegister, setErrorFormRegister] = useState(defaultErrorForm);
     
     useEffect(() => {
-        const token = localStorage.getItem("artisansHubUserToken");
-        if(token) {
-            setIsLogged(true);
+        try {
+            const token = localStorage.getItem("artisansHubUserToken");
+
+            if(token) {
+                setIsLogged(true);
+            }else {
+                setIsLogged(false);
+
+            }
+        } catch (error) {
+            console.error('Une erreur est survenue lors de la récupération du token : ', error);
+        }finally{
+            setControllerLoading(false);
         }
-        setControllerLoading(false);
+
     }, [])
 
     const handleLogin = async (e, formLogin) => {
@@ -82,8 +93,6 @@ export const AuthController = ({ children }) => {
             }
 
         } catch (error) {
-            setIsLoading(false);
-            
             if (!error.response) return setErrorMessage("Une erreur s'est produite lors de la tentative de connexion.");
 
             const { status, data } = error.response;
@@ -123,6 +132,8 @@ export const AuthController = ({ children }) => {
 
     const handleRegister = async (e) => {
         e.preventDefault();
+
+        setIsLoading(true);
 
         //Reset errors
         setErrorFormRegister(defaultErrorForm);
@@ -167,12 +178,12 @@ export const AuthController = ({ children }) => {
 
         //Check if there is at least 1 error
         if(Object.keys(validateInputs).length > 0){
-            setErrorFormRegister(validateInputs)
+            setErrorFormRegister(validateInputs);
+            setIsLoading(false);
             return;
         }
 
-        setIsLoading(true);
-
+        
         try {
             const register = await axios.post(apiBase + "/api/register", formRegister);
             
@@ -207,8 +218,8 @@ export const AuthController = ({ children }) => {
                 isLogged, 
                 setIsLogged, 
 
-                authUser, 
-                setAuthUser,
+                userDatas, 
+                setUserDatas,
 
                 handleLogout,
                 handleLogin,

@@ -6,9 +6,9 @@ main.main-home {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap : 3rem;
 
-    & section.hero {
-
+    section.hero {
         width : 100%;
 
         @media screen and (min-width : var.$bp-lg) {
@@ -19,32 +19,32 @@ main.main-home {
             padding : 1.5rem 2rem 0 2rem;
         }
 
-        & div.hero-content {
+        div.hero-content {
             display : flex;
             flex-direction: column;
             align-items: center;
             gap : var.$gap-base;
 
-            & h1 {
+            h1 {
                 font-size: var.$txt-4xl;
                 font-weight: 800;
                 }
 
-            & h2 {
+            h2 {
                 font-size: var.$txt-xl;
                 color : var.$gray;
             }
 
-            & h1, h2 {
+            h1, h2 {
                 line-height: 1.2;
                 text-align: center;
             }
 
             @media screen and (max-width : var.$bp-lg) {
 
-                padding : 1.5rem 2rem;
+                padding : 3rem 2rem;
 
-                & h1, h2 {
+                h1, h2 {
                     max-width: 35rem;
                     text-align: center;
                 }
@@ -54,27 +54,27 @@ main.main-home {
                 width : 40%;
                 gap : var.$gap-xl;
 
-                & h1 {
+                h1 {
                     font-size: var.$txt-5xl;
                 }
 
-                & h1, h2 {
+                h1, h2 {
                     text-align: start;
                 }
             }
 
-            & div.hero-btn {
+            div.hero-btn {
                 display : flex;
                 flex-direction: column;
                 gap: var.$gap-xl;
                 width : 100%;
 
-                & a.a-btn-secondary {
+                a.a-btn-secondary {
                     @include mxn.a-btn("secondary", var.$txt-sm);
                     width : 100%;
                 }
     
-                & a.a-btn-primary {
+                a.a-btn-primary {
                     @include mxn.a-btn("primary", var.$txt-sm);
                     width : 100%;
                 }
@@ -87,7 +87,7 @@ main.main-home {
                 @media screen and (min-width : var.$bp-lg) {
                     justify-content: start;
 
-                    & a.a-btn-secondary,
+                    a.a-btn-secondary,
                     a.a-btn-primary {
                         width: fit-content;
                     }
@@ -96,13 +96,13 @@ main.main-home {
 
         }
 
-        & div.hero-img{
+        div.hero-img{
             width : 100%;
             @media screen and (min-width : var.$bp-lg) {
                 width : 60%;
             }
 
-            & img{
+            img{
                 object-fit: cover;
                 width: 100vw;
                 height: 15rem;
@@ -117,7 +117,7 @@ main.main-home {
                     -webkit-mask-image: linear-gradient(to right, transparent 0%, black 40%);
                     mask-image: linear-gradient(to right, transparent 0%, black 40%);
 
-                    border-top-right-radius: var.$rounded-lg;;
+                    border-top-right-radius: var.$rounded-lg;
                     border-bottom-right-radius: var.$rounded-lg;
                 }
             }
@@ -125,12 +125,13 @@ main.main-home {
 
     }
 
-    & div.content {
+    div.content {
         max-width: var.$bp-2xl;
         width : 100%;
 
         display: flex;
         flex-direction: column;
-        padding: 1.5rem 2rem;
+        gap : 3rem;
+        padding: 0 2rem 2rem;
     }
 }

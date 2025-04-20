@@ -2,7 +2,6 @@
 @use "../assets/scss/variables" as var;
 @use "../assets/scss/extends" as ext;
 
-
 button.btn-primary {
     @include mxn.btn("primary", var.$txt-sm);
 }

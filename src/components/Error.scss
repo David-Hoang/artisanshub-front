@@ -9,7 +9,7 @@ div.error-wrapper {
     color : #ef4444;
     padding : 0;
 
-    & p.error-text {
+    p.error-text {
         font-size: var.$txt-sm;
     }
 }

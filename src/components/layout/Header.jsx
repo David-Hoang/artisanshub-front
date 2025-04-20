@@ -49,12 +49,22 @@ function Header() {
                     )}
                 </div>
 
-                <Button className="toggle-menu" onClick={openMobileMenu}>
+                <Button className="toggle-menu"
+                        onClick={openMobileMenu}
+                        aria-expanded={toggleMobileMenu}
+                        aria-controls="mobile-menu"
+                        aria-label="Ouvrir le menu principal"
+                    >
                     <FontAwesomeIcon icon={faGripLines} />
                 </Button>
             </nav>
             { toggleMobileMenu &&
-                <div className="mobile-menu" onClick={closeMobileMenu}>
+                <div className="mobile-menu"
+                    role="dialog"
+                    aria-modal="true"
+                    aria-label="Menu principal"
+                    onClick={closeMobileMenu}
+                    >
                     <div className="mobile-list" onClick={e => e.stopPropagation()}>
                         <Button className="close-mobile-menu" onClick={closeMobileMenu}>
                             <FontAwesomeIcon icon={faXmark} />

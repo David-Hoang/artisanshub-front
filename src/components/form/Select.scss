@@ -7,12 +7,12 @@ div.select-wrapper {
     flex-direction: column;
     gap : var.$gap-sm;
 
-    & label {
+    label {
         font-size : var.$txt-sm;
         font-weight: 500;
     }
 
-    & select {
+    select {
         padding: 0.5rem 1rem;
         background-color : var.$secondary;
         color : var.$black;

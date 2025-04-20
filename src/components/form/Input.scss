@@ -7,12 +7,12 @@ div.input-wrapper {
     flex-direction: column;
     gap : var.$gap-sm;
 
-    & label {
+    label {
         font-size : var.$txt-sm;
         font-weight: 500;
     }
 
-    & input {
+    input {
         @include mxn.default-input;
     }
 

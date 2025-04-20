@@ -2,11 +2,17 @@ import './Home.scss';
 import HeroImg from '../assets/img/home-hero.jpg';
 
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { JobsCatContext } from "../context/JobsCatContext.jsx";
 
-import Search from '../components/home/Search.jsx'
+import Search from '../components/home/Search.jsx';
+import JobCard from '../components/home/JobCard.jsx';
 
 
 function Home() {
+    
+    const { jobsCategories } = useContext(JobsCatContext);
+
     return ( 
         <main className="main-home">
                 <section className="hero">
@@ -27,8 +33,17 @@ function Home() {
                     </div>
                 </section>
                 <div className="content">
-                    <Search />
-                    
+                    <Search
+                        //Transform to an array of name only
+                        jobsCategories={
+                            jobsCategories.length > 1 ?
+                            jobsCategories.map(job => job.name) : 
+                            null
+                        }
+                    />
+
+                    <JobCard jobsCategories={jobsCategories}/>
+
                 </div>
         </main>
     );

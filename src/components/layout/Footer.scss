@@ -9,7 +9,7 @@ footer {
     display : flex;
     justify-content : center;
 
-    & div.footer-wrapper {
+    div.footer-wrapper {
         max-width: var.$bp-2xl;
         padding : 3rem 2rem;
 
@@ -17,30 +17,30 @@ footer {
         flex-direction: column;
         gap : 2.5rem;
         
-        & div.footer-main-section {
+        div.footer-main-section {
             display : flex;
             flex-direction: column;
             gap : 2.5rem;
 
-            & div.footer-about-us, div.footer-list {
+            div.footer-about-us, div.footer-list {
                 text-align: center;
-                & h4 {
+                h4 {
                     padding-bottom: 0.3rem;
                 }
-                & p {
+                p {
                     font-size: var.$txt-sm;
                     color : rgba(var.$full-white, 0.5);
                 }
             }
 
-            & div.footer-list {
+            div.footer-list {
                 display : flex;
                 justify-content: space-evenly;
                 
-                & div ul {
+                div ul {
                     display : flex;
                     flex-direction: column;
-                    & li a {
+                    li a {
                         color : rgba(var.$full-white, 0.5);
                         font-size: var.$txt-sm;
 
@@ -54,16 +54,16 @@ footer {
 
         }
 
-        & div.footer-social {
+        div.footer-social {
         display : flex;
         justify-content : center;
         
-            & ul{
+            ul{
                 display : flex;
                 align-items: center;
                 gap : 2rem;
 
-                & li a {
+                li a {
                     display : flex ;
                     align-items: center;
                     justify-content: center;
@@ -84,7 +84,7 @@ footer {
             }
         }
         
-        & div.footer-signature {
+        div.footer-signature {
             font-size: var.$txt-sm;
             text-align: center;
             color : rgba(var.$full-white, 0.5);
@@ -93,27 +93,27 @@ footer {
 
         @media screen and (min-width : var.$bp-md) {
 
-            & div.footer-main-section {
+            div.footer-main-section {
                 flex-direction: row;
 
-                & div.footer-about-us {
+                div.footer-about-us {
                     text-align: start;
                 }
 
-                & div.footer-about-us{
+                div.footer-about-us{
                     width : 40%
                 }
 
-                & div.footer-list {
+                div.footer-list {
                     flex-direction: row;
                     width: 60%;
 
-                    & div ul {
+                    div ul {
                         align-items: start;
                     }
                 }
 
-                & div.footer-about-us, div.footer-list {
+                div.footer-about-us, div.footer-list {
                     text-align: start;
                 }
             }
