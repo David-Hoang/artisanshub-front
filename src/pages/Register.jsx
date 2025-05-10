@@ -5,11 +5,11 @@ import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext.jsx";
 import axios from 'axios';
 
-import Button from "../components/Button.jsx";
-import Input from "../components/form/Input.jsx";
-import Select from "../components/form/Select.jsx";
+import Button from "../components/ui/Button.jsx";
+import Input from "../components/ui/Input.jsx";
+import Select from "../components/ui/Select.jsx";
 import Error from "../components/Error.jsx";
-import SpinLoader from "../components/form/SpinLoader.jsx";
+import SpinLoader from "../components/ui/SpinLoader.jsx";
 
 
 function Register() {

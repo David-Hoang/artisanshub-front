@@ -123,7 +123,7 @@ export const AuthProvider = ({ children }) => {
 
             localStorage.removeItem("artisansHubUserToken");
             setIsLogged(false);
-            navigate('/');
+            window.location.href = '/';
         
         } catch (error) {
             console.error(error)

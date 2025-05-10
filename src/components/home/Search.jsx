@@ -1,8 +1,8 @@
 import './Search.scss';
 
-import Button from "../Button.jsx";
-import Input from "../form/Input.jsx";
-import Select from "../form/Select.jsx";
+import Button from "../ui/Button.jsx";
+import Input from "../ui/Input.jsx";
+import Select from "../ui/Select.jsx";
 
 function Search({jobsCategories, ...props}) {
 

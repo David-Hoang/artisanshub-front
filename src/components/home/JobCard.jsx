@@ -1,7 +1,7 @@
 import './JobCard.scss';
 import { Link } from "react-router-dom";
-import SpinLoader from "../form/SpinLoader";
-import Button from "../../components/Button.jsx";
+import SpinLoader from "../ui/SpinLoader.jsx";
+import Button from "../ui/Button.jsx";
 
 
 function JobCard({jobsCategories, ...props}) {

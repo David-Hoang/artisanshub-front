@@ -7,7 +7,7 @@ import { faGripLines, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext.jsx";
 
-import Button from '../Button.jsx';
+import Button from '../ui/Button.jsx';
 import NavMenu from './NavMenu.jsx';
 
 function Header() {
