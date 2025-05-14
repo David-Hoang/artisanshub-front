@@ -12,7 +12,10 @@ export const AuthProvider = ({ children }) => {
 
     const [isLogged, setIsLogged] = useState(false);
     const [userDatas, setUserDatas] = useState(null);
+    const [userRole, setUserRole] = useState(null);
+    const [userToken, setUserToken] = useState(null);
 
+    //To manage loading spinner
     const [isLoading, setIsLoading] = useState(false);
 
     const [errorEmail, setErrorEmail] = useState("");
@@ -45,23 +48,50 @@ export const AuthProvider = ({ children }) => {
     };
 
     const [errorFormRegister, setErrorFormRegister] = useState(defaultErrorForm);
-    
-    useEffect(() => {
-        try {
-            const token = localStorage.getItem("artisansHubUserToken");
 
-            if(token) {
+    // get user info on reload
+    const userInfos = async (token) => {
+        try {
+            const response = await axios.get(apiBase + "/api/me", {
+                    headers: {
+                        "Authorization": "Bearer " + token,
+                    }
+                })
+            if(response.status === 200){
+                setUserRole(response.data.role);
+                setUserDatas(response.data);
+            }
+        } catch (error) {
+            if (!error.response) return setErrorMessage("Une erreur s'est produite lors de la récupération des informations de l'utilisateur.");
+
+            const { status } = error.response;
+
+            if (status === 401) {
+                setErrorMessage("Les informations de connexion ne sont pas valides.");
+                navigate('/connexion')
+            } else {
+                return setErrorMessage("Une erreur s'est produite lors de la récupération des informations de l'utilisateur.");
+            }
+        }
+    }
+
+    useEffect( () => {
+        try {
+            const actualToken = localStorage.getItem("artisansHubUserToken");
+
+            if(actualToken) {
+                userInfos(actualToken);
+                setUserToken(actualToken);
                 setIsLogged(true);
             }else {
+                setUserToken(null);
                 setIsLogged(false);
-
             }
         } catch (error) {
             console.error('Une erreur est survenue lors de la récupération du token : ', error);
         }finally{
             setControllerLoading(false);
         }
-
     }, [])
 
     const handleLogin = async (e, formLogin) => {
@@ -85,8 +115,12 @@ export const AuthProvider = ({ children }) => {
                 })
 
             if(response.status === 200){
-                let userToken = response.data.token;
-                localStorage.setItem("artisansHubUserToken", userToken);
+                let token = response.data.token;
+
+                localStorage.setItem("artisansHubUserToken", token);
+                setUserToken(token);
+                setUserDatas(response.data.user);
+                setUserRole(response.data.user.role);
                 setIsLogged(true);
                 setIsLoading(true);
                 navigate('/');
@@ -113,7 +147,7 @@ export const AuthProvider = ({ children }) => {
     const handleLogout = async () => {
 
         try {
-            const userToken = localStorage.getItem("artisansHubUserToken");
+            // const userToken = localStorage.getItem("artisansHubUserToken");
 
             await axios.post(apiBase + "/api/logout", {}, {
                 headers: {
@@ -122,6 +156,7 @@ export const AuthProvider = ({ children }) => {
             })
 
             localStorage.removeItem("artisansHubUserToken");
+            setUserToken(null);
             setIsLogged(false);
             window.location.href = '/';
         
@@ -188,8 +223,9 @@ export const AuthProvider = ({ children }) => {
             const register = await axios.post(apiBase + "/api/register", formRegister);
             
             if(register.status === 201){
-                let userToken = register.data.token;
-                localStorage.setItem("artisansHubUserToken", userToken);
+                let token = register.data.token;
+                localStorage.setItem("artisansHubUserToken", token);
+                setUserToken(token);
                 setIsLogged(true);
                 navigate('/');
             }
@@ -218,8 +254,10 @@ export const AuthProvider = ({ children }) => {
                 isLogged, 
                 setIsLogged, 
 
+                userToken,
                 userDatas, 
                 setUserDatas,
+                userRole,
 
                 handleLogout,
                 handleLogin,

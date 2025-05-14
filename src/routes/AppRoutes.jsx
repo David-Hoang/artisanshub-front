@@ -18,7 +18,8 @@ function AppRouters() {
                 <Route path="/" element={<Home />} />
                 <Route path="/inscription" element={isLogged ? <Navigate to="/" /> : <Register />} />
                 <Route path="/connexion" element={isLogged ? <Navigate to="/" /> : <Login />} /> 
-                <Route path="/dashboard" element={isLogged ? <Navigate to="/" /> : <Dashboard />} /> 
+                
+                <Route path="/dashboard" element={isLogged ? <Dashboard /> : <Navigate to="/" />} /> 
             </Routes>
         </>
     );

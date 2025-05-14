@@ -81,7 +81,7 @@ function Register() {
                             onChange={(e) => { setFormRegister({...formRegister, phone : e.target.value}) }}/>
                         {errorFormRegister.phone && <Error>{errorFormRegister.phone}</Error>}
                     </div>
-                    <Input label="Pseudo" id="username" type="text"
+                    <Input label="Pseudo" id="username" type="text" placeholder="johndoe123"
                         value={formRegister.username}
                         onChange={(e) => { setFormRegister({...formRegister, username : e.target.value}) }}/>
                 </div>
