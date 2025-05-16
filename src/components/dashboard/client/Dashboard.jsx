@@ -12,9 +12,10 @@ import PrestationsTab from './PrestationsTab.jsx';
 
 import Tabs from '../../ui/Tabs.jsx'
 function Dashboard() {
-    const {userDatas, userToken} = useContext(AuthContext);
+    const {userDatas, userToken, userRoleInfos} = useContext(AuthContext);
     const [selectedTab, setSelectedTab] = useState('Informations')
-
+    console.log(userRoleInfos);
+    
     return ( 
         <>
             <Tabs 

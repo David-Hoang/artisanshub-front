@@ -10,8 +10,8 @@ import CraftsmanDashboard from '../components/dashboard/craftsman/Dashboard.jsx'
 
 function Dashboard() {
 
-    const {userDatas, userRole} = useContext(AuthContext);
-
+    const {userRole} = useContext(AuthContext);
+    
     const dashboard = () => {
         switch (userRole) {
             case 'admin':

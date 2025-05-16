@@ -14,6 +14,7 @@ export const AuthProvider = ({ children }) => {
     const [userDatas, setUserDatas] = useState(null);
     const [userRole, setUserRole] = useState(null);
     const [userToken, setUserToken] = useState(null);
+    const [userRoleInfos, setUserRoleInfos] = useState(false);
 
     //To manage loading spinner
     const [isLoading, setIsLoading] = useState(false);
@@ -60,6 +61,11 @@ export const AuthProvider = ({ children }) => {
             if(response.status === 200){
                 setUserRole(response.data.role);
                 setUserDatas(response.data);
+
+                // Check if user set his role infos
+                if(response.data.profile){
+                    setUserRoleInfos(true);
+                }
             }
         } catch (error) {
             if (!error.response) return setErrorMessage("Une erreur s'est produite lors de la récupération des informations de l'utilisateur.");
@@ -149,19 +155,23 @@ export const AuthProvider = ({ children }) => {
         try {
             // const userToken = localStorage.getItem("artisansHubUserToken");
 
-            await axios.post(apiBase + "/api/logout", {}, {
+            const userLogout = await axios.post(apiBase + "/api/logout", {}, {
                 headers: {
                     "Authorization": "Bearer " + userToken,
                 }
             })
 
+            if (userLogout.status === 200){
+                localStorage.removeItem("artisansHubUserToken");
+                setUserToken(null);
+                setIsLogged(false);
+                window.location.href = '/';
+            }
+        } catch (error) {
             localStorage.removeItem("artisansHubUserToken");
             setUserToken(null);
             setIsLogged(false);
             window.location.href = '/';
-        
-        } catch (error) {
-            console.error(error)
         }
     }
 
@@ -258,6 +268,8 @@ export const AuthProvider = ({ children }) => {
                 userDatas, 
                 setUserDatas,
                 userRole,
+                userRoleInfos, 
+                setUserRoleInfos,
 
                 handleLogout,
                 handleLogin,

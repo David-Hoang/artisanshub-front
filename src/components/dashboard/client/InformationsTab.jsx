@@ -28,19 +28,30 @@ function InformationsTab({userDatas, token}) {
         last_name : "",
         username : "",
         email : "",
-        password : "",
-        new_password : "",
-        new_password_confirmation : "",
         phone : "",
         city : "",
         region : "",
         zipcode : "",
+        
+        password : "",
+        new_password : "",
+        new_password_confirmation : "",
+
+        street_number : "",
+        street_name : "",
+        complement : "",
     };
 
     const defaultPasswordForm = {
         password : "",
         new_password : "",
         new_password_confirmation : "",
+    };
+    
+    const defaultUserClientForm = {
+        street_number : userDatas.profile?.street_number ?? "",
+        street_name : userDatas.profile?.street_name ?? "",
+        complement : userDatas.profile?.complement ?? "",
     };
 
 
@@ -58,6 +69,8 @@ function InformationsTab({userDatas, token}) {
     })
 
     const [userPasswordForm, setUserPasswordForm] = useState(defaultPasswordForm);
+
+    const [userClientForm, setUserClientForm] = useState(defaultUserClientForm);
 
     const handleSubmitUserInfos = async (e) => {
         e.preventDefault();
@@ -244,9 +257,96 @@ function InformationsTab({userDatas, token}) {
             setIsLoading(false);
         }
     }
-    
+
+    const handleSubmitUserClientInfos = async (e) => {
+        e.preventDefault();
+
+        setAlertMessage(defaultAlertMessage);
+        setErrorInfosForm(defaultErrorForm);
+
+        setIsLoading(true);
+
+        //Validation : Get userClientForm and return object of error if no value in input
+        const validateClientInputs = Object.entries(userClientForm).reduce((acc, [key, value]) => {
+            if (!value) {
+                switch (key) {
+                    case "street_number":
+                        acc[key] = "Le numéro de rue est requis.";
+                        break;
+                    case "street_name":
+                        acc[key] = "Le nom de la rue est requis.";
+                        break;
+                    default:
+                        break;
+                }
+            } else if (value.length > 255) {
+                switch (key) {
+                    case "street_name":
+                        acc[key] = "Le nom de la rue ne peut pas dépasser 255 caractères.";
+                        break;
+                    case "complement":
+                        acc[key] = "Le complément d'adresse ne peut pas dépasser 255 caractères.";
+                        break;
+                    default:
+                        break;
+                }
+            } else if (value < 0){
+
+                if(key === "street_number"){
+                    acc[key] = "Le numéro de rue ne peut pas être négatif.";
+                }
+            }
+            return acc;
+        }, {});
+
+        // Check if there is at least 1 error
+        if(Object.keys(validateClientInputs).length > 0){
+            setErrorInfosForm(validateClientInputs);
+            setIsLoading(false);
+            return;
+        }
+
+        try {
+            const updateClientInfos = await axios.post(apiBase + "/api/client-infos", 
+                userClientForm,
+                { headers: {
+                    "Authorization": "Bearer " + token,
+                }
+            });
+
+            if(updateClientInfos.status === 200) {
+                setAlertMessage({...alertMessage, type : "success", message : "Votre adresse a été mis à jour avec succès.", context : "client-infos"});
+            }else if (updateClientInfos.status === 201) {
+                setAlertMessage({...alertMessage, type : "success", message : "Votre adresse a été ajouté avec succès.", context : "client-infos"});
+            }
+        } catch (error) {
+            
+            if (!error.response) return setAlertMessage({...alertMessage, type : "", message : "Une erreur est survenue durant la mise à jour de votre addresse", context : "client-infos"})
+            
+            const { status, data } = error.response;
+            
+            if(status === 422){
+                // Convert the error into an object
+                const getErrors = Object.entries(data.errors).reduce((validateError, validate) => {
+                    validateError[validate[0]] = validate[1][0];
+                    return validateError;
+                }, {})
+
+                setErrorInfosForm(getErrors);
+            } else {
+                setAlertMessage({...alertMessage, type : "error", message : "Une erreur est survenue durant la mise à jour de votre adresse", context : "client-infos"})
+            }
+        } finally {
+            setIsLoading(false);
+        }
+    }
+
+    const handleSubmitUserPicture = async (e) => {
+
+    }
     return ( 
         <div className="informations-tab">
+
             <form onSubmit={handleSubmitUserInfos} className="user-infos-form">
                 <h2>Informations utilisateur</h2>
                 <div className="user-infos-input">
@@ -268,7 +368,7 @@ function InformationsTab({userDatas, token}) {
                     </div>
 
                     <div className="wrapper">
-                        <Input label="Pseudo" id="username" placeholder="johndoe123" type="text" autoComplete="off"
+                        <Input label="Pseudo" id="username" placeholder="johndoe123" type="text" autoComplete="off" maxLength={255}
                             value={userInfosForm.username}
                             onChange={(e) => setUserInfosForm({...userInfosForm, username : e.target.value})}
                         />
@@ -369,7 +469,57 @@ function InformationsTab({userDatas, token}) {
                 {alertMessage.context === "user-password" && alertMessage.message &&
                     <AlertMessage type={alertMessage.type}>{alertMessage.message}</AlertMessage>
                 }
+            </form>
 
+            <form onSubmit={handleSubmitUserClientInfos} className="client-infos-form">
+                <div className="client-infos-header">
+                    <h2>Adresse</h2>
+                    <h3>Indiquez votre adresse complète pour que l'artisan puisse se déplacer facilement.</h3>
+                </div>
+                <div className="client-address-input">
+                    <div className="wrapper">
+                        <Input label="Numéro de rue" id="street_number" type="number" min="0"
+                            value={userClientForm.street_number}
+                            onChange={(e) => setUserClientForm({...userClientForm, street_number : e.target.value})}
+                            />
+                        {errorInfosForm.street_number && <AlertMessage type="error">{errorInfosForm.street_number}</AlertMessage>}
+                    </div>
+                    <div className="wrapper">
+                        <Input label="Nom de la rue" id="street_name" type="text" maxLength={255}
+                            value={userClientForm.street_name}
+                            onChange={(e) => setUserClientForm({...userClientForm, street_name : e.target.value})}
+                            />
+                        {errorInfosForm.street_name && <AlertMessage type="error">{errorInfosForm.street_name}</AlertMessage>}
+                    </div>
+                    <div className="wrapper">
+                        <Input label="Compléments" id="complement" type="text" autoComplete="off" maxLength={255}
+                            value={userClientForm.complement}
+                            onChange={(e) => setUserClientForm({...userClientForm, complement : e.target.value})}
+                            />
+                        {errorInfosForm.complement && <AlertMessage type="error">{errorInfosForm.complement}</AlertMessage>}
+                    </div>
+                </div>
+
+                <Button type="submit" className="btn-primary">
+                    {isLoading ? (
+                        <SpinLoader />
+                    ): (
+                        <>
+                            Sauvegarder
+                        </>
+                    )}
+                </Button>
+
+                {alertMessage.context === "client-infos" && alertMessage.message &&
+                    <AlertMessage type={alertMessage.type}>{alertMessage.message}</AlertMessage>
+                }
+            </form>
+            
+            <form onSubmit={handleSubmitUserPicture} className="user-picture-form">
+                <h2>Photo de profil</h2>
+                <div className="input-file-wrapper">
+                    <input type="file" />
+                </div>
             </form>
         </div>
     );
