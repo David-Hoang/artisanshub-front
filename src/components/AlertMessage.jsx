@@ -4,7 +4,7 @@ import { faExclamationTriangle, faCheck } from '@fortawesome/free-solid-svg-icon
 
 function AlertMessage({children, type}) {
     return ( 
-        <div className={`alert-wrapper ${type === "success" ? 'success' : 'error'}`}>
+        <div className={`alert-wrapper ${type && type}`}>
             <div className="alert-icon-success">
                 {type === "success" 
                     ?   <FontAwesomeIcon icon={faCheck} />

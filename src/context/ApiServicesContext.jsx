@@ -50,6 +50,7 @@ export const ApiServicesProvider = ({children}) => {
 
     useEffect(() => {
         fetchEndPoints()
+        
     }, [])
 
     return (

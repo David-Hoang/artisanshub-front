@@ -240,7 +240,7 @@ export const AuthProvider = ({ children }) => {
                     return validateError;
                 }, {})
                 setErrorFormRegister(getErrors);
-            }else {
+            } else {
                 setErrorMessage("Une erreur est survenue durant la création de votre compte.")
             }
             
