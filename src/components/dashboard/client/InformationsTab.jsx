@@ -3,6 +3,10 @@ import axios from 'axios'
 import {useContext, useState} from 'react';
 import { useNavigate } from "react-router-dom";
 
+import DefaultClient from '../../../assets/img/default-client.svg';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons'
+
 import { ApiServicesContext } from "../../../context/ApiServicesContext.jsx";
 
 import Button from "../../ui/Button.jsx";
@@ -13,7 +17,7 @@ import SpinLoader from "../../ui/SpinLoader.jsx";
 
 
 function InformationsTab({userDatas, token}) {
-
+    
     const apiBase = import.meta.env.VITE_MAIN_API_URI;
     let navigate = useNavigate();
 
@@ -40,6 +44,9 @@ function InformationsTab({userDatas, token}) {
         street_number : "",
         street_name : "",
         complement : "",
+
+        img_title : "",
+        profile_picture : ""
     };
 
     const defaultPasswordForm = {
@@ -49,11 +56,16 @@ function InformationsTab({userDatas, token}) {
     };
     
     const defaultUserClientForm = {
-        street_number : userDatas.profile?.street_number ?? "",
-        street_name : userDatas.profile?.street_name ?? "",
-        complement : userDatas.profile?.complement ?? "",
+        street_number : userDatas.client?.street_number ?? "",
+        street_name : userDatas.client?.street_name ?? "",
+        complement : userDatas.client?.complement ?? "",
     };
 
+    const defaultUserPicture = {
+        img_path : userDatas.profile_img.img_path ? `${apiBase}/storage/${userDatas.profile_img.img_path}` : DefaultClient,
+        img_title : userDatas.profile_img.img_title ?? "",
+        profile_picture : null,
+    }
 
     const [alertMessage, setAlertMessage] = useState(defaultAlertMessage);
     const [errorInfosForm, setErrorInfosForm] = useState(defaultErrorForm);
@@ -71,6 +83,8 @@ function InformationsTab({userDatas, token}) {
     const [userPasswordForm, setUserPasswordForm] = useState(defaultPasswordForm);
 
     const [userClientForm, setUserClientForm] = useState(defaultUserClientForm);
+
+    const [userPictureForm, setUserPictureForm] = useState(defaultUserPicture);
 
     const handleSubmitUserInfos = async (e) => {
         e.preventDefault();
@@ -235,7 +249,7 @@ function InformationsTab({userDatas, token}) {
             }
         } catch (error) {
             
-            if (!error.response) return setAlertMessage({...alertMessage, type : "", message : "Une erreur est survenue durant la mise à jour de votre mot de passe", context : "user-password"})
+            if (!error.response) return setAlertMessage({...alertMessage, type : "error", message : "Une erreur est survenue durant la mise à jour de votre mot de passe", context : "user-password"})
             
             const { status, data } = error.response;
             
@@ -321,7 +335,7 @@ function InformationsTab({userDatas, token}) {
             }
         } catch (error) {
             
-            if (!error.response) return setAlertMessage({...alertMessage, type : "", message : "Une erreur est survenue durant la mise à jour de votre addresse", context : "client-infos"})
+            if (!error.response) return setAlertMessage({...alertMessage, type : "error", message : "Une erreur est survenue durant la mise à jour de votre addresse", context : "client-infos"})
             
             const { status, data } = error.response;
             
@@ -342,8 +356,108 @@ function InformationsTab({userDatas, token}) {
     }
 
     const handleSubmitUserPicture = async (e) => {
+        e.preventDefault()
+        // return console.log(userPictureForm.profile_picture);
 
+        setAlertMessage(defaultAlertMessage);
+        setErrorInfosForm(defaultErrorForm);
+
+        setIsLoading(true);
+
+        //Validation : Get userPasswordForm and return object of error if no value in input
+        if(userPictureForm.img_title.length > 255){
+            setErrorInfosForm({...errorInfosForm, img_title : "Le nom ne peut pas dépasser 255 caractères."});
+        }
+
+        if(userPictureForm.profile_picture){
+
+        }
+
+        //Validation : Get userPasswordForm and return object of error if no value in input
+        const validateUserPictureInputs = Object.entries(userPictureForm).reduce((acc, [key, value]) => {
+
+            if (key === "img_title" && value.length > 255) {
+                acc[key] = "Le nom ne peut pas dépasser 255 caractères.";
+            }
+
+            if(key === "profile_picture" && value?.type ) {
+                const allowedTypes = ["image/png", "image/jpeg", "image/jpg", "image/webp"];
+                const maxSize = 3 * 1024 * 1024; // 3Mo
+
+                if(value.size > maxSize) {
+                    acc[key] = "Le volume du fichier est trop grand, maximum 3 Mo.";
+                }
+
+                if(!allowedTypes.includes(value.type)){
+                    acc[key] = "L'extension du fichier ne peut être autre que du PNG, JPEG, JPG ou WEBP";
+                }
+            }
+
+            return acc;
+        }, {});
+        
+        // Check if there is at least 1 error
+        if(Object.keys(validateUserPictureInputs).length > 0){
+            setErrorInfosForm(validateUserPictureInputs);
+            setIsLoading(false);
+            return;
+        }
+
+        try {
+            const formData = new FormData();
+            formData.append('img_title', userPictureForm.img_title);
+            formData.append('profile_picture', userPictureForm.profile_picture);
+
+            const updateUserPicture = await axios.post(apiBase + "/api/user-profile-picture", 
+                formData,
+                { headers: {
+                    "Authorization": "Bearer " + token,
+                }
+            });
+
+            if(updateUserPicture.status === 200) {
+                setAlertMessage({...alertMessage, type : "success", message : "Votre photo de profil et son titre ont bien été enregistrés !", context : "user-picture"});
+                setUserPictureForm(defaultUserPicture);
+            }
+
+            if(updateClientInfos.status === 200) {
+                setAlertMessage({...alertMessage, type : "success", message : "Votre photo de profil et son titre ont bien été enregistrés !", context : "user-picture"});
+                setUserPictureForm(defaultUserPicture);
+            }else if (updateClientInfos.status === 201) {
+                setAlertMessage({...alertMessage, type : "success", message : "Votre photo de profil et son titre ont bien été ajouté avec succès !", context : "user-picture"});
+                setUserPictureForm(defaultUserPicture);
+            }
+
+        } catch (error) {
+            
+            if (!error.response) return setAlertMessage({...alertMessage, type : "error", message : "Une erreur est survenue durant la mise à jour de votre photo de profil et son titre.", context : "user-picture"})
+            
+            const { status, data } = error.response;
+            
+            if(status === 422){
+                // Convert the error into an object
+                const getErrors = Object.entries(data.errors).reduce((validateError, validate) => {
+                    validateError[validate[0]] = validate[1][0];
+                    return validateError;
+                }, {})
+                setErrorInfosForm(getErrors);
+            } else {
+                setAlertMessage({...alertMessage, type : "error", message : "Une erreur est survenue durant la mise à jour de votre photo de profil et son titre.", context : "user-picture"})
+            }
+        } finally {
+            setIsLoading(false);
+        }
     }
+    
+    // If user upload a picture, he can remove and it will back to the old picture
+    const removePicture = () => {
+        setUserPictureForm({
+            ...userPictureForm,
+            img_path : userDatas.profile_img.img_path ? `${apiBase}/storage/${userDatas.profile_img.img_path}` : DefaultClient,
+            profile_picture : null
+        })
+    }
+
     return ( 
         <div className="informations-tab">
 
@@ -352,7 +466,7 @@ function InformationsTab({userDatas, token}) {
                 <div className="user-infos-input">
 
                     <div className="wrapper">
-                        <Input label="Nom" id="last_name" placeholder="Doe" type="text" autoComplete="off" maxLength={255}
+                        <Input label="Nom*" id="last_name" placeholder="Doe" type="text" autoComplete="off" maxLength={255}
                             value={userInfosForm.last_name}
                             onChange={(e) => setUserInfosForm({...userInfosForm, last_name : e.target.value})}
                             />
@@ -360,7 +474,7 @@ function InformationsTab({userDatas, token}) {
                     </div>
                     
                     <div className="wrapper">
-                        <Input label="Prénom" id="first_name" placeholder="John" type="text" autoComplete="off" maxLength={255}
+                        <Input label="Prénom*" id="first_name" placeholder="John" type="text" autoComplete="off" maxLength={255}
                             value={userInfosForm.first_name}
                             onChange={(e) => setUserInfosForm({...userInfosForm, first_name : e.target.value})}
                             />
@@ -376,7 +490,7 @@ function InformationsTab({userDatas, token}) {
                     </div>
         
                     <div className="wrapper">
-                        <Input label="Téléphone" id="phone" type="phone" maxLength={10}
+                        <Input label="Téléphone*" id="phone" type="phone" maxLength={10} placeholder="0612345678"
                             value={userInfosForm.phone}
                             onChange={(e) => setUserInfosForm({...userInfosForm, phone : e.target.value})}
                             />
@@ -384,7 +498,7 @@ function InformationsTab({userDatas, token}) {
                     </div>
 
                     <div className="wrapper">
-                        <Input label="Ville" id="city" placeholder="Bordeaux" type="text" maxLength={255}
+                        <Input label="Ville*" id="city" placeholder="Bordeaux" type="text" maxLength={255}
                             value={userInfosForm.city}
                             onChange={(e) => setUserInfosForm({...userInfosForm, city : e.target.value})}
                             />
@@ -392,7 +506,7 @@ function InformationsTab({userDatas, token}) {
                     </div>
                     
                     <div className="wrapper">
-                        <Input label="Code postal" id="zipcode" placeholder="33000" maxLength={5}
+                        <Input label="Code postal*" id="zipcode" placeholder="33000" maxLength={5}
                             value={userInfosForm.zipcode}
                             onChange={(e) => setUserInfosForm({...userInfosForm, zipcode : e.target.value})}
                             />
@@ -434,21 +548,21 @@ function InformationsTab({userDatas, token}) {
                 <div className="user-password-input">
 
                     <div className="wrapper">
-                        <Input label="Mot de passe actuel" id="password" type="password" autoComplete="off" minLength={8}
+                        <Input label="Mot de passe actuel*" id="password" type="password" autoComplete="off" minLength={8}
                             value={userPasswordForm.password}
                             onChange={(e) => setUserPasswordForm({...userPasswordForm, password : e.target.value})}
                             />
                         {errorInfosForm.password && <AlertMessage type="error">{errorInfosForm.password}</AlertMessage>}
                     </div>
                     <div className="wrapper">
-                        <Input label="Nouveau mot de passe" id="new_password" type="password" autoComplete="off" minLength={8}
+                        <Input label="Nouveau mot de passe*" id="new_password" type="password" autoComplete="off" minLength={8}
                             value={userPasswordForm.new_password}
                             onChange={(e) => setUserPasswordForm({...userPasswordForm, new_password : e.target.value})}
                             />
                         {errorInfosForm.new_password && <AlertMessage type="error">{errorInfosForm.new_password}</AlertMessage>}
                     </div>
                     <div className="wrapper">
-                        <Input label="Confirmer nouveau mot de passe" id="new_password_confirmation" type="password" autoComplete="off" minLength={8}
+                        <Input label="Confirmer nouveau mot de passe*" id="new_password_confirmation" type="password" autoComplete="off" minLength={8}
                             value={userPasswordForm.new_password_confirmation}
                             onChange={(e) => setUserPasswordForm({...userPasswordForm, new_password_confirmation : e.target.value})}
                             />
@@ -478,21 +592,21 @@ function InformationsTab({userDatas, token}) {
                 </div>
                 <div className="client-address-input">
                     <div className="wrapper">
-                        <Input label="Numéro de rue" id="street_number" type="number" min="0"
+                        <Input label="Numéro de rue*" id="street_number" type="number" min="0" placeholder="12"
                             value={userClientForm.street_number}
                             onChange={(e) => setUserClientForm({...userClientForm, street_number : e.target.value})}
                             />
                         {errorInfosForm.street_number && <AlertMessage type="error">{errorInfosForm.street_number}</AlertMessage>}
                     </div>
                     <div className="wrapper">
-                        <Input label="Nom de la rue" id="street_name" type="text" maxLength={255}
+                        <Input label="Nom de la rue*" id="street_name" type="text" maxLength={255} placeholder="rue Verdun"
                             value={userClientForm.street_name}
                             onChange={(e) => setUserClientForm({...userClientForm, street_name : e.target.value})}
                             />
                         {errorInfosForm.street_name && <AlertMessage type="error">{errorInfosForm.street_name}</AlertMessage>}
                     </div>
                     <div className="wrapper">
-                        <Input label="Compléments" id="complement" type="text" autoComplete="off" maxLength={255}
+                        <Input label="Compléments" id="complement" type="text" autoComplete="off" maxLength={255} placeholder="Résidence Blue, Bâtiment A"
                             value={userClientForm.complement}
                             onChange={(e) => setUserClientForm({...userClientForm, complement : e.target.value})}
                             />
@@ -517,9 +631,58 @@ function InformationsTab({userDatas, token}) {
             
             <form onSubmit={handleSubmitUserPicture} className="user-picture-form">
                 <h2>Photo de profil</h2>
-                <div className="input-file-wrapper">
-                    <input type="file" />
+                <div className="user-picture-wrapper">
+                    <div className="picture-wrapper">
+                        <div className="input-file-wrapper">
+                            <label htmlFor="profile_picture">
+                                <FontAwesomeIcon icon={faPlus} />
+                            </label>
+                            <input type="file" name="profile_picture" id="profile_picture"
+                                accept="image/png, image/jpeg, image/jpg, image/webp"
+                                onChange={(e) => setUserPictureForm({
+                                            ...userPictureForm,
+                                            img_path : URL.createObjectURL(e.target.files[0]),
+                                            profile_picture : e.target.files[0]
+                                        })
+                                    }/>
+                            <img src={userPictureForm.img_path} alt={userPictureForm.img_title ?? ""} className="profile-picture"/>
+                        </div>
+                        {userPictureForm.profile_picture &&
+                            <button type="button" className="button-delete-picture"
+                                onClick={removePicture}>
+                                <FontAwesomeIcon icon={faTrash}/>
+                            </button>
+                        }
+                    </div>
+                    
+                    
+                    {errorInfosForm.profile_picture && 
+                        <div>
+                            <AlertMessage type="error">{errorInfosForm.profile_picture}</AlertMessage>
+                        </div>
+                    }
+
+                    <div className="wrapper">
+                        <Input label="Nom de l'image (facultatif)" id="img_title" type="text"
+                            value={userPictureForm.img_title}
+                            onChange={(e) => setUserPictureForm({...userPictureForm, img_title : e.target.value})}
+                            />
+                        {errorInfosForm.img_title && <AlertMessage type="error">{errorInfosForm.img_title}</AlertMessage>}
+                    </div>
                 </div>
+
+                <Button type="submit" className="btn-primary">
+                    {isLoading ? (
+                        <SpinLoader />
+                    ): (
+                        <>
+                            Sauvegarder
+                        </>
+                    )}
+                </Button>
+                {alertMessage.context === "user-picture" && alertMessage.message &&
+                    <AlertMessage type={alertMessage.type}>{alertMessage.message}</AlertMessage>
+                }
             </form>
         </div>
     );
