@@ -357,7 +357,6 @@ function InformationsTab({userDatas, token}) {
 
     const handleSubmitUserPicture = async (e) => {
         e.preventDefault()
-        // return console.log(userPictureForm.profile_picture);
 
         setAlertMessage(defaultAlertMessage);
         setErrorInfosForm(defaultErrorForm);
@@ -406,7 +405,10 @@ function InformationsTab({userDatas, token}) {
         try {
             const formData = new FormData();
             formData.append('img_title', userPictureForm.img_title);
-            formData.append('profile_picture', userPictureForm.profile_picture);
+            
+            if(userPictureForm.profile_picture){
+                formData.append('profile_picture', userPictureForm.profile_picture);
+            }
 
             const updateUserPicture = await axios.post(apiBase + "/api/user-profile-picture", 
                 formData,
@@ -415,22 +417,18 @@ function InformationsTab({userDatas, token}) {
                 }
             });
 
-            if(updateUserPicture.status === 200) {
+            if(updateUserPicture.status === 200) { 
                 setAlertMessage({...alertMessage, type : "success", message : "Votre photo de profil et son titre ont bien été enregistrés !", context : "user-picture"});
-                setUserPictureForm(defaultUserPicture);
-            }
-
-            if(updateClientInfos.status === 200) {
-                setAlertMessage({...alertMessage, type : "success", message : "Votre photo de profil et son titre ont bien été enregistrés !", context : "user-picture"});
-                setUserPictureForm(defaultUserPicture);
-            }else if (updateClientInfos.status === 201) {
+                setUserPictureForm({...userPictureForm, profile_picture : null});
+            }else if (updateUserPicture.status === 201) {
                 setAlertMessage({...alertMessage, type : "success", message : "Votre photo de profil et son titre ont bien été ajouté avec succès !", context : "user-picture"});
-                setUserPictureForm(defaultUserPicture);
+                setUserPictureForm({userPictureForm, profile_picture : null});
             }
 
         } catch (error) {
+            console.log(error);
             
-            if (!error.response) return setAlertMessage({...alertMessage, type : "error", message : "Une erreur est survenue durant la mise à jour de votre photo de profil et son titre.", context : "user-picture"})
+            if (!error.response) return setAlertMessage({...alertMessage, type : "error", message : "Une erreur est survenue durant la mise à jour de votre photo de profil et son titre.!", context : "user-picture"})
             
             const { status, data } = error.response;
             

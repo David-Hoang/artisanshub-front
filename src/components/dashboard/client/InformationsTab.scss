@@ -125,6 +125,13 @@ div.informations-tab {
                 }
             }
             
+            div.wrapper {
+                width: 100%;
+                @media screen and (min-width : var.$bp-md) {
+                    width : 30%;
+                }
+            }
+
         }
 
 
