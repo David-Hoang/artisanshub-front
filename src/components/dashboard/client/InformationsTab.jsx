@@ -1,7 +1,6 @@
 import './InformationsTab.scss';
 import axios from 'axios'
 import {useContext, useState} from 'react';
-import { useNavigate } from "react-router-dom";
 
 import DefaultClient from '../../../assets/img/default-client.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -19,12 +18,14 @@ import SpinLoader from "../../ui/SpinLoader.jsx";
 function InformationsTab({userDatas, token}) {
     
     const apiBase = import.meta.env.VITE_MAIN_API_URI;
-    let navigate = useNavigate();
 
     const {regions} = useContext(ApiServicesContext);
 
     //To manage loading spinner
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoadingUserInfos, setIsLoadingUserInfos] = useState(false);
+    const [isLoadingUserPassword, setIsLoadingUserPassword] = useState(false);
+    const [isLoadingClient, setIsLoadingClient] = useState(false);
+    const [isLoadingUserPicture, setIsLoadingUserPicture] = useState(false);
 
     const defaultAlertMessage = {type : "", message : "", context : ""};
     const defaultErrorForm = {
@@ -54,18 +55,6 @@ function InformationsTab({userDatas, token}) {
         new_password : "",
         new_password_confirmation : "",
     };
-    
-    const defaultUserClientForm = {
-        street_number : userDatas.client?.street_number ?? "",
-        street_name : userDatas.client?.street_name ?? "",
-        complement : userDatas.client?.complement ?? "",
-    };
-
-    const defaultUserPicture = {
-        img_path : userDatas.profile_img.img_path ? `${apiBase}/storage/${userDatas.profile_img.img_path}` : DefaultClient,
-        img_title : userDatas.profile_img.img_title ?? "",
-        profile_picture : null,
-    }
 
     const [alertMessage, setAlertMessage] = useState(defaultAlertMessage);
     const [errorInfosForm, setErrorInfosForm] = useState(defaultErrorForm);
@@ -82,9 +71,17 @@ function InformationsTab({userDatas, token}) {
 
     const [userPasswordForm, setUserPasswordForm] = useState(defaultPasswordForm);
 
-    const [userClientForm, setUserClientForm] = useState(defaultUserClientForm);
+    const [userClientForm, setUserClientForm] = useState({
+        street_number : userDatas.client?.street_number ?? "",
+        street_name : userDatas.client?.street_name ?? "",
+        complement : userDatas.client?.complement ?? "",
+    });
 
-    const [userPictureForm, setUserPictureForm] = useState(defaultUserPicture);
+    const [userPictureForm, setUserPictureForm] = useState({
+        img_path : userDatas.profile_img.img_path ? `${apiBase}/storage/${userDatas.profile_img.img_path}` : DefaultClient,
+        img_title : userDatas.profile_img.img_title ?? "",
+        profile_picture : null,
+    });
 
     const handleSubmitUserInfos = async (e) => {
         e.preventDefault();
@@ -93,7 +90,7 @@ function InformationsTab({userDatas, token}) {
         setAlertMessage(defaultAlertMessage);
         setErrorInfosForm(defaultErrorForm);
 
-        setIsLoading(true);
+        setIsLoadingUserInfos(true);
 
         //Validation : Get userInfosForm and return object of error if no value in input
         const validateUserInfosInputs = Object.entries(userInfosForm).reduce((acc, [key, value]) => {
@@ -162,7 +159,7 @@ function InformationsTab({userDatas, token}) {
         // Check if there is at least 1 error
         if(Object.keys(validateUserInfosInputs).length > 0){
             setErrorInfosForm(validateUserInfosInputs);
-            setIsLoading(false);
+            setIsLoadingUserInfos(false);
             return;
         }
 
@@ -194,7 +191,7 @@ function InformationsTab({userDatas, token}) {
                 setAlertMessage({...alertMessage, type : "error", message : "Une erreur est survenue durant la mise à jour de vos informations.", context : "user-infos"})
             }
         } finally {
-            setIsLoading(false);
+            setIsLoadingUserInfos(false);
         }
     }
 
@@ -205,7 +202,7 @@ function InformationsTab({userDatas, token}) {
         setAlertMessage(defaultAlertMessage);
         setErrorInfosForm(defaultErrorForm);
 
-        setIsLoading(true);
+        setIsLoadingUserPassword(true);
         
         //Validation : Get userPasswordForm and return object of error if no value in input
         const validateUserPasswordInputs = Object.entries(userPasswordForm).reduce((acc, [key, value]) => {
@@ -231,7 +228,7 @@ function InformationsTab({userDatas, token}) {
         // Check if there is at least 1 error
         if(Object.keys(validateUserPasswordInputs).length > 0){
             setErrorInfosForm(validateUserPasswordInputs);
-            setIsLoading(false);
+            setIsLoadingUserPassword(false);
             return;
         }
 
@@ -268,7 +265,7 @@ function InformationsTab({userDatas, token}) {
                 setAlertMessage({...alertMessage, type : "error", message : "Une erreur est survenue durant la mise à jour de votre mot de passe", context : "user-password"})
             }
         } finally {
-            setIsLoading(false);
+            setIsLoadingUserPassword(false);
         }
     }
 
@@ -278,7 +275,7 @@ function InformationsTab({userDatas, token}) {
         setAlertMessage(defaultAlertMessage);
         setErrorInfosForm(defaultErrorForm);
 
-        setIsLoading(true);
+        setIsLoadingClient(true);
 
         //Validation : Get userClientForm and return object of error if no value in input
         const validateClientInputs = Object.entries(userClientForm).reduce((acc, [key, value]) => {
@@ -316,7 +313,7 @@ function InformationsTab({userDatas, token}) {
         // Check if there is at least 1 error
         if(Object.keys(validateClientInputs).length > 0){
             setErrorInfosForm(validateClientInputs);
-            setIsLoading(false);
+            setIsLoadingClient(false);
             return;
         }
 
@@ -351,7 +348,7 @@ function InformationsTab({userDatas, token}) {
                 setAlertMessage({...alertMessage, type : "error", message : "Une erreur est survenue durant la mise à jour de votre adresse", context : "client-infos"})
             }
         } finally {
-            setIsLoading(false);
+            setIsLoadingClient(false);
         }
     }
 
@@ -361,7 +358,7 @@ function InformationsTab({userDatas, token}) {
         setAlertMessage(defaultAlertMessage);
         setErrorInfosForm(defaultErrorForm);
 
-        setIsLoading(true);
+        setIsLoadingUserPicture(true);
 
         //Validation : Get userPasswordForm and return object of error if no value in input
         if(userPictureForm.img_title.length > 255){
@@ -398,7 +395,7 @@ function InformationsTab({userDatas, token}) {
         // Check if there is at least 1 error
         if(Object.keys(validateUserPictureInputs).length > 0){
             setErrorInfosForm(validateUserPictureInputs);
-            setIsLoading(false);
+            setIsLoadingUserPicture(false);
             return;
         }
 
@@ -426,8 +423,7 @@ function InformationsTab({userDatas, token}) {
             }
 
         } catch (error) {
-            console.log(error);
-            
+
             if (!error.response) return setAlertMessage({...alertMessage, type : "error", message : "Une erreur est survenue durant la mise à jour de votre photo de profil et son titre.!", context : "user-picture"})
             
             const { status, data } = error.response;
@@ -443,7 +439,7 @@ function InformationsTab({userDatas, token}) {
                 setAlertMessage({...alertMessage, type : "error", message : "Une erreur est survenue durant la mise à jour de votre photo de profil et son titre.", context : "user-picture"})
             }
         } finally {
-            setIsLoading(false);
+            setIsLoadingUserPicture(false);
         }
     }
     
@@ -457,7 +453,7 @@ function InformationsTab({userDatas, token}) {
     }
 
     return ( 
-        <div className="informations-tab">
+        <div className="informations-tab-client">
 
             <form onSubmit={handleSubmitUserInfos} className="user-infos-form">
                 <h2>Informations utilisateur</h2>
@@ -523,7 +519,7 @@ function InformationsTab({userDatas, token}) {
                 </div>
                 
                 <Button type="submit" className="btn-primary">
-                    {isLoading ? (
+                    {isLoadingUserInfos ? (
                         <SpinLoader />
                     ): (
                         <>
@@ -569,7 +565,7 @@ function InformationsTab({userDatas, token}) {
                 </div>
 
                 <Button type="submit" className="btn-primary">
-                    {isLoading ? (
+                    {isLoadingUserPassword ? (
                         <SpinLoader />
                     ): (
                         <>
@@ -578,8 +574,11 @@ function InformationsTab({userDatas, token}) {
                     )}
                 </Button>
 
-                {alertMessage.context === "user-password" && alertMessage.message &&
-                    <AlertMessage type={alertMessage.type}>{alertMessage.message}</AlertMessage>
+                {(alertMessage.context === "user-password" && alertMessage.message) && alertMessage.type === "success" &&
+                    <AlertMessage type="success">{alertMessage.message}</AlertMessage>
+                }
+                {(alertMessage.context === "user-password" && alertMessage.message) && alertMessage.type === "error" &&
+                    <AlertMessage type="error">{alertMessage.message}</AlertMessage>
                 }
             </form>
 
@@ -613,7 +612,7 @@ function InformationsTab({userDatas, token}) {
                 </div>
 
                 <Button type="submit" className="btn-primary">
-                    {isLoading ? (
+                    {isLoadingClient ? (
                         <SpinLoader />
                     ): (
                         <>
@@ -622,8 +621,11 @@ function InformationsTab({userDatas, token}) {
                     )}
                 </Button>
 
-                {alertMessage.context === "client-infos" && alertMessage.message &&
-                    <AlertMessage type={alertMessage.type}>{alertMessage.message}</AlertMessage>
+                {(alertMessage.context === "client-infos" && alertMessage.message) && alertMessage.type === "success" &&
+                    <AlertMessage type="success">{alertMessage.message}</AlertMessage>
+                }
+                {(alertMessage.context === "client-infos" && alertMessage.message) && alertMessage.type === "error" &&
+                    <AlertMessage type="error">{alertMessage.message}</AlertMessage>
                 }
             </form>
             
@@ -670,7 +672,7 @@ function InformationsTab({userDatas, token}) {
                 </div>
 
                 <Button type="submit" className="btn-primary">
-                    {isLoading ? (
+                    {isLoadingUserPicture ? (
                         <SpinLoader />
                     ): (
                         <>
@@ -678,8 +680,11 @@ function InformationsTab({userDatas, token}) {
                         </>
                     )}
                 </Button>
-                {alertMessage.context === "user-picture" && alertMessage.message &&
-                    <AlertMessage type={alertMessage.type}>{alertMessage.message}</AlertMessage>
+                {(alertMessage.context === "user-picture" && alertMessage.message) && alertMessage.type === "success" &&
+                    <AlertMessage type="success">{alertMessage.message}</AlertMessage>
+                }
+                {(alertMessage.context === "user-picture" && alertMessage.message) && alertMessage.type === "error" &&
+                    <AlertMessage type="error">{alertMessage.message}</AlertMessage>
                 }
             </form>
         </div>

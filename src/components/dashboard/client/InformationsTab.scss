@@ -2,7 +2,7 @@
 @use "../../../assets/scss/mixins" as mxn;
 @use "../../../assets/scss/extends" as ext;
 
-div.informations-tab {
+div.informations-tab-client {
     display: flex;
     flex-direction: column;
     gap: var.$gap-xl;
@@ -110,13 +110,17 @@ div.informations-tab {
                     top : 1.35rem;
                     background-color: transparent;
                     border : none;
-                    font-size : var.$txt-lg;
                     color : var.$danger;
                     cursor : pointer;
                     transition: all 0.1s ease-out;
+                    z-index: 1;
 
                     svg {
                         font-size: var.$txt-2xl;
+                        transition: all 0.1s ease-in-out;
+                        &:hover {
+                            font-size : var.$txt-3xl;
+                        }
                     }
 
                     &:hover{
@@ -133,7 +137,6 @@ div.informations-tab {
             }
 
         }
-
 
         @media screen and (min-width : var.$bp-md) {
             button.btn-primary{
