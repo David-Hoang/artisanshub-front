@@ -30,6 +30,7 @@ export const AuthProvider = ({ children }) => {
         username : "",
         role : "",
         password : "",
+        password_confirmation : "",
         phone : "",
         city : "",
         region : "",
@@ -202,6 +203,9 @@ export const AuthProvider = ({ children }) => {
                     case "password":
                         acc[key] = "Veuillez renseigner un mot de passe.";
                         break;
+                    case "password_confirmation":
+                        acc[key] = "Vous devez confirmer le mot de passe.";
+                        break;
                     case "phone":
                         acc[key] = "Veuillez renseigner votre téléphone.";
                         break;
@@ -228,13 +232,14 @@ export const AuthProvider = ({ children }) => {
             return;
         }
 
-        
         try {
             const register = await axios.post(apiBase + "/api/register", formRegister);
-            
             if(register.status === 201){
                 let token = register.data.token;
                 localStorage.setItem("artisansHubUserToken", token);
+                setUserDatas(register.data.user);
+                setUserRole(register.data.user.role);
+                setUserRoleInfos(true);
                 setUserToken(token);
                 setIsLogged(true);
                 navigate('/');

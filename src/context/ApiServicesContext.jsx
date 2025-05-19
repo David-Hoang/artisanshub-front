@@ -10,19 +10,6 @@ export const ApiServicesProvider = ({children}) => {
     const [jobsCategories, setJobsCategories] = useState([]);
     const [regions, setRegions] = useState([]);
 
-    // const fetchJobsCat = async () => {
-    //     try {
-    //         const response = await axios.get(apiBase + "/api/jobs");
-    //         if(response.status === 200){
-    //             setJobsCategories(response.data.jobs);
-    //         }
-    //     } catch (error) {
-    //         console.log(error);
-    //     }finally{
-    //         setControllerLoading(false);
-    //     }
-    // }
-
     const fetchEndPoints = async () => {
 
         try {
