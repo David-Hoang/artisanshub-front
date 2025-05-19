@@ -286,6 +286,79 @@ function InformationsTab({userDatas, token}) {
 
         setIsLoadingCraftsman(true);
 
+         //Validation : Get userInfosForm and return object of error if no value in input
+        const validateUserCraftsmanInputs = Object.entries(userCraftsmanForm).reduce((acc, [key, value]) => {
+
+            if(key === "craftsman_job_id"){
+                if(!value){
+                    acc[key] = "Veuillez sélectionner votre activité.";
+                    return acc ;
+                }
+            }
+
+            if(key === "available"){
+                if(value === undefined){
+                    acc[key] = "Veuillez sélectionner votre activité.";
+                    return acc;
+                }
+            }
+
+            if (key === "price") {
+                if (value !== '' && (isNaN(parseFloat(value)) || parseFloat(value) < 0 || parseFloat(value) > 99999999.99)) {
+                    acc[key] = "Le prix doit être un nombre entre 0 et 99 999 999,99.";
+                    return acc;
+                }
+            }
+
+            if (key === "description") { 
+                if(value.length > 65535) { //longText type in database
+                    acc[key] = "La description ne doit pas dépasser 65 535 caractères.";
+                    return acc;
+                }
+            }
+            return acc;
+        }, {});
+
+        // Check if there is at least 1 error
+        if(Object.keys(validateUserCraftsmanInputs).length > 0){
+            setErrorInfosForm(validateUserCraftsmanInputs);
+            setIsLoadingCraftsman(false);
+            return;
+        }
+
+        try {
+            const updateCraftsmanInfos = await axios.post(apiBase + "/api/craftsman-infos", 
+                userCraftsmanForm,
+                { headers: {
+                    "Authorization": "Bearer " + token,
+                }
+            });
+
+            if(updateCraftsmanInfos.status === 200) {
+                setAlertMessage({...alertMessage, type : "success", message : "Vos informations ont été mises à jour avec succès.", context : "craftsman-infos"});
+            }else if (updateCraftsmanInfos.status === 201) {
+                setAlertMessage({...alertMessage, type : "success", message : "Vos informations ont été ajouté avec succès.", context : "craftsman-infos"});
+            }
+        } catch (error) {
+
+            const { status, data } = error.response;
+
+            if(status === 422){
+
+                // Convert the error into an object
+                const getErrors = Object.entries(data.errors).reduce((validateError, validate) => {
+                    validateError[validate[0]] = validate[1][0];
+                    return validateError;
+                }, {})
+
+                setErrorInfosForm(getErrors);
+            } else {
+                setAlertMessage({...alertMessage, type : "error", message : "Une erreur est survenue durant la mise à jour de vos informations.", context : "craftsman-infos"})
+            }
+        } finally {
+            setIsLoadingCraftsman(false);
+        }
+
     }
 
     const handleSubmitUserPicture = async (e) => {
@@ -420,7 +493,7 @@ function InformationsTab({userDatas, token}) {
                     </div>
         
                     <div className="wrapper">
-                        <Input label="Téléphone*" id="phone" type="phone" maxLength={10} placeholder="0612345678"
+                        <Input label="Téléphone*" id="phone" type="phone" pattern="^0\d{9}$" maxLength={10} placeholder="0612345678"
                             value={userInfosForm.phone}
                             onChange={(e) => setUserInfosForm({...userInfosForm, phone : e.target.value})}
                             />
@@ -436,7 +509,7 @@ function InformationsTab({userDatas, token}) {
                     </div>
                     
                     <div className="wrapper">
-                        <Input label="Code postal*" id="zipcode" placeholder="33000" maxLength={5}
+                        <Input label="Code postal*" id="zipcode" type="text" pattern="^\d{5}$" placeholder="33000" maxLength={5}
                             value={userInfosForm.zipcode}
                             onChange={(e) => setUserInfosForm({...userInfosForm, zipcode : e.target.value})}
                             />
@@ -536,8 +609,9 @@ function InformationsTab({userDatas, token}) {
                                 null
                             }
                             value={userCraftsmanForm.craftsman_job_id}
-                            onChange={(e) => setUserCraftsmanForm({...userCraftsmanForm, craftsman_job_id : e.target.value})}
+                            onChange={(e) => setUserCraftsmanForm({...userCraftsmanForm, craftsman_job_id : parseInt(e.target.value)})}
                         />
+                        {errorInfosForm.craftsman_job_id && <AlertMessage type="error">{errorInfosForm.craftsman_job_id}</AlertMessage>}
                     </div>
 
                     <div className="wrapper">
@@ -565,6 +639,7 @@ function InformationsTab({userDatas, token}) {
                         value={userCraftsmanForm.description}
                         onChange={(e) => setUserCraftsmanForm({...userCraftsmanForm, description : e.target.value})}
                     />
+                    {errorInfosForm.description && <AlertMessage type="error">{errorInfosForm.description}</AlertMessage>}
                 </div>
 
                 <div className="craftsman-gallery">

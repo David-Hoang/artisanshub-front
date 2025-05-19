@@ -276,7 +276,8 @@ function InformationsTab({userDatas, token}) {
         setErrorInfosForm(defaultErrorForm);
 
         setIsLoadingClient(true);
-
+        console.log(userClientForm.street_number);
+        
         //Validation : Get userClientForm and return object of error if no value in input
         const validateClientInputs = Object.entries(userClientForm).reduce((acc, [key, value]) => {
             if (!value) {
@@ -484,7 +485,7 @@ function InformationsTab({userDatas, token}) {
                     </div>
         
                     <div className="wrapper">
-                        <Input label="Téléphone*" id="phone" type="phone" maxLength={10} placeholder="0612345678"
+                        <Input label="Téléphone*" id="phone" type="phone" pattern="^0\d{9}$" maxLength={10} placeholder="0612345678"
                             value={userInfosForm.phone}
                             onChange={(e) => setUserInfosForm({...userInfosForm, phone : e.target.value})}
                             />
@@ -500,7 +501,7 @@ function InformationsTab({userDatas, token}) {
                     </div>
                     
                     <div className="wrapper">
-                        <Input label="Code postal*" id="zipcode" placeholder="33000" maxLength={5}
+                        <Input label="Code postal*" id="zipcode" type="text" pattern="^\d{5}$" placeholder="33000" maxLength={5}
                             value={userInfosForm.zipcode}
                             onChange={(e) => setUserInfosForm({...userInfosForm, zipcode : e.target.value})}
                             />
@@ -591,7 +592,7 @@ function InformationsTab({userDatas, token}) {
                     <div className="wrapper">
                         <Input label="Numéro de rue*" id="street_number" type="number" min="0" placeholder="12"
                             value={userClientForm.street_number}
-                            onChange={(e) => setUserClientForm({...userClientForm, street_number : e.target.value})}
+                            onChange={(e) => setUserClientForm({...userClientForm, street_number : parseInt(e.target.value)})}
                             />
                         {errorInfosForm.street_number && <AlertMessage type="error">{errorInfosForm.street_number}</AlertMessage>}
                     </div>

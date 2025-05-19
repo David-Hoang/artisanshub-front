@@ -22,7 +22,7 @@ section.tabs {
         justify-content: space-between;
         gap : var.$gap-sm;
 
-        padding : 0.25rem 0.75rem;
+        padding : 0.25rem 0.5rem;
         border-radius: var.$rounded-lg;
         
         @media screen and (min-width : var.$bp-sm) {
@@ -30,11 +30,12 @@ section.tabs {
         }
 
         button.tab-item {
-            color : var.$gray;
+            color : #71717a;
             font-size : var.$txt-sm;
             font-weight : 600;
             padding : 0.4rem 0.65rem;
             cursor: pointer;
+            background-color: transparent;
             
             // Prevent select
             -webkit-user-select: none; /* Safari */
@@ -45,6 +46,7 @@ section.tabs {
             align-items: center;
             gap : var.$gap-xs;
             border : none;
+            transition : 0.1s ease-out;
 
             &:hover{
                 background-color: transparent;
@@ -57,6 +59,7 @@ section.tabs {
             animation : fade-in 0.2s ease-out;
             border-radius: var.$rounded-lg;
             color : var.$black;
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 
             &:hover{
                 background-color: var.$secondary;

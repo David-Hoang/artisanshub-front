@@ -16,7 +16,7 @@ div.switch-input{
         position: relative;
         display: inline-block;
         width: 2.9rem;
-        height: 1.47rem;
+        height: 1.48rem;
 
         input {
             opacity: 0;
@@ -29,8 +29,8 @@ div.switch-input{
             cursor: pointer;
             inset: 0;
             background-color: #ccc;
-            -webkit-transition: 0.4s;
-            transition: 0.4s;
+            -webkit-transition: 0.2s;
+            transition: 0.2s;
             border-radius: 2.15rem;
         }
 
@@ -42,8 +42,8 @@ div.switch-input{
             left: 4px;
             bottom: 4px;
             background-color: var.$full-white;
-            -webkit-transition: 0.4s;
-            transition: 0.4s;
+            -webkit-transition: 0.2s;
+            transition: 0.2s;
             border-radius : 50%;
         }
 
