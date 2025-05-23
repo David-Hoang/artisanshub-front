@@ -237,10 +237,10 @@ export const AuthProvider = ({ children }) => {
             if(register.status === 201){
                 let token = register.data.token;
                 localStorage.setItem("artisansHubUserToken", token);
+                setUserToken(token);
                 setUserDatas(register.data.user);
                 setUserRole(register.data.user.role);
                 setUserRoleInfos(true);
-                setUserToken(token);
                 setIsLogged(true);
                 navigate('/');
             }

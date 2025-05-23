@@ -78,8 +78,8 @@ function InformationsTab({userDatas, token}) {
     });
 
     const [userPictureForm, setUserPictureForm] = useState({
-        img_path : userDatas.profile_img.img_path ? `${apiBase}/storage/${userDatas.profile_img.img_path}` : DefaultClient,
-        img_title : userDatas.profile_img.img_title ?? "",
+        img_path : userDatas.profile_img?.img_path ? `${apiBase}/storage/${userDatas.profile_img.img_path}` : DefaultClient,
+        img_title : userDatas.profile_img?.img_title ?? "",
         profile_picture : null,
     });
 
@@ -276,8 +276,7 @@ function InformationsTab({userDatas, token}) {
         setErrorInfosForm(defaultErrorForm);
 
         setIsLoadingClient(true);
-        console.log(userClientForm.street_number);
-        
+
         //Validation : Get userClientForm and return object of error if no value in input
         const validateClientInputs = Object.entries(userClientForm).reduce((acc, [key, value]) => {
             if (!value) {
@@ -448,7 +447,7 @@ function InformationsTab({userDatas, token}) {
     const removePicture = () => {
         setUserPictureForm({
             ...userPictureForm,
-            img_path : userDatas.profile_img.img_path ? `${apiBase}/storage/${userDatas.profile_img.img_path}` : DefaultClient,
+            img_path : userDatas.profile_img?.img_path ? `${apiBase}/storage/${userDatas.profile_img.img_path}` : DefaultClient,
             profile_picture : null
         })
     }

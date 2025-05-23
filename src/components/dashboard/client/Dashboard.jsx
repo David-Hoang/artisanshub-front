@@ -14,7 +14,8 @@ import Tabs from '../../ui/Tabs.jsx'
 function Dashboard() {
     const {userDatas, userToken} = useContext(AuthContext);
     const [selectedTab, setSelectedTab] = useState('Informations');
-        
+
+
     return ( 
         <>
             <Tabs 
@@ -32,7 +33,7 @@ function Dashboard() {
                     <MessagesTab />
                 }
                 {selectedTab === 'Prestations' &&
-                    <PrestationsTab />
+                    <PrestationsTab/>
                 }
             </Tabs>
         </>

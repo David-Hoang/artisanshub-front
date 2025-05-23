@@ -2,7 +2,7 @@ import './InformationsTab.scss';
 import axios from 'axios'
 import {useContext, useState} from 'react';
 
-import DefaultClient from '../../../assets/img/default-client.svg';
+import DefaultCraftsman from '../../../assets/img/default-craftsman.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons'
 
@@ -85,8 +85,8 @@ function InformationsTab({userDatas, token}) {
     });
 
     const [userPictureForm, setUserPictureForm] = useState({
-        img_path : userDatas.profile_img.img_path ? `${apiBase}/storage/${userDatas.profile_img.img_path}` : DefaultClient,
-        img_title : userDatas.profile_img.img_title ?? "",
+        img_path : userDatas.profile_img?.img_path ? `${apiBase}/storage/${userDatas.profile_img.img_path}` : DefaultCraftsman,
+        img_title : userDatas.profile_img?.img_title ?? "",
         profile_picture : null,
     });
 
@@ -456,7 +456,7 @@ function InformationsTab({userDatas, token}) {
     const removePicture = () => {
         setUserPictureForm({
             ...userPictureForm,
-            img_path : userDatas.profile_img.img_path ? `${apiBase}/storage/${userDatas.profile_img.img_path}` : DefaultClient,
+            img_path : userDatas.profile_img?.img_path ? `${apiBase}/storage/${userDatas.profile_img.img_path}` : DefaultCraftsman,
             profile_picture : null
         })
     }
