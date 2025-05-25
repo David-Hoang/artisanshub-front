@@ -6,28 +6,16 @@ span.badge{
     border : 1px #e6e6e6 solid ;
     border-radius: var.$rounded-lg;
     width: fit-content;
+    min-width: fit-content;
+    height: fit-content;
     font-size: var.$txt-sm;
     padding: 0.25rem 0.60rem;
     background-color: var.$tiertiary;
     border: none;
 
-    &.pending {
-        background-color: #fef3c7;
-        color : #92400e;
-    }
+    &.pending { @include mxn.pending; }
+    &.info    { @include mxn.info; }
+    &.success { @include mxn.success; }
+    &.danger  { @include mxn.danger; }
 
-    &.info {
-        background-color: #dbeafe;
-        color : #1e40af;
-    }
-
-    &.success {
-        background-color: #ecfccb;
-        color : #3f6212;
-    }
-
-    &.danger {
-        background-color: #fee2e2;
-        color : #991b1b;
-    }
 }
