@@ -636,6 +636,7 @@ function InformationsTab({userDatas, token}) {
                         label="Description"
                         id="description"
                         placeholder="Décrivez votre activité..."
+                        rows="8"
                         value={userCraftsmanForm.description}
                         onChange={(e) => setUserCraftsmanForm({...userCraftsmanForm, description : e.target.value})}
                     />

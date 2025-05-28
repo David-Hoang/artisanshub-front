@@ -14,5 +14,6 @@ div.textarea-wrapper{
 
     textarea {
         @include mxn.default-input;
+        resize : vertical;
     }
 }

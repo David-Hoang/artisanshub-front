@@ -83,20 +83,20 @@
 
 @mixin pending {
     background-color: #fef3c7;
-    color: #92400e;
+    color: #d97706;
 }
 
 @mixin info {
     background-color: #dbeafe;
-    color: #1e40af;
+    color: #2563eb;
 }
 
 @mixin success {
-    background-color: #ecfccb;
-    color: #3f6212;
+    background-color: #dcfce7;
+    color: #16a34a;
 }
 
 @mixin danger {
-    background-color: #fee2e2;
-    color: #991b1b;
+    background-color: #ffe4e6;
+    color: #ef4444;
 }

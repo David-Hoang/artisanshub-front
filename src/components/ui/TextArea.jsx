@@ -6,7 +6,7 @@ function TextArea({label, ...props}) {
             <label htmlFor={props.id}>
                 {label}
             </label>
-            <textarea {...props} rows="8" />
+            <textarea {...props} />
         </div>
     );
 }

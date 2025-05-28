@@ -24,15 +24,25 @@ div.background-modal {
         flex-direction: column;
         max-height: 90vh;
 
+        > svg {
+            margin : auto;
+        }
+
         button.close-modal{
             position : absolute;
-            top : 0.5rem;
-            right : 0.5rem;
+            top : 1rem;
+            right : 1rem;
             background-color: transparent;
             border: none;
-            padding: 0.5rem;
             cursor: pointer;
             transition: 0.2s ease-in-out;
+            font-size: var.$txt-base;
+            width : 2rem;
+            height : 2rem;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
             &:hover {
                 background-color: rgba(var.$gray, 0.1);

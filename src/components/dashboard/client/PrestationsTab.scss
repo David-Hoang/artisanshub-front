@@ -59,20 +59,29 @@ div.prestations-tab-client {
     div.modal.prestation-details {
         width: 100%;
 
+        min-height: 10rem;
         @media screen and (min-width : var.$bp-md) {
-            max-width: 70rem;
+            max-width: 75rem;
         }
+
+        // div.loading-icon {
+        //     display: flex;
+        //     align-items: center;
+        //     justify-content: center;
+        //     height: 100%;
+        //     width: 100%;
+        // }
 
         div.modal-header {
             display : flex; 
             align-items: center;
             gap: var.$gap-base;
             padding : 1.5rem;
-            background-color: #dbeafe;
+            background-color: var.$light-blue;
 
             div.icon-bg{
-                background-color: #bfdbfe;
-                color: #2563eb;
+                background-color: var.$primary;
+                color: var.$full-white;
                 padding: 0.8rem;
                 border-radius: var.$rounded-lg;
                 height : 3rem;
@@ -122,7 +131,7 @@ div.prestations-tab-client {
                     flex-direction : column;
                     gap: var.$gap-xl;
                     border-radius: var.$rounded-lg;
-                    background-color: #dbeafe;
+                    background-color: var.$light-blue;
                     padding: 1.5rem;
 
                     div.wrapper{
@@ -131,7 +140,7 @@ div.prestations-tab-client {
                         gap: var.$gap-base;
 
                         div.icon{
-                            color : #2563eb;
+                            color : var.$primary;
                             font-size: var.$txt-xl;
                         }
 
@@ -206,13 +215,12 @@ div.prestations-tab-client {
                         }
 
                         div.price-card > div.icon {
-                            background-color: #dcfce7;
-                            color : #16a34a
+                            @include mxn.success;
                         }
 
                         div.date-card > div.icon {
-                            background-color: #bfdbfe;
-                            color: #2563eb;
+                            @include mxn.info;
+
                         }
                     }
                 }
@@ -264,19 +272,31 @@ div.prestations-tab-client {
                                 display : flex;
                                 flex-direction: column;
                                 gap: var.$gap-xs;
-                                    h4{
-                                        font-size: var.$txt-base;
-                                        font-weight: 600;
-                                    }
-                                    p {
-                                        font-size: var.$txt-sm;
-                                    }
+
+                                h4{
+                                    font-size: var.$txt-base;
+                                    font-weight: 600;
+                                }
+                                p {
+                                    font-size: var.$txt-sm;
+                                }
                             }
 
-                        }
+                            &.pending{
+                                @include mxn.pending;
+                            }
 
-                        div.state-card.pending {
-                            @include mxn.pending;
+                            &.confirmed{
+                                @include mxn.info;
+                            }
+
+                            &.completed{
+                                @include mxn.success;
+                            }
+
+                            &.refused{
+                                @include mxn.danger;
+                            }
                         }
 
                         div.info-card {
@@ -291,7 +311,7 @@ div.prestations-tab-client {
                                 gap: var.$gap-xs;
                                 h4{
                                     font-size: var.$txt-base;
-                                    font-weight: 400;
+                                    font-weight: 600;
                                 }
 
                                 ul.info-list > li {
@@ -363,7 +383,7 @@ div.prestations-tab-client {
                         gap: var.$gap-base;
 
                         div.icon{
-                            color : #fb923c;
+                            color : var.$orange;
                             font-size: var.$txt-xl;
                         }
 
@@ -424,7 +444,7 @@ div.prestations-tab-client {
 
                             p.craftsman-infos.price{
                                 font-size: var.$txt-lg;
-                                color : #fb923c;
+                                color : var.$orange;
                                 font-weight: 600;
                             }
 
@@ -472,20 +492,18 @@ div.prestations-tab-client {
                                 }
 
                                 a.contact.craftsman-phone{
-                                    background-color: #bfdbfe;
-                                    color: #2563eb;
+                                    @include mxn.info;
 
                                     &:hover {
-                                        background-color: #60a5fa;
+                                        background-color: #bfdbfe;
                                     }
                                 }
 
                                 a.contact.craftsman-email{
-                                    background-color: #dcfce7;
-                                    color : #16a34a;
+                                    @include mxn.success;
 
                                     &:hover {
-                                        background-color: #4ade80;
+                                        background-color: #bbf7d0;
                                     }
                                 }
 
@@ -544,14 +562,46 @@ div.prestations-tab-client {
                             &.action-cancel{
                                 @include mxn.danger;
                                 &:hover{
-                                    background-color : #fecaca
+                                    background-color : #fecdd3
                                 }
                             }
                             &.action-accept{
                                 @include mxn.success;
+                                &:hover{
+                                    background-color: #bbf7d0;
+                                }
                             }
                             &.action-refuse{
-                                @include mxn.danger
+                                @include mxn.danger;
+                                &:hover{
+                                    background-color : #fecdd3
+                                }
+                            }
+                        }
+
+                        p.prestation-info {
+                            padding: 1.5rem;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            border-radius: var.$rounded-lg;
+                            font-size: var.$txt-sm;
+                            text-align: center;
+
+                            &.pending{
+                                @include mxn.pending;
+                            }
+
+                            &.info{
+                                @include mxn.info;
+                            }
+
+                            &.success{
+                                @include mxn.success;
+                            }
+
+                            &.cancel{
+                                @include mxn.danger;
                             }
                         }
                     }
