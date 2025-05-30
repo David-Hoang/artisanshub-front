@@ -141,11 +141,18 @@ main.main-register {
             }
         }
 
-        div.register-region {
-            display: flex;
+        div.register-passwords {
+            display : flex;
             flex-direction: column;
-            gap : var.$gap-xs;
-            padding: 1rem 0;
+            gap : var.$gap-base;
+            
+            @media screen and (min-width : var.$bp-sm) {
+                flex-direction: row;
+            }
+
+            div.wrapper {
+                width: 100%;
+            }
         }
 
         p {

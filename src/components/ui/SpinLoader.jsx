@@ -6,6 +6,7 @@ import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
 function SpinLoader ({className, ...props}) {
     return ( 
         <FontAwesomeIcon 
+            spin={true}
             icon={faCircleNotch} 
             className={`fa-spin ${className}`}
             {...props}

@@ -2,7 +2,7 @@
 @use "../../assets/scss/mixins" as mxn;
 @use "../../assets/scss/extends" as ext;
 
-div.input-wrapper {
+div.textarea-wrapper{
     display: flex;
     flex-direction: column;
     gap : var.$gap-sm;
@@ -12,8 +12,8 @@ div.input-wrapper {
         font-weight: 500;
     }
 
-    input {
+    textarea {
         @include mxn.default-input;
+        resize : vertical;
     }
-
 }

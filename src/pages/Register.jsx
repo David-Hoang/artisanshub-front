@@ -5,11 +5,11 @@ import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext.jsx";
 import axios from 'axios';
 
-import Button from "../components/Button.jsx";
-import Input from "../components/form/Input.jsx";
-import Select from "../components/form/Select.jsx";
+import Button from "../components/ui/Button.jsx";
+import Input from "../components/ui/Input.jsx";
+import Select from "../components/ui/Select.jsx";
 import Error from "../components/Error.jsx";
-import SpinLoader from "../components/form/SpinLoader.jsx";
+import SpinLoader from "../components/ui/SpinLoader.jsx";
 
 
 function Register() {
@@ -81,7 +81,7 @@ function Register() {
                             onChange={(e) => { setFormRegister({...formRegister, phone : e.target.value}) }}/>
                         {errorFormRegister.phone && <Error>{errorFormRegister.phone}</Error>}
                     </div>
-                    <Input label="Pseudo" id="username" type="text"
+                    <Input label="Pseudo" id="username" type="text" placeholder="johndoe123"
                         value={formRegister.username}
                         onChange={(e) => { setFormRegister({...formRegister, username : e.target.value}) }}/>
                 </div>
@@ -94,10 +94,14 @@ function Register() {
                         {errorFormRegister.email && <Error>{errorFormRegister.email}</Error>}
                     </div>
                     <div className="wrapper">
-                        <Input label="Mot de passe*" id="password" type="password"
-                            value={formRegister.password}
-                            onChange={(e) => { setFormRegister({...formRegister, password : e.target.value}) }}/>
-                        {errorFormRegister.password && <Error>{errorFormRegister.password}</Error>}
+                        <Select 
+                            label="Region*"
+                            id="region"
+                            placeholder="Sélectionnez votre région"
+                            datas={regions}
+                            value={formRegister.region}
+                            onChange={(e) => { setFormRegister({...formRegister, region : e.target.value}) }}/>
+                        {errorFormRegister.region && <Error>{errorFormRegister.region}</Error>}
                     </div>
                 </div>
 
@@ -115,21 +119,23 @@ function Register() {
                             onChange={(e) => { setFormRegister({...formRegister, zipcode : e.target.value}) }}/>
                         {errorFormRegister.zipcode && <Error>{errorFormRegister.zipcode}</Error>}
                     </div>
-
                 </div>
                 
-                <div className="register-region">
-                    <Select 
-                        label="Region*"
-                        id="region"
-                        placeholder="Sélectionnez votre région"
-                        datas={regions}
-                        value={formRegister.region}
-                        onChange={(e) => { setFormRegister({...formRegister, region : e.target.value}) }}/>
-                    {errorFormRegister.region && <Error>{errorFormRegister.region}</Error>}
-
+                <div className="register-passwords">
+                    <div className="wrapper">
+                        <Input label="Mot de passe*" id="password" type="password"
+                            value={formRegister.password}
+                            onChange={(e) => { setFormRegister({...formRegister, password : e.target.value}) }}/>
+                        {errorFormRegister.password && <Error>{errorFormRegister.password}</Error>}
+                    </div>
+                    <div className="wrapper">
+                        <Input label="Confirmation mot de passe*" id="password_confirmation" type="password"
+                            value={formRegister.password_confirmation}
+                            onChange={(e) => { setFormRegister({...formRegister, password_confirmation : e.target.value}) }}/>
+                        {errorFormRegister.password_confirmation && <Error>{errorFormRegister.password_confirmation}</Error>}
+                    </div>
                 </div>
-                
+
                 <Button type="submit" className="btn-primary">
                     {isLoading ? (
                         <SpinLoader />

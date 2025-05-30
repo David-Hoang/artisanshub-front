@@ -3,7 +3,7 @@ import HeroImg from '../assets/img/home-hero.jpg';
 
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import { JobsCatContext } from "../context/JobsCatContext.jsx";
+import { ApiServicesContext } from "../context/ApiServicesContext.jsx";
 
 import Search from '../components/home/Search.jsx';
 import JobCard from '../components/home/JobCard.jsx';
@@ -13,7 +13,7 @@ import { faMagnifyingGlass, faComments, faHandshakeSimple } from '@fortawesome/f
 
 function Home() {
 
-    const { jobsCategories } = useContext(JobsCatContext);
+    const { jobsCategories } = useContext(ApiServicesContext);
 
     return ( 
         <main className="main-home">

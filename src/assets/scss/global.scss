@@ -26,7 +26,8 @@
     box-sizing: border-box;
 }
 
-input::placeholder {
+input::placeholder,
+textarea::placeholder {
     color : rgba(var.$black, 0.2);
 }
 
@@ -38,6 +39,10 @@ a, a:visited {
 ul {
     list-style: none;
     padding-left: 0;
+}
+
+button{
+    font-family: "Nunito", Avenir, Helvetica, Arial, sans-serif;
 }
 
 body {

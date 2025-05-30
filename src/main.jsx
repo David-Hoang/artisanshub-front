@@ -7,15 +7,15 @@ import { BrowserRouter } from "react-router";
 import App from "./App.jsx";
 
 import { AuthProvider } from "./context/AuthContext.jsx";
-import { JobsCatProvider } from "./context/JobsCatContext.jsx";
+import { ApiServicesProvider } from "./context/ApiServicesContext.jsx";
 
 createRoot(document.getElementById("root")).render(
     // <StrictMode>
         <BrowserRouter>
             <AuthProvider>
-                <JobsCatProvider>
+                <ApiServicesProvider>
                     <App />
-                </JobsCatProvider>
+                </ApiServicesProvider>
             </AuthProvider>
         </BrowserRouter>
     // </StrictMode>

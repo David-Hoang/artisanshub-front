@@ -12,7 +12,11 @@ export const AuthProvider = ({ children }) => {
 
     const [isLogged, setIsLogged] = useState(false);
     const [userDatas, setUserDatas] = useState(null);
+    const [userRole, setUserRole] = useState(null);
+    const [userToken, setUserToken] = useState(null);
+    const [userRoleInfos, setUserRoleInfos] = useState(false);
 
+    //To manage loading spinner
     const [isLoading, setIsLoading] = useState(false);
 
     const [errorEmail, setErrorEmail] = useState("");
@@ -26,6 +30,7 @@ export const AuthProvider = ({ children }) => {
         username : "",
         role : "",
         password : "",
+        password_confirmation : "",
         phone : "",
         city : "",
         region : "",
@@ -45,23 +50,61 @@ export const AuthProvider = ({ children }) => {
     };
 
     const [errorFormRegister, setErrorFormRegister] = useState(defaultErrorForm);
-    
-    useEffect(() => {
-        try {
-            const token = localStorage.getItem("artisansHubUserToken");
 
-            if(token) {
+    // get user info on reload
+    const userInfos = async (token) => {
+        try {
+            const response = await axios.get(apiBase + "/api/me", {
+                    headers: {
+                        "Authorization": "Bearer " + token,
+                    }
+                })
+            if(response.status === 200){
+                setUserRole(response.data.role);
+                setUserDatas(response.data);
+
+                // Check if user set his role infos
+                if(response.data.profile){
+                    setUserRoleInfos(true);
+                }
+            }
+        } catch (error) {
+            console.log(error);
+            
+            if (!error.response) {
+                return setErrorMessage("Une erreur s'est produite lors de la récupération des informations de l'utilisateur.");
+            }
+            const { status } = error.response;
+            
+            if (status === 401) {
+                setErrorMessage("Votre session a expiré. Veuillez vous reconnecter.");
+                localStorage.removeItem("artisansHubUserToken");
+                setUserToken(null);
+                setIsLogged(false);
+                navigate('/connexion');
+            } else {
+                return setErrorMessage("Une erreur s'est produite lors de la récupération des informations de l'utilisateur.");
+            }
+        }
+    }
+
+    useEffect( () => {
+        try {
+            const actualToken = localStorage.getItem("artisansHubUserToken");
+
+            if(actualToken) {
+                userInfos(actualToken);
+                setUserToken(actualToken);
                 setIsLogged(true);
             }else {
+                setUserToken(null);
                 setIsLogged(false);
-
             }
         } catch (error) {
             console.error('Une erreur est survenue lors de la récupération du token : ', error);
         }finally{
             setControllerLoading(false);
         }
-
     }, [])
 
     const handleLogin = async (e, formLogin) => {
@@ -85,8 +128,12 @@ export const AuthProvider = ({ children }) => {
                 })
 
             if(response.status === 200){
-                let userToken = response.data.token;
-                localStorage.setItem("artisansHubUserToken", userToken);
+                let token = response.data.token;
+
+                localStorage.setItem("artisansHubUserToken", token);
+                setUserToken(token);
+                setUserDatas(response.data.user);
+                setUserRole(response.data.user.role);
                 setIsLogged(true);
                 setIsLoading(true);
                 navigate('/');
@@ -113,20 +160,25 @@ export const AuthProvider = ({ children }) => {
     const handleLogout = async () => {
 
         try {
-            const userToken = localStorage.getItem("artisansHubUserToken");
+            // const userToken = localStorage.getItem("artisansHubUserToken");
 
-            await axios.post(apiBase + "/api/logout", {}, {
+            const userLogout = await axios.post(apiBase + "/api/logout", {}, {
                 headers: {
                     "Authorization": "Bearer " + userToken,
                 }
             })
 
-            localStorage.removeItem("artisansHubUserToken");
-            setIsLogged(false);
-            navigate('/');
-        
+            if (userLogout.status === 200){
+                localStorage.removeItem("artisansHubUserToken");
+                setUserToken(null);
+                setIsLogged(false);
+                window.location.href = '/';
+            }
         } catch (error) {
-            console.error(error)
+            localStorage.removeItem("artisansHubUserToken");
+            setUserToken(null);
+            setIsLogged(false);
+            window.location.href = '/';
         }
     }
 
@@ -157,6 +209,9 @@ export const AuthProvider = ({ children }) => {
                     case "password":
                         acc[key] = "Veuillez renseigner un mot de passe.";
                         break;
+                    case "password_confirmation":
+                        acc[key] = "Vous devez confirmer le mot de passe.";
+                        break;
                     case "phone":
                         acc[key] = "Veuillez renseigner votre téléphone.";
                         break;
@@ -183,13 +238,15 @@ export const AuthProvider = ({ children }) => {
             return;
         }
 
-        
         try {
             const register = await axios.post(apiBase + "/api/register", formRegister);
-            
             if(register.status === 201){
-                let userToken = register.data.token;
-                localStorage.setItem("artisansHubUserToken", userToken);
+                let token = register.data.token;
+                localStorage.setItem("artisansHubUserToken", token);
+                setUserToken(token);
+                setUserDatas(register.data.user);
+                setUserRole(register.data.user.role);
+                setUserRoleInfos(true);
                 setIsLogged(true);
                 navigate('/');
             }
@@ -204,7 +261,7 @@ export const AuthProvider = ({ children }) => {
                     return validateError;
                 }, {})
                 setErrorFormRegister(getErrors);
-            }else {
+            } else {
                 setErrorMessage("Une erreur est survenue durant la création de votre compte.")
             }
             
@@ -218,8 +275,12 @@ export const AuthProvider = ({ children }) => {
                 isLogged, 
                 setIsLogged, 
 
+                userToken,
                 userDatas, 
                 setUserDatas,
+                userRole,
+                userRoleInfos, 
+                setUserRoleInfos,
 
                 handleLogout,
                 handleLogin,

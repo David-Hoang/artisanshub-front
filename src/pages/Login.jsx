@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import { useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext.jsx";
 
-import SpinLoader from "../components/form/SpinLoader.jsx";
-import Button from "../components/Button.jsx";
-import Input from "../components/form/Input.jsx";
+import SpinLoader from "../components/ui/SpinLoader.jsx";
+import Button from "../components/ui/Button.jsx";
+import Input from "../components/ui/Input.jsx";
 import Error from "../components/Error.jsx";
 
 
