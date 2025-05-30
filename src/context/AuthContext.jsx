@@ -69,13 +69,19 @@ export const AuthProvider = ({ children }) => {
                 }
             }
         } catch (error) {
-            if (!error.response) return setErrorMessage("Une erreur s'est produite lors de la récupération des informations de l'utilisateur.");
-
+            console.log(error);
+            
+            if (!error.response) {
+                return setErrorMessage("Une erreur s'est produite lors de la récupération des informations de l'utilisateur.");
+            }
             const { status } = error.response;
-
+            
             if (status === 401) {
-                setErrorMessage("Les informations de connexion ne sont pas valides.");
-                navigate('/connexion')
+                setErrorMessage("Votre session a expiré. Veuillez vous reconnecter.");
+                localStorage.removeItem("artisansHubUserToken");
+                setUserToken(null);
+                setIsLogged(false);
+                navigate('/connexion');
             } else {
                 return setErrorMessage("Une erreur s'est produite lors de la récupération des informations de l'utilisateur.");
             }

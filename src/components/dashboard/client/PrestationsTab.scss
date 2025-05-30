@@ -4,6 +4,10 @@
 
 div.prestations-tab-client {
 
+    svg.loading-list {
+        margin : 4rem auto;
+    }
+
     display : grid;
     grid-template-columns: repeat(1, 1fr);
     gap : var.$gap-xl;
@@ -63,14 +67,6 @@ div.prestations-tab-client {
         @media screen and (min-width : var.$bp-md) {
             max-width: 75rem;
         }
-
-        // div.loading-icon {
-        //     display: flex;
-        //     align-items: center;
-        //     justify-content: center;
-        //     height: 100%;
-        //     width: 100%;
-        // }
 
         div.modal-header {
             display : flex; 
@@ -492,19 +488,11 @@ div.prestations-tab-client {
                                 }
 
                                 a.contact.craftsman-phone{
-                                    @include mxn.info;
-
-                                    &:hover {
-                                        background-color: #bfdbfe;
-                                    }
+                                    @include mxn.info($hover:true);
                                 }
 
                                 a.contact.craftsman-email{
-                                    @include mxn.success;
-
-                                    &:hover {
-                                        background-color: #bbf7d0;
-                                    }
+                                    @include mxn.success($hover:true);
                                 }
 
                                 p {
@@ -560,22 +548,13 @@ div.prestations-tab-client {
                             }
                             
                             &.action-cancel{
-                                @include mxn.danger;
-                                &:hover{
-                                    background-color : #fecdd3
-                                }
+                                @include mxn.danger($hover:true);
                             }
                             &.action-accept{
-                                @include mxn.success;
-                                &:hover{
-                                    background-color: #bbf7d0;
-                                }
+                                @include mxn.success($hover:true);
                             }
                             &.action-refuse{
-                                @include mxn.danger;
-                                &:hover{
-                                    background-color : #fecdd3
-                                }
+                                @include mxn.danger($hover:true);
                             }
                         }
 
