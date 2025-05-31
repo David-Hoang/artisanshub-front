@@ -5,7 +5,7 @@ import Button from "../ui/Button.jsx";
 
 
 function JobCard({jobsCategories, ...props}) {
-    const randomJobs = jobsCategories.sort(() => .5 - Math.random()).splice(0,4)
+    const randomJobs = [...jobsCategories].sort(() => .5 - Math.random()).splice(0,4)
     const apiBase = import.meta.env.VITE_MAIN_API_URI;
     
     return ( 
@@ -19,7 +19,7 @@ function JobCard({jobsCategories, ...props}) {
                 <>
                     <div className="jobs-categories-list">
                         {randomJobs.map(job => (
-                        <Link to={'/'} key={job.id} className="job-category-card">
+                        <Link to='/' key={job.id} className="job-category-card">
                             <div className="image-container">
                                 <div className="filter-brightness"></div>
                                 <img src={`${apiBase}/storage/${job.img_path}`} alt={job.name} className="image-artisan" />
