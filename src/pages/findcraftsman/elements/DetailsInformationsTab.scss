@@ -1,0 +1,119 @@
+@use "../../../assets/scss/variables" as var;
+@use "../../../assets/scss/mixins" as mxn;
+@use "../../../assets/scss/extends" as ext;
+
+div.details-tab-craftsman {
+    display: flex;
+    flex-direction: column;
+    gap : var.$gap-2xl;
+
+    div.description-craftsman{
+        display: flex;
+        flex-direction: column;
+        gap : var.$gap-base;
+    }
+
+    div.details-craftsman-wrapper{
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: var.$gap-base;
+
+        @media screen and (min-width : var.$bp-lg) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        div.card {
+            background-color: var.$light-gray;
+            border : 1px #e6e6e6 solid ;
+            border-radius: var.$rounded-lg;
+            padding : 1.5rem;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            @media screen and (min-width : var.$bp-lg) {
+                align-items: start;
+            }
+        }
+
+        p.details-price,
+        p.details-member-since,
+        span.details-location {
+            font-size: var.$txt-lg;
+            font-weight: 800;
+        }
+    }
+
+    div.contact-craftsman {
+
+        display: flex;
+        flex-direction: column;
+        gap : var.$gap-base;
+
+        
+        div.card-wrapper {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: var.$gap-base;
+
+            @media screen and (min-width : var.$bp-lg) {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        
+            div.card{
+                padding: 1.5rem;
+                border-radius: var.$rounded-lg;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: var.$gap-sm;
+
+                @media screen and (min-width : var.$bp-lg) {
+                    justify-content: start;
+                }
+
+                &.email-wrapper{
+                    @include mxn.success;
+                }
+                &.phone-wrapper{
+                    @include mxn.info;
+                }
+
+                a.contact,
+                div.contact {
+                    font-size: var.$txt-lg;
+                    padding: 1.2rem;
+                    border-radius: var.$rounded-lg;
+                    height: 2rem;
+                    width: 2rem;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    transition: 0.2s ease-in-out;
+                    cursor: pointer;
+
+                    &.craftsman-phone {
+                        background : var.$primary;
+                        color : var.$full-white;
+
+                        &:hover{
+                            background-color: #2563eb;
+                        }
+                    }
+
+                    &.craftsman-email {
+                        background : #22c55e;
+                        color : var.$full-white;
+
+                        &:hover{
+                            background-color: #4ade80;
+                        }
+                    }
+                    
+                }
+            }
+        }
+    }
+}

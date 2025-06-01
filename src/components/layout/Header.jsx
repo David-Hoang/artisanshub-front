@@ -30,7 +30,7 @@ function Header() {
                     </Link>
 
                     <ul className="desktop-menu-nav">
-                        <NavMenu closeMobileMenu/>
+                        <NavMenu closeMobileMenu={closeMobileMenu}/>
                     </ul>
                 </div>
 
