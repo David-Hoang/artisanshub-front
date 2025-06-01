@@ -1,0 +1,39 @@
+@use "../../assets/scss/variables" as var;
+@use "../../assets/scss/mixins" as mxn;
+@use "../../assets/scss/extends" as ext;
+
+main.main-details-craftsman {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var.$gap-2xl;
+    padding : 2rem 0;
+
+    div.btn-container {
+        width : 100%;
+        padding: 0 2rem;
+
+        @media screen and (min-width: var.$bp-lg) {
+            max-width: var.$bp-2xl;
+        }
+    }
+
+    div.tab-content {
+        width : 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 2rem;
+        
+        @media screen and (min-width: var.$bp-lg) {
+                max-width: var.$bp-2xl;
+        }
+        
+        section.tabs {
+            background-color: var.$full-white;
+            border : 1px #e6e6e6 solid ;
+            border-radius: var.$rounded-lg;
+            padding : 1.5rem;
+        }
+    }
+}

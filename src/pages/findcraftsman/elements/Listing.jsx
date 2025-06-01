@@ -11,7 +11,6 @@ import SpinLoader from "../../../components/ui/SpinLoader";
 import DefaultCraftsman from '../../../assets/img/default-craftsman.svg';
 
 function Listing({isLoadingList, listing , ...props}) {
-    console.log(listing)
     return ( 
         <section className="craftsmen-content">
             { isLoadingList && <SpinLoader /> }

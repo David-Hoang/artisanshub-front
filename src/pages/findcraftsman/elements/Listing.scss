@@ -12,7 +12,7 @@ section.craftsmen-content {
     @media screen and (min-width: var.$bp-lg) {
         max-width: var.$bp-2xl;
     }
-
+    
     ul.craftsmen-list {
         display: grid;
         grid-template-columns: repeat(1, 1fr);
