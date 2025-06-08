@@ -34,6 +34,10 @@ main.main-details-craftsman {
             border : 1px #e6e6e6 solid ;
             border-radius: var.$rounded-lg;
             padding : 1.5rem;
+
+            div.tab-list {
+                width: fit-content;
+            }
         }
     }
 }
