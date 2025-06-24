@@ -8,7 +8,7 @@ export const AuthProvider = ({ children }) => {
     const apiBase = import.meta.env.VITE_MAIN_API_URI;
     let navigate = useNavigate();
 
-    const [controllerLoading, setControllerLoading] = useState(true);
+    const [providerLoading, setProviderLoading] = useState(true);
 
     const [isLogged, setIsLogged] = useState(false);
     const [userDatas, setUserDatas] = useState(null);
@@ -56,13 +56,13 @@ export const AuthProvider = ({ children }) => {
         try {
             const response = await axios.get(apiBase + "/api/me", {
                     headers: {
-                        "Authorization": "Bearer " + token,
+                        "Authorization": `Bearer ${token}`,
                     }
                 })
             if(response.status === 200){
                 setUserRole(response.data.role);
                 setUserDatas(response.data);
-
+                
                 // Check if user set his role infos
                 if(response.data.profile){
                     setUserRoleInfos(true);
@@ -78,10 +78,7 @@ export const AuthProvider = ({ children }) => {
             
             if (status === 401) {
                 setErrorMessage("Votre session a expiré. Veuillez vous reconnecter.");
-                localStorage.removeItem("artisansHubUserToken");
-                setUserToken(null);
-                setIsLogged(false);
-                navigate('/connexion');
+                cleanUserDatasToken()
             } else {
                 return setErrorMessage("Une erreur s'est produite lors de la récupération des informations de l'utilisateur.");
             }
@@ -89,23 +86,35 @@ export const AuthProvider = ({ children }) => {
     }
 
     useEffect( () => {
-        try {
-            const actualToken = localStorage.getItem("artisansHubUserToken");
+        const fetchUserData = async () => {
+            try {
+                const actualToken = localStorage.getItem("artisansHubUserToken");
 
-            if(actualToken) {
-                userInfos(actualToken);
-                setUserToken(actualToken);
-                setIsLogged(true);
-            }else {
-                setUserToken(null);
-                setIsLogged(false);
+                if(actualToken) {
+                    await userInfos(actualToken);
+                    setUserToken(actualToken);
+                    setIsLogged(true);
+                }else {
+                    cleanUserDatasToken()
+                }
+            } catch (error) {
+                console.error('Une erreur est survenue lors de la récupération du token : ', error);
+            }finally{
+                setProviderLoading(false);
             }
-        } catch (error) {
-            console.error('Une erreur est survenue lors de la récupération du token : ', error);
-        }finally{
-            setControllerLoading(false);
         }
+
+    fetchUserData()
     }, [])
+
+    const cleanUserDatasToken = () =>{
+        localStorage.removeItem("artisansHubUserToken");
+        setUserToken(null);
+        setIsLogged(false);
+        setUserDatas(null);
+        setUserRole(null);
+        navigate('/connexion');
+    }
 
     const handleLogin = async (e, formLogin) => {
         e.preventDefault();
@@ -297,7 +306,7 @@ export const AuthProvider = ({ children }) => {
                 }}
             >
             {/* Force not return the children before the end of loading */}
-            {!controllerLoading && children} 
+            {!providerLoading && children} 
         </AuthContext.Provider>
     );
 };

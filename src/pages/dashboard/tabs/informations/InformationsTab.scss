@@ -1,0 +1,30 @@
+@use "../../../../assets/scss/variables" as var;
+@use "../../../../assets/scss/mixins" as mxn;
+@use "../../../../assets/scss/extends" as ext;
+
+div.informations-tab {
+    display: flex;
+    flex-direction: column;
+    gap: var.$gap-xl;
+
+    form {
+        width: 100%;
+        background-color: var.$full-white;
+        border : 1px #e6e6e6 solid ;
+        border-radius: var.$rounded-lg;
+        padding : 1.5rem;
+
+        display : flex;
+        flex-direction: column;
+        gap : var.$gap-xl;
+
+        @media screen and (min-width : var.$bp-md) {
+            button.btn-primary{
+                align-self: end;
+            }
+            div.alert-wrapper {
+                align-self: end;
+            }
+        }
+    }
+}
