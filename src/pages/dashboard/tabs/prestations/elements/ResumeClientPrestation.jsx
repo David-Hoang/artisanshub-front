@@ -1,9 +1,10 @@
+import "./ResumeClientPrestation.scss"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFileLines, faEuroSign, faCalendar } from '@fortawesome/free-solid-svg-icons'
 
 import { dateFull } from "../../../../../utils/Helpers.jsx";
 
-function ResumeClientPrestation({detailsPrestation}) {
+function ResumeClientPrestation({detailsPrestation, userRole}) {
 
     return ( 
         <div className="resume-client-prestation">
@@ -28,12 +29,26 @@ function ResumeClientPrestation({detailsPrestation}) {
                         <FontAwesomeIcon icon={faEuroSign} />
                     </div>
                     <div className="suggestion-content">
-                        <p className="suggestion-title">Prix proposé par l'artisan</p>
-                        <p className={`suggestion ${detailsPrestation.price ? 'price': ''}`}>
-                            {detailsPrestation.price ?
-                                detailsPrestation.price + ' €'
-                            : "Tarif non défini"}
-                        </p>
+
+                        {userRole === 'client' && 
+                            <>
+                                <p className="suggestion-title">Prix proposé par l'artisan</p>
+                                <p className={`suggestion ${detailsPrestation.price ? 'price': ''}`}>
+                                    {detailsPrestation.price ?
+                                        detailsPrestation.price + ' €'
+                                        : "Tarif non défini"}
+                                </p>
+                            </>
+                        }
+
+                        {userRole === 'craftsman' && !detailsPrestation.price && <p className="suggestion-title">Prix en attente de votre part</p>}
+                        {userRole === 'craftsman' && detailsPrestation.price && 
+                            <>
+                                <p className="suggestion-title">Montant proposé</p>
+                                <p className="suggestion price">{detailsPrestation.price} €</p>
+                            </>
+                        }
+
                     </div>
                 </div>
 
@@ -42,12 +57,27 @@ function ResumeClientPrestation({detailsPrestation}) {
                         <FontAwesomeIcon icon={faCalendar} />
                     </div>
                     <div className="suggestion-content">
-                        <p className="suggestion-title">Date proposée par l'artisan</p>
-                        <p className="suggestion-date">
-                            {detailsPrestation.date ?
-                                dateFull(detailsPrestation.date)
-                            : "Date non définie"}
-                        </p>
+                        {userRole === 'client' &&
+                            <>
+                                <p className="suggestion-title">Date proposée par l'artisan</p>
+                                <p className="suggestion-date">
+                                    {detailsPrestation.date ?
+                                        dateFull(detailsPrestation.date)
+                                        : "Date non définie"}
+                                </p>
+                            </>
+                        }
+
+                        {userRole === 'craftsman' && !detailsPrestation.date && <p className="suggestion-title">Date en attente de votre part</p>}
+                        
+                        {userRole === 'craftsman' && detailsPrestation.date && 
+                            <>
+                                <p className="suggestion-title">Date proposé</p>
+                                <p className="suggestion-date">
+                                    {dateFull(detailsPrestation.date)}
+                                </p>
+                            </>
+                        }
                     </div>
                 </div>
             </div>

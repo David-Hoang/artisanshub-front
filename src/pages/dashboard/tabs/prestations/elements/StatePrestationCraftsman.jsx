@@ -1,11 +1,12 @@
+import "./StatePrestationCraftsman.scss"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCheck, faHourglassHalf, faListCheck, faCaretRight, faUserClock, faCheck, faUserXmark } from '@fortawesome/free-solid-svg-icons';
 
 import { firstCapitalize, dateLong, dateFull } from "../../../../../utils/Helpers.jsx";
 
-function StatePrestation({detailsPrestation}) {
+function StatePrestationCraftsman({detailsPrestation}) {
     return ( 
-        <div className="state-prestation">
+        <div className="state-prestation-craftsman">
             <div className="wrapper">
                 <div className="icon">
                     <FontAwesomeIcon icon={faHourglassHalf} />
@@ -23,9 +24,9 @@ function StatePrestation({detailsPrestation}) {
                             </div>
                             <div className="state-content">
                                 <h4>
-                                    En attente de l'artisan
+                                    Vous avez une nouvelle demande de la part d'un client
                                 </h4>
-                                <p className="state-description">Votre demande est en attente de traitement par {firstCapitalize(detailsPrestation.craftsman.user.first_name)}</p>
+                                <p className="state-description">{firstCapitalize(detailsPrestation.client.user.first_name)} attend une proposition de votre part</p>
                             </div>
                         </div>
 
@@ -38,9 +39,9 @@ function StatePrestation({detailsPrestation}) {
                                     Prochaines étapes
                                 </h4>
                                 <ul className="info-list">
-                                    <li><FontAwesomeIcon icon={faCaretRight} /> {firstCapitalize(detailsPrestation.craftsman.user.first_name)} étudie votre demande</li>
-                                    <li><FontAwesomeIcon icon={faCaretRight} /> Il vous fait une proposition ou la refuse</li>
-                                    <li><FontAwesomeIcon icon={faCaretRight} /> Vous choisissez d'accepter ou non sa proposition</li>
+                                    <li><FontAwesomeIcon icon={faCaretRight} /> Étudiez la demande de {firstCapitalize(detailsPrestation.client.user.first_name)} puis répondez</li>
+                                    <li><FontAwesomeIcon icon={faCaretRight} /> Soumettez votre proposition à {firstCapitalize(detailsPrestation.client.user.first_name)}</li>
+                                    <li><FontAwesomeIcon icon={faCaretRight} /> {firstCapitalize(detailsPrestation.client.user.first_name)} acceptera ou déclinera votre proposition</li>
                                 </ul>
                             </div>
                         </div>
@@ -55,9 +56,9 @@ function StatePrestation({detailsPrestation}) {
                             </div>
                             <div className="state-content">
                                 <h4>
-                                    En attente de votre réponse
+                                    En attente du client
                                 </h4>
-                                <p className="state-description">{firstCapitalize(detailsPrestation.craftsman.user.first_name)} vous a fait une proposition ! À vous de choisir la suite</p>
+                                <p className="state-description">Vous avez envoyé une proposition à {firstCapitalize(detailsPrestation.client.user.first_name)}, attendez sa réponse</p>
                             </div>
                         </div>
 
@@ -70,9 +71,9 @@ function StatePrestation({detailsPrestation}) {
                                     Prochaines étapes
                                 </h4>
                                 <ul className="info-list">
-                                    <li><FontAwesomeIcon icon={faCaretRight} /> Examiner sa proposition</li>
-                                    <li><FontAwesomeIcon icon={faCaretRight} /> Échanger avec {firstCapitalize(detailsPrestation.craftsman.user.first_name)} si vous avez des questions</li>
-                                    <li><FontAwesomeIcon icon={faCaretRight} /> Accepter ou refuser sa proposition</li>
+                                    <li><FontAwesomeIcon icon={faCaretRight} /> Attendez la décision concernant votre proposition</li>
+                                    <li><FontAwesomeIcon icon={faCaretRight} /> {firstCapitalize(detailsPrestation.client.user.first_name)} pourrait accepter ou décliner la proposition</li>
+                                    <li><FontAwesomeIcon icon={faCaretRight} /> Restez disponible en cas de question ou d'échange</li>
                                 </ul>
                             </div>
                         </div>
@@ -87,9 +88,9 @@ function StatePrestation({detailsPrestation}) {
                             </div>
                             <div className="state-content">
                                 <h4>
-                                    Proposition confirmé
+                                    Proposition accepté
                                 </h4>
-                                <p className="state-description">Vous avez confirmé la proposition de {firstCapitalize(detailsPrestation.craftsman.user.first_name)}</p>
+                                <p className="state-description">{firstCapitalize(detailsPrestation.client.user.first_name)} a accepté votre proposition</p>
                             </div>
                         </div>
 
@@ -102,8 +103,9 @@ function StatePrestation({detailsPrestation}) {
                                     Prochaines étapes
                                 </h4>
                                 <ul className="info-list">
-                                    <li><FontAwesomeIcon icon={faCaretRight} /> L'artisan va vous contacter pour les travaux</li>
-                                    <li><FontAwesomeIcon icon={faCaretRight} /> Restez disponible pour toute information</li>
+                                    <li><FontAwesomeIcon icon={faCaretRight} /> Prenez contact avec {firstCapitalize(detailsPrestation.client.user.first_name)} pour convenir des modalités</li>
+                                    <li><FontAwesomeIcon icon={faCaretRight} /> Effectuez l'intervention chez {firstCapitalize(detailsPrestation.client.user.first_name)} à la date convenue</li>
+                                    <li><FontAwesomeIcon icon={faCaretRight} /> Mettez à jour le statut du projet une fois les travaux terminés</li>
                                 </ul>
                             </div>
                         </div>
@@ -132,9 +134,9 @@ function StatePrestation({detailsPrestation}) {
                             </div>
                             <div className="state-content">
                                 <h4>
-                                    Refusé par vous
+                                    Refusé par le client
                                 </h4>
-                                <p className="state-description">Vous avez décliné la proposition de {firstCapitalize(detailsPrestation.craftsman.user.first_name)}</p>
+                                <p className="state-description">Votre proposition a été décliné par {firstCapitalize(detailsPrestation.client.user.first_name)}</p>
                             </div>
                         </div>
 
@@ -147,9 +149,9 @@ function StatePrestation({detailsPrestation}) {
                                     Prochaines étapes
                                 </h4>
                                 <ul className="info-list">
-                                    <li><FontAwesomeIcon icon={faCaretRight} /> Projet annulé suite à votre refus</li>
-                                    <li><FontAwesomeIcon icon={faCaretRight} /> Vous pouvez créer une nouvelle demande</li>
-                                    <li><FontAwesomeIcon icon={faCaretRight} /> Cherchez un autre artisan pour votre projet</li>
+                                    <li><FontAwesomeIcon icon={faCaretRight} /> Mettez à jour votre disponibilité pour faciliter de futurs contacts</li>
+                                    <li><FontAwesomeIcon icon={faCaretRight} /> Cette demande reste archivé dans votre espace</li>
+                                    <li><FontAwesomeIcon icon={faCaretRight} /> Restez attentif, peut etre que {firstCapitalize(detailsPrestation.client.user.first_name)} vous sollictera à l'avenir</li>
                                 </ul>
                             </div>
                         </div>
@@ -164,9 +166,9 @@ function StatePrestation({detailsPrestation}) {
                             </div>
                             <div className="state-content">
                                 <h4>
-                                    Refusé par l'artisan
+                                    Refusé par vous
                                 </h4>
-                                <p className="state-description">Votre demande a été décliné par {firstCapitalize(detailsPrestation.craftsman.user.first_name)}</p>
+                                <p className="state-description">Vous avez décliné la demande de {firstCapitalize(detailsPrestation.client.user.first_name)}</p>
                             </div>
                         </div>
 
@@ -179,9 +181,9 @@ function StatePrestation({detailsPrestation}) {
                                     Prochaines étapes
                                 </h4>
                                 <ul className="info-list">
-                                    <li><FontAwesomeIcon icon={faCaretRight} /> L'artisan ne peut pas réaliser votre demande</li>
-                                    <li><FontAwesomeIcon icon={faCaretRight} /> Recontacter en modifiant votre demande</li>
-                                    <li><FontAwesomeIcon icon={faCaretRight} /> Recherchez un autre artisan</li>
+                                    <li><FontAwesomeIcon icon={faCaretRight} /> {firstCapitalize(detailsPrestation.client.user.first_name)} est informé de votre décision</li>
+                                    <li><FontAwesomeIcon icon={faCaretRight} /> Cette demande reste archivé dans votre espace</li>
+                                    <li><FontAwesomeIcon icon={faCaretRight} /> Restez disponible si {firstCapitalize(detailsPrestation.client.user.first_name)} souhaite reprendre contact à l'avenir</li>
                                 </ul>
                             </div>
                         </div>
@@ -204,4 +206,4 @@ function StatePrestation({detailsPrestation}) {
     );
 }
 
-export default StatePrestation;
+export default StatePrestationCraftsman;

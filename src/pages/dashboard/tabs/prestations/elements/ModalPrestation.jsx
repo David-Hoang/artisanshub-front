@@ -1,38 +1,38 @@
-import { useState, useEffect } from 'react';
+import "./ModalPrestation.scss";
+import { useState, useEffect, useContext } from 'react';
 import axios from "axios";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGears, faUserCheck, faPhone, faEnvelope, faHourglassHalf, faListCheck, faCaretRight, faBolt, faUserClock, faCheck, faUserXmark } from '@fortawesome/free-solid-svg-icons';
+import { faGears } from '@fortawesome/free-solid-svg-icons';
 
-import { firstCapitalize, dateLong, dateFull } from "../../../../../utils/Helpers.jsx";
+import { firstCapitalize } from "../../../../../utils/Helpers.jsx";
 
-import DefaultCraftsman from '../../../../../assets/img/default-craftsman.svg';
-import DefaultClient from '../../../../../assets/img/default-client.svg';
+import { PrestationsContext } from "../../../context/PrestationsContext.jsx";
 
 import Modal from "../../../../../components/ui/Modal.jsx";
 import SpinLoader from "../../../../../components/ui/SpinLoader.jsx";
 
 import ResumeClientPrestation from "./ResumeClientPrestation.jsx";
-import StatePrestation from "./StatePrestation.jsx";
+import StatePrestationClient from "./StatePrestationClient.jsx";
+import StatePrestationCraftsman from "./StatePrestationCraftsman.jsx";
 
-import Contact from "./Contact.jsx";
+import ContactClient from "./ContactClient.jsx";
+import ContactCraftsman from "./ContactCraftsman.jsx";
 import Actions from "./Actions.jsx";
-
 
 function ModalPrestation({isModalOpen, closeModal, selectedPrestation, userToken, userRole}) {
 
     const apiBase = import.meta.env.VITE_MAIN_API_URI;
 
+    const {setQuoteForm, setAlertMessage, setQuoteErrorForm} = useContext(PrestationsContext);
+
     const [detailsPrestation, setDetailsPrestation] = useState(null);
     const [isLoadingDetailsPrestation, setIsLoadingDetailsPrestation] = useState(false);
 
-    const defaultAlertMessage = {type : "", message : ""};
-    const [alertMessage, setAlertMessage] = useState(defaultAlertMessage);
-
-    const fetchDetailPrestation = async (presId) => {
+    const fetchDetailsPrestation = async (presId) => {
         setIsLoadingDetailsPrestation(true)
         try {
-            const response = await axios.get(`${apiBase}/api/prestation/${selectedPrestation.id}`, {
+            const response = await axios.get(`${apiBase}/api/prestation/${presId}`, {
                 headers: {
                     "Authorization": "Bearer " + userToken,
                 }
@@ -46,7 +46,10 @@ function ModalPrestation({isModalOpen, closeModal, selectedPrestation, userToken
     }
 
     useEffect(() => {
-        fetchDetailPrestation();
+        setQuoteForm({price : "", date : ""});
+        setAlertMessage({type : "", message : ""});
+        setQuoteErrorForm({price : "", date : ""});
+        fetchDetailsPrestation(selectedPrestation.id);
     }, []);
 
     return ( 
@@ -66,20 +69,23 @@ function ModalPrestation({isModalOpen, closeModal, selectedPrestation, userToken
                 : detailsPrestation 
                     ? 
                         <div className="modal-main">
-                            <div className="modal-client-prestation">
-                                <ResumeClientPrestation detailsPrestation={detailsPrestation} />
-                                <StatePrestation detailsPrestation={detailsPrestation} />
+                            <div className="content-prestation">
+
+                                <ResumeClientPrestation detailsPrestation={detailsPrestation} userRole={userRole}/>
+
+                                {userRole === 'client' && <StatePrestationClient detailsPrestation={detailsPrestation} />}
+                                {userRole === 'craftsman' && <StatePrestationCraftsman detailsPrestation={detailsPrestation} />}
+                                
                             </div>
                             
                             <aside>
-                                <Contact detailsPrestation={detailsPrestation} />
+                                {userRole === 'client' && <ContactClient detailsPrestation={detailsPrestation}/> }
+                                {userRole === 'craftsman' && <ContactCraftsman detailsPrestation={detailsPrestation}/> }
                                 <Actions 
-                                    detailsPrestation={detailsPrestation} 
+                                    detailsPrestation={detailsPrestation}
+                                    user={{userToken, userRole}}
                                     closeModal={closeModal} 
-                                    fetchDetailPrestation={fetchDetailPrestation}
-                                    userToken={userToken}
-                                    alertMessage={alertMessage}
-                                    setAlertMessage={setAlertMessage}
+                                    fetchDetailsPrestation={fetchDetailsPrestation}
                                 />
                             </aside>
                         </div>

@@ -79,12 +79,7 @@ div.messages-tab{
                 p.message-content {
                     color: var.$gray;
                     font-size: var.$txt-sm;
-                    
-                    display: -webkit-box;
-                    -webkit-line-clamp: 2;
-                    -webkit-box-orient: vertical;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
+                    @include mxn.limitLineText(1)
                 }
             }
         }

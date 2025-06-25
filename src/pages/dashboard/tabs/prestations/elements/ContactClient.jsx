@@ -1,11 +1,14 @@
+import "./ContactClient.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGears, faFileLines, faEuroSign, faCalendar, faUserCheck, faPhone, faEnvelope, faHourglassHalf, faListCheck, faCaretRight, faBolt, faUserClock, faCheck, faUserXmark } from '@fortawesome/free-solid-svg-icons'
+import { faUserCheck, faPhone, faEnvelope } from '@fortawesome/free-solid-svg-icons'
 
-import { firstCapitalize, dateLong, dateFull } from "../../../../../utils/Helpers.jsx";
+import { firstCapitalize} from "../../../../../utils/Helpers.jsx";
 
+import DefaultCraftsman from "../../../../../assets/img/default-craftsman.svg";
 
-function Contact({detailsPrestation}) {
+function ContactClient({detailsPrestation}) {
 
+    // If user is client, then show craftsman infos
     const apiBase = import.meta.env.VITE_MAIN_API_URI;
 
     return ( 
@@ -83,4 +86,4 @@ function Contact({detailsPrestation}) {
     );
 }
 
-export default Contact;
+export default ContactClient;

@@ -50,17 +50,12 @@ section.hero-craftsman {
             flex-direction: column;
             gap: var.$gap-base;
 
-            div.hero-name-job{
-                display: flex;
-                align-items: center;
-                gap: var.$gap-base;
-
-                h1{
-                    color: var.$full-white;
-                    font-weight: 800;
-                }
+            h1{
+                color: var.$full-white;
+                font-weight: 800;
+                @include mxn.limitLineText(2)
             }
-
+            
             div.hero-infos-wrapper{
                 display: flex;
                 align-items: center;

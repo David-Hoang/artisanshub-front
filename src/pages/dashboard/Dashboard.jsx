@@ -11,14 +11,12 @@ import { faUserGear, faComments, faReceipt } from '@fortawesome/free-solid-svg-i
 import InformationsTab from "./tabs/informations/InformationsTab.jsx";
 import MessagesTab from "./tabs/messages/MessagesTab.jsx";
 import PrestationsTab from "./tabs/prestations/PrestationsTab.jsx";
-import PrestationsTabCrafts from "../../components/dashboard/craftsman/PrestationsTab.jsx";
-
 
 function Dashboard() {
 
     const {userRole, userDatas, userToken} = useContext(AuthContext);
     
-    const [selectedTab, setSelectedTab] = useState('Prestations');
+    const [selectedTab, setSelectedTab] = useState('Informations');
 
     return ( 
         <main className="main-dashboard">
@@ -42,15 +40,11 @@ function Dashboard() {
                 {selectedTab === 'Messages' &&
                     <MessagesTab userDatas={userDatas} userToken={userToken} userRole={userRole} />
                 }
-                {selectedTab === 'Prestations' && userRole === 'client' &&
+                {selectedTab === 'Prestations' &&
                     <PrestationsProvider>
                         <PrestationsTab userToken={userToken} userRole={userRole} />
                     </PrestationsProvider>
                 }
-                {selectedTab === 'Prestations' && userRole === 'craftsman' &&
-                        <PrestationsTabCrafts/>
-                }
-                
             </Tabs>
             
         </main>
