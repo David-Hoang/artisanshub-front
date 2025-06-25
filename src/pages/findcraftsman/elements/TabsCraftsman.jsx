@@ -18,11 +18,9 @@ function TabsCraftsman({craftsmanInfos, ...props}) {
                 ]}
                 selectedTab={selectedTab} setSelectedTab={setSelectedTab}
                 >
-
                 {selectedTab === 'Informations' &&
                     <DetailsInformationsTab craftsmanInfos={craftsmanInfos}/>
                 }
-                
                 {selectedTab === 'Galerie' &&
                     <DetailsGalleryTab craftsmanInfos={craftsmanInfos}/>
                 }

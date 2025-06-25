@@ -77,6 +77,7 @@ section.craftsmen-content {
                     h3 {
                         font-size: var.$txt-xl;
                         font-weight: 800;
+                        @include mxn.limitLineText(2)
                     }
 
                     div.craftsman-job-container {

@@ -126,3 +126,11 @@
         }
     }
 }
+
+@mixin limitLineText($limit : 2) {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: $limit;
+    line-clamp: $limit;
+    -webkit-box-orient: vertical;
+}

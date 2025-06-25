@@ -1,0 +1,102 @@
+@use "../../../../../assets/scss/variables" as var;
+@use "../../../../../assets/scss/mixins" as mxn;
+@use "../../../../../assets/scss/extends" as ext;
+
+div.modal-client-info {
+    border: 1px #e6e6e6 solid;
+    border-radius: var.$rounded-lg;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: var.$gap-2xl;
+    height: fit-content;
+
+    div.wrapper {
+        display: flex;
+        align-items: center;
+        gap: var.$gap-base;
+
+        div.icon {
+            color: var.$orange;
+            font-size: var.$txt-xl;
+        }
+
+        h3 {
+            font-size: var.$txt-lg;
+            font-weight: 600;
+        }
+    }
+
+    div.client-infos {
+        display: flex;
+        flex-direction: column;
+        gap: var.$gap-xl;
+
+        div.wrapper {
+            display: flex;
+            align-items: center;
+            gap: var.$gap-base;
+
+            div.client-picture > img {
+                width: 3rem;
+                height: 3rem;
+                object-fit: cover;
+                object-position: 50% 50%;
+                border-radius: 100%;
+                box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+                    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+            }
+
+            div.client-name {
+                display: flex;
+                flex-direction: column;
+                gap: var.$gap-xs;
+
+                h4 {
+                    font-size: var.$txt-base;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+
+    div.client-contact {
+        display: flex;
+        flex-direction: column;
+        gap: var.$gap-xl;
+
+        div.contact-wrapper {
+            display: flex;
+            align-items: center;
+            gap: var.$gap-base;
+            a.contact,
+            div.contact {
+                font-size: var.$txt-lg;
+                padding: 1.2rem;
+                border-radius: var.$rounded-lg;
+                height: 2rem;
+                width: 2rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                transition: 0.2s ease-in-out;
+            }
+
+            a.contact.client-phone {
+                @include mxn.info($hover: true);
+            }
+
+            a.contact.client-email {
+                @include mxn.success($hover: true);
+            }
+
+            div.contact.client-address {
+                @include mxn.danger($hover: true);
+            }
+
+            p {
+                font-size: var.$txt-sm;
+            }
+        }
+    }
+}
