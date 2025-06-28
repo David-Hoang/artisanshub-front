@@ -1,4 +1,6 @@
 import './InformationsTab.scss';
+import { useContext } from 'react';
+import { AuthContext } from "../../../../context/AuthContext.jsx";
 
 import UserInfosForm from "./elements/UserInfosForm.jsx";
 import UserPasswordForm from "./elements/UserPasswordForm.jsx";
@@ -6,24 +8,26 @@ import CraftsmanInfosForm from "./elements/CraftsmanInfosForm.jsx";
 import ClientInfosForm from "./elements/ClientInfosForm.jsx";
 import UserPictureForm from "./elements/UserPictureForm.jsx";
 
-function InformationsTab({userDatas, userToken, userRole}) {
+function InformationsTab() {
+
+    const {userRole} = useContext(AuthContext);
 
     return ( 
         <div className="informations-tab">
 
-            <UserInfosForm userDatas={userDatas} userToken={userToken}/>
+            <UserInfosForm />
             
-            <UserPasswordForm userToken={userToken}/>
+            <UserPasswordForm/>
 
             {   
-                userRole === "craftsman" 
-                ? <CraftsmanInfosForm userDatas={userDatas} userToken={userToken} />
+                userRole === "craftsman"
+                ? <CraftsmanInfosForm />
                     : userRole === "client" ?
-                    <ClientInfosForm userDatas={userDatas} userToken={userToken}/>
+                    <ClientInfosForm />
                         : null
             }
 
-            <UserPictureForm userDatas={userDatas} userToken={userToken}/>
+            <UserPictureForm />
 
         </div>
     );

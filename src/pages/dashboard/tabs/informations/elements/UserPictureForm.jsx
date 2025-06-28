@@ -1,20 +1,24 @@
 import "./UserPictureForm.scss";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
 
 import DefaultClient from '../../../../../assets/img/default-client.svg';
+import DefaultCraftsman from '../../../../../assets/img/default-craftsman.svg';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { AuthContext } from "../../../../../context/AuthContext";
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import Input from "../../../../../components/ui/Input";
 import Button from "../../../../../components/ui/Button";
 import AlertMessage from "../../../../../components/AlertMessage";
 import SpinLoader from "../../../../../components/ui/SpinLoader";
 
-function UserpictureForm({userDatas, userToken}) {
+function UserpictureForm() {
 
     const apiBase = import.meta.env.VITE_MAIN_API_URI;
+    const {userDatas, userToken, userRole} = useContext(AuthContext)
 
     const defaultAlertMessage = {type : "", message : ""};
     const defaultErrorForm = {
@@ -26,9 +30,14 @@ function UserpictureForm({userDatas, userToken}) {
     const [errorInfosForm, setErrorInfosForm] = useState(defaultErrorForm);
     const [isLoadingUserPicture, setIsLoadingUserPicture] = useState(false);
 
+    const defaultImage = userRole === 'client' 
+                        ? DefaultClient 
+                        : userRole === 'craftsman' 
+                            ? DefaultCraftsman 
+                            : null;
 
     const [userPictureForm, setUserPictureForm] = useState({
-        img_path : userDatas.profile_img?.img_path ? `${apiBase}/storage/${userDatas.profile_img.img_path}` : DefaultClient,
+        img_path : userDatas.profile_img?.img_path ? `${apiBase}/storage/${userDatas.profile_img.img_path}` : defaultImage,
         img_title : userDatas.profile_img?.img_title ?? "",
         profile_picture : null,
     });
@@ -41,16 +50,11 @@ function UserpictureForm({userDatas, userToken}) {
 
         setIsLoadingUserPicture(true);
 
-        //Validation : Get userPasswordForm and return object of error if no value in input
         if(userPictureForm.img_title.length > 255){
             setErrorInfosForm({...errorInfosForm, img_title : "Le nom ne peut pas dépasser 255 caractères."});
         }
 
-        if(userPictureForm.profile_picture){
-
-        }
-
-        //Validation : Get userPasswordForm and return object of error if no value in input
+        //Validation : Get userPictureForm and return object of error if no value in input
         const validateUserPictureInputs = Object.entries(userPictureForm).reduce((acc, [key, value]) => {
 
             if (key === "img_title" && value.length > 255) {
@@ -100,7 +104,7 @@ function UserpictureForm({userDatas, userToken}) {
                 setUserPictureForm({...userPictureForm, profile_picture : null});
             }else if (updateUserPicture.status === 201) {
                 setAlertMessage({...alertMessage, type : "success", message : "Votre photo de profil et son titre ont bien été ajouté avec succès !"});
-                setUserPictureForm({userPictureForm, profile_picture : null});
+                setUserPictureForm({...userPictureForm, profile_picture : null});
             }
 
         } catch (error) {
@@ -129,7 +133,7 @@ function UserpictureForm({userDatas, userToken}) {
     const removePicture = () => {
         setUserPictureForm({
             ...userPictureForm,
-            img_path : userDatas.profile_img?.img_path ? `${apiBase}/storage/${userDatas.profile_img.img_path}` : DefaultClient,
+            img_path : userDatas.profile_img?.img_path ? `${apiBase}/storage/${userDatas.profile_img.img_path}` : defaultImage,
             profile_picture : null
         })
     }

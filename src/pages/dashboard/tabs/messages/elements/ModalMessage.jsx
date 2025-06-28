@@ -1,7 +1,9 @@
 import './ModalMessage.scss';
 
-import { useState, useEffect, useRef  } from 'react';
+import { useState, useEffect, useRef, useContext  } from 'react';
 import axios from "axios";
+
+import { AuthContext } from "../../../../../context/AuthContext.jsx";
 
 import { firstCapitalize, dateMessageFormat } from "../../../../../utils/Helpers";
 
@@ -15,9 +17,10 @@ import SpinLoader from "../../../../../components/ui/SpinLoader.jsx";
 import Button from "../../../../../components/ui/Button.jsx";
 import AlertMessage from "../../../../../components/AlertMessage.jsx";
 
-function ModalMessage({isModalOpen, closeModal, selectedUserConversation, userId, userToken}) {
+function ModalMessage({isModalOpen, closeModal, selectedUserConversation}) {
         
         const apiBase = import.meta.env.VITE_MAIN_API_URI;
+        const {userToken} = useContext(AuthContext)
 
         const [isLoadingConversation, setIsLoadingConversation] = useState(false)
         const [conversation, setConversation] = useState([])

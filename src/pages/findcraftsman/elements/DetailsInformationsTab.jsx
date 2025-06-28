@@ -4,9 +4,8 @@ import { firstCapitalize, dateMonthYear } from "../../../utils/Helpers";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPhone, faEnvelope } from '@fortawesome/free-solid-svg-icons'
 
-function DetailsInformationsTab({craftsmanInfos, ...props}) {
+function DetailsInformationsTab({craftsmanInfos}) {
 
-    console.log(craftsmanInfos)
     return ( 
         <div className="details-tab-craftsman">
             <div className="description-craftsman">
@@ -25,11 +24,11 @@ function DetailsInformationsTab({craftsmanInfos, ...props}) {
                     <p className="card-title">Tarification</p>
                     <p className="details-price">{craftsmanInfos.price ?  craftsmanInfos.price + '€/h' : "Non renseigné"}</p>
                 </div>
-                <div className="card">
+                <address className="card">
                     <p className="card-title">Zone d'intervention</p>
                     <p>Region : <span className="details-location">{craftsmanInfos.user.region}</span></p>
                     <p>Ville : <span className="details-location">{craftsmanInfos.user.city}</span></p>
-                </div>
+                </address>
                 <div className="card">
                     <p className="card-title">Membre depuis</p>
                     <p className="details-member-since">{dateMonthYear(craftsmanInfos.user.created_at)}</p>
@@ -57,14 +56,13 @@ function DetailsInformationsTab({craftsmanInfos, ...props}) {
                                 </div>
                                 <p>Vous devez être connecté pour voir cette information</p>
                             </> 
-                            
                         }
                     </div>
                     <div className="card email-wrapper">
                         { craftsmanInfos.user.hasOwnProperty("email") 
                             ? craftsmanInfos.user.email 
                                 ? <>
-                                    <a href={`tel:+${craftsmanInfos.user.email}`} className="contact craftsman-email">
+                                    <a href={`mailto:${craftsmanInfos.user.email}`} className="contact craftsman-email">
                                         <FontAwesomeIcon icon={faEnvelope} />
                                     </a>
                                     <p>{craftsmanInfos.user.email}</p>
@@ -76,7 +74,6 @@ function DetailsInformationsTab({craftsmanInfos, ...props}) {
                                 </div>
                                 <p>Vous devez être connecté pour voir cette information</p>
                             </> 
-                            
                         }
                     </div>
                 </div>

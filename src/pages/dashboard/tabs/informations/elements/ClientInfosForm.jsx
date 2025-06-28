@@ -1,15 +1,18 @@
 import "./ClientInfosForm.scss";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
 
-import Input from "../../../../../components/ui/Input";
-import Button from "../../../../../components/ui/Button";
-import AlertMessage from "../../../../../components/AlertMessage";
-import SpinLoader from "../../../../../components/ui/SpinLoader";
+import { AuthContext } from "../../../../../context/AuthContext.jsx";
 
-function ClientInfosForm({userDatas, userToken}) {
+import Input from "../../../../../components/ui/Input.jsx";
+import Button from "../../../../../components/ui/Button.jsx";
+import AlertMessage from "../../../../../components/AlertMessage.jsx";
+import SpinLoader from "../../../../../components/ui/SpinLoader.jsx";
+
+function ClientInfosForm() {
 
     const apiBase = import.meta.env.VITE_MAIN_API_URI;
+    const {userDatas, userToken} = useContext(AuthContext)
 
     const defaultErrorForm = {
         street_number : "",

@@ -85,26 +85,26 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
-    useEffect( () => {
-        const fetchUserData = async () => {
-            try {
-                const actualToken = localStorage.getItem("artisansHubUserToken");
+    const fetchUserData = async () => {
+        try {
+            const actualToken = localStorage.getItem("artisansHubUserToken");
 
-                if(actualToken) {
-                    await userInfos(actualToken);
-                    setUserToken(actualToken);
-                    setIsLogged(true);
-                }else {
-                    cleanUserDatasToken()
-                }
-            } catch (error) {
-                console.error('Une erreur est survenue lors de la récupération du token : ', error);
-            }finally{
-                setProviderLoading(false);
+            if(actualToken) {
+                await userInfos(actualToken);
+                setUserToken(actualToken);
+                setIsLogged(true);
+            }else {
+                cleanUserDatasToken()
             }
+        } catch (error) {
+            console.error('Une erreur est survenue lors de la récupération du token : ', error);
+        }finally{
+            setProviderLoading(false);
         }
+    }
 
-    fetchUserData()
+    useEffect( () => {
+        fetchUserData()
     }, [])
 
     const cleanUserDatasToken = () =>{
@@ -290,6 +290,8 @@ export const AuthProvider = ({ children }) => {
                 userRole,
                 userRoleInfos, 
                 setUserRoleInfos,
+
+                reFetchUserDatas : fetchUserData,
 
                 handleLogout,
                 handleLogin,

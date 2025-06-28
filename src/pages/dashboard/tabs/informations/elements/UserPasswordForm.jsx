@@ -1,15 +1,18 @@
 import "./UserPasswordForm.scss";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
+
+import { AuthContext } from "../../../../../context/AuthContext";
 
 import Input from "../../../../../components/ui/Input";
 import Button from "../../../../../components/ui/Button";
 import AlertMessage from "../../../../../components/AlertMessage";
 import SpinLoader from "../../../../../components/ui/SpinLoader";
 
-function UserPasswordForm({userToken}) {
+function UserPasswordForm() {
 
     const apiBase = import.meta.env.VITE_MAIN_API_URI;
+    const {userToken} = useContext(AuthContext)
 
     const defaultPasswordForm = {
         password : "",

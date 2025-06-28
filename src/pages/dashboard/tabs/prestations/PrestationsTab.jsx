@@ -10,7 +10,7 @@ import SpinLoader from "../../../../components/ui/SpinLoader";
 
 import ModalPrestation from "./elements/ModalPrestation.jsx";
 
-function PrestationsTab({userToken, userRole}) {
+function PrestationsTab() {
     
     const {isLoadingPrestations, userPrestations} = useContext(PrestationsContext);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -58,8 +58,6 @@ function PrestationsTab({userToken, userRole}) {
                             isModalOpen={isModalOpen}
                             closeModal={closeModal} 
                             selectedPrestation={selectedPrestation}
-                            userRole={userRole}
-                            userToken={userToken}
                         />
                     }
                 </>

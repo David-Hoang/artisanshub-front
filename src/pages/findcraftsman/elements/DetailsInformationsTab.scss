@@ -22,7 +22,11 @@ div.details-tab-craftsman {
             grid-template-columns: repeat(3, 1fr);
         }
 
-        div.card {
+        address {
+            font-style : normal;
+        }
+        
+        div.card, address.card {
             background-color: var.$light-gray;
             border : 1px #e6e6e6 solid ;
             border-radius: var.$rounded-lg;
@@ -52,7 +56,6 @@ div.details-tab-craftsman {
         flex-direction: column;
         gap : var.$gap-base;
 
-        
         div.card-wrapper {
             display: grid;
             grid-template-columns: repeat(1, 1fr);
