@@ -52,20 +52,18 @@ function CraftsmanInfosForm() {
 
     const handleSubmitUserCraftsmanInfos = async (e) => {
         e.preventDefault();
-
+        setIsLoadingCraftsman(true);
+        
         //using same variable to reset error
         setAlertMessage(defaultAlertMessage);
         setAlertGallery(defaultAlertMessage);
 
         setErrorInfosForm(defaultErrorForm);
 
-        setIsLoadingCraftsman(true);
-
         //validate gallery
         let validateImgFile;
         const allowedTypes = ["image/png", "image/jpeg", "image/jpg", "image/webp"];
         const maxSize = 3 * 1024 * 1024; // 3Mo
-
 
         for(let i = 0; i < galleryToForm.length; i++){
 
@@ -114,16 +112,20 @@ function CraftsmanInfosForm() {
 
         // Check if there is at least 1 error
         if(Object.keys(validateUserCraftsmanInputs).length > 0){
-            setErrorInfosForm(validateUserCraftsmanInputs);
-            setIsLoadingCraftsman(false);
+            setTimeout(() => {
+                setErrorInfosForm(validateUserCraftsmanInputs);
+                setIsLoadingCraftsman(false);
+            }, 500);
             return;
         }
 
         // Check if there is at least 1 error in array gallery
         if(validateImgFile) {
-            setAlertMessage(validateImgFile);
-            setIsLoadingCraftsman(false);
-            return;
+            setTimeout(() => {
+                setAlertMessage(validateImgFile);
+                setIsLoadingCraftsman(false);
+            }, 500);
+            return;    
         }
 
         try {
@@ -248,6 +250,7 @@ function CraftsmanInfosForm() {
                 alertGallery={alertGallery}
                 setAlertGallery={setAlertGallery}
                 resetPreview={resetPreview}
+                setAlertMessage={setAlertMessage}
             />
 
             <Button type="submit" className="btn-primary">

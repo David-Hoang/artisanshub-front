@@ -7,9 +7,10 @@ import { AuthContext } from "../../../../../context/AuthContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUp, faTrash, faCloud } from '@fortawesome/free-solid-svg-icons';
 
+import Modal from "../../../../../components/ui/Modal";
 import AlertMessage from "../../../../../components/AlertMessage";
 
-function CraftsmanGallery({galleryToForm, setGalleryToForm, alertGallery, setAlertGallery, resetPreview}) {
+function CraftsmanGallery({galleryToForm, setGalleryToForm, alertGallery, setAlertGallery, resetPreview, setAlertMessage}) {
 
     const apiBase = import.meta.env.VITE_MAIN_API_URI;
     const {userToken, reFetchUserDatas, userDatas} = useContext(AuthContext)
@@ -61,6 +62,7 @@ function CraftsmanGallery({galleryToForm, setGalleryToForm, alertGallery, setAle
     const deletePhotoGallery = async (photoId) => {
 
         setAlertGallery({type : "", message : ""});
+        setAlertMessage({type : "", message : ""})
 
         try{
             const response = await axios.delete(`${apiBase}/api/photo-gallery/${photoId}`,
@@ -85,6 +87,20 @@ function CraftsmanGallery({galleryToForm, setGalleryToForm, alertGallery, setAle
         }
     }
 
+    // LightBox
+    const [isOpenModal, setIsOpenModal] = useState(false);
+    const [selectedImgPath, setSelectedPath] = useState(null);
+
+    const openLightBox = (img_path) => {
+        setIsOpenModal(true);
+        setSelectedPath(img_path);
+    }
+
+    const closeLightBox = () => {
+        setIsOpenModal(false);
+        setSelectedPath(null)
+    }
+
     return (
         <div className="craftsman-gallery">
             <h2>Galerie de photo</h2>
@@ -93,15 +109,17 @@ function CraftsmanGallery({galleryToForm, setGalleryToForm, alertGallery, setAle
                 ?   <>
                         <ul className="gallery gallery-photos">
                             {craftsmanGallery.map(photo => (
-                                <li key={photo.id} className="item-photo">
+                                <li key={photo.id} className="item-photo" onClick={() => openLightBox(photo.img_path)}>
+
                                     <img src={`${apiBase}/storage/${photo.img_path}`} />
 
                                     <div className="filter-opacity">
                                         <button type="button" className="button-delete-preview"
-                                            onClick={() => deletePhotoGallery(photo.id)}>
+                                            onClick={(e) => {deletePhotoGallery(photo.id); e.stopPropagation()}}>
                                             <FontAwesomeIcon icon={faTrash}/>
                                         </button>
                                     </div>
+
                                 </li>
                             ))}
                         </ul>
@@ -111,6 +129,16 @@ function CraftsmanGallery({galleryToForm, setGalleryToForm, alertGallery, setAle
                         }
                         {alertGallery.message && alertGallery.type === "error" &&
                             <AlertMessage type="error">{alertGallery.message}</AlertMessage>
+                        }
+
+                        {isOpenModal &&
+                            <Modal 
+                                isOpen={isOpenModal} 
+                                closeModal={closeLightBox} 
+                                className="lightbox"
+                            > 
+                                <img className="full-photo" src={`${apiBase}/storage/${selectedImgPath}`} />
+                            </Modal>
                         }
 
                     </>

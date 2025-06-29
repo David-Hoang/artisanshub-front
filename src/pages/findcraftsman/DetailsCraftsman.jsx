@@ -9,6 +9,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 
 import HeroCraftsman from "./elements/HeroCraftsman";
+import CtaContact from "./elements/CtaContact.jsx";
+
 import Button from "../../components/ui/Button.jsx";
 import SpinLoader from "../../components/ui/SpinLoader.jsx";
 import TabsCraftsman from "./elements/TabsCraftsman.jsx";
@@ -18,9 +20,9 @@ function DetailsCraftsman() {
     const navigate = useNavigate()
 
     const craftsmanId = useParams().craftsmanId;
-    const {userToken} = useContext(AuthContext)
+    const {userToken, userRole} = useContext(AuthContext)
 
-    const [craftsmanInfos, setListing] = useState(null);
+    const [craftsmanInfos, setCraftsmanInfo] = useState(null);
     const [isLoadingInfos, setIsloadingInfos] = useState(false);
 
     const fetchCraftsmanInfos = async () => {
@@ -41,7 +43,7 @@ function DetailsCraftsman() {
             }
                 
             if(response.status === 200){
-                setListing(response.data);
+                setCraftsmanInfo(response.data);
             }
             
         } catch (error) {
@@ -71,6 +73,12 @@ function DetailsCraftsman() {
                     ? ( 
                         <>
                             <HeroCraftsman craftsmanInfos={craftsmanInfos} />
+
+                            {/* Button contact + prestation */}
+                            {userRole === 'client' &&
+                                <CtaContact craftsmanInfos={craftsmanInfos}/>
+                            }
+
                             <div className="tab-content">
                                 <TabsCraftsman craftsmanInfos={craftsmanInfos} />
                             </div>
