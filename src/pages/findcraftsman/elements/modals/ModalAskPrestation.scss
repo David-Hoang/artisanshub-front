@@ -2,3 +2,71 @@
 @use "../../../../assets/scss/mixins" as mxn;
 @use "../../../../assets/scss/extends" as ext;
 
+div.modal-ask-prestation{
+    display : flex;
+    flex-direction: column;
+
+    width: 100%;
+    
+    @media screen and (min-width : var.$bp-md) {
+        max-width: 40rem;
+    }
+
+    div.modal-header{
+        padding : 1.5rem;
+        background-color: var.$light-gray;
+    }
+
+    form.new-prestation {
+        display: flex;
+        flex-direction: column;
+        gap: var.$gap-xl;
+        padding : 1.5rem;
+
+        div.new-prestation-inputs {
+            display : flex;
+            flex-direction: column;
+
+            gap: var.$gap-xl;
+
+            p.wrapper {
+                font-size: var.$txt-sm;
+            }
+        }
+
+        div.btn-wrapper {
+            align-self: end;
+            display: flex;
+            align-items: center;
+            gap: var.$gap-lg;
+            
+            button.btn-primary{
+
+                display: flex;
+                align-items: center;
+                gap: var.$gap-xs;
+                svg {
+                    font-size: var.$txt-sm;
+                }
+            }
+        }
+    }
+
+    p.prestation-asked {
+        display : flex;
+        align-items: center;
+        justify-content: center;
+        gap: var.$gap-xl;
+        padding : 2rem 2rem 0;
+        color : var.$success;
+        svg {
+                font-size: var.$txt-xl;
+            }
+    }
+
+    button.btn-prestation-asked {
+        width : 6rem;
+        align-self: center;
+        margin: 2rem 0;
+    }
+}

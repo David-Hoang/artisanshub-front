@@ -31,7 +31,7 @@ function ModalMessage({isModalOpen, closeModal, selectedUserConversation}) {
     const messageList = useRef(null);
 
     const fetchConversation = async () => {
-        setIsLoadingConversation(true)
+        setIsLoadingConversation(true);
         try {
             const response = await axios.get(`${apiBase}/api/message/conversation/${selectedUserConversation.id}`, {
                 headers: {
@@ -40,13 +40,13 @@ function ModalMessage({isModalOpen, closeModal, selectedUserConversation}) {
             })
 
             if(response.status === 200){
-                setConversation(response.data)
+                setConversation(response.data);
             }                
 
         } catch (error) {
             console.log(error);
         } finally {
-            setIsLoadingConversation(false)
+            setIsLoadingConversation(false);
         }
     }
 
@@ -130,7 +130,6 @@ function ModalMessage({isModalOpen, closeModal, selectedUserConversation}) {
                 <TextArea 
                     placeholder="Votre message ..."
                     rows="4"
-                    maxLength="65535"
                     value={messageToSend}
                     onChange={(e) => setMessageToSend(e.target.value)}
                 />

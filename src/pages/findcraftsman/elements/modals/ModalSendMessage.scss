@@ -24,14 +24,20 @@ div.modal-send-message{
         gap: var.$gap-xl;
 
         padding : 1.5rem;
-
-        button.btn-primary{
+        div.btn-wrapper {
             align-self: end;
             display: flex;
             align-items: center;
-            gap: var.$gap-xs;
-            svg {
-                font-size: var.$txt-sm;
+            gap: var.$gap-lg;
+
+            button.btn-primary{
+
+                display: flex;
+                align-items: center;
+                gap: var.$gap-xs;
+                svg {
+                    font-size: var.$txt-sm;
+                }
             }
         }
     }
@@ -41,10 +47,17 @@ div.modal-send-message{
         align-items: center;
         justify-content: center;
         gap: var.$gap-xl;
-        padding : 3rem;
+        padding : 2rem 2rem 0;
+
         color : var.$success;
         svg {
                 font-size: var.$txt-xl;
             }
+    }
+
+    button.btn-message-sended {
+        width : 6rem;
+        align-self: center;
+        margin: 2rem 0;
     }
 }

@@ -15,7 +15,7 @@ import SpinLoader from "../../../../components/ui/SpinLoader.jsx";
 function ModalSendMessage({isOpen, closeModal, craftsmanInfos}) {
 
     const apiBase = import.meta.env.VITE_MAIN_API_URI;
-    const {userToken} = useContext(AuthContext)
+    const {userToken} = useContext(AuthContext);
 
     const [messageToSend, setMessageToSend] = useState("");
 
@@ -64,10 +64,15 @@ function ModalSendMessage({isOpen, closeModal, craftsmanInfos}) {
     return ( 
         <Modal isOpen={isOpen} closeModal={closeModal} className="modal-send-message">
             { messageSended && 
-                <p className="message-sended"> 
-                    <FontAwesomeIcon icon={faCircleCheck} />
-                    Votre message à bien été transmis à {craftsmanInfos.user.first_name}, vous pouvez continuer la conversation dans votre tableau de bord.
-                </p>
+                <>
+                    <p className="message-sended"> 
+                        <FontAwesomeIcon icon={faCircleCheck} />
+                        Votre message à bien été transmis à {craftsmanInfos.user.first_name}, vous pouvez continuer la conversation dans votre tableau de bord.
+                    </p>
+                    <Button className="btn btn-primary btn-message-sended" onClick={closeModal}>
+                            Fermer
+                    </Button>
+                </>
             }
 
             { !messageSended &&
@@ -78,8 +83,7 @@ function ModalSendMessage({isOpen, closeModal, craftsmanInfos}) {
                     <form onSubmit={handleSendMessage} className="send-message">
                         <TextArea 
                             placeholder="Votre message ..."
-                            rows="2"
-                            maxLength="65535"
+                            rows="3"
                             value={messageToSend}
                             onChange={(e) => setMessageToSend(e.target.value)}
                         />
@@ -88,15 +92,21 @@ function ModalSendMessage({isOpen, closeModal, craftsmanInfos}) {
                             <AlertMessage type="error">{alertMessage.message}</AlertMessage>
                         }
 
-                        <Button type="submit" className="btn-primary">
-                            { isLoadingSend 
-                                ? <SpinLoader />
-                                : <>
-                                    Envoyer
-                                    <FontAwesomeIcon icon={faPaperPlane} />
-                                </>
-                            }
-                        </Button>
+                        <div className="btn-wrapper">
+                            <Button className="btn btn-secondary" onClick={closeModal}>
+                                Fermer
+                            </Button>
+
+                            <Button type="submit" className="btn-primary">
+                                { isLoadingSend 
+                                    ? <SpinLoader />
+                                    : <>
+                                        Envoyer
+                                        <FontAwesomeIcon icon={faPaperPlane} />
+                                    </>
+                                }
+                            </Button>
+                        </div>
                     </form>
                 </>
             }

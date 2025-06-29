@@ -1,12 +1,12 @@
 import './CtaContact.scss';
 import { useState } from 'react';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPaperPlane, faFilePen } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPaperPlane, faFilePen } from '@fortawesome/free-solid-svg-icons';
 
-import Button from "../../../components/ui/Button";
-import ModalSendMessage from "./modals/ModalSendMessage";
-import ModalPrestation from "../../dashboard/tabs/prestations/elements/ModalPrestation";
+import Button from "../../../components/ui/Button.jsx";
+import ModalSendMessage from "./modals/ModalSendMessage.jsx";
+import ModalAskPrestation from "./modals/ModalAskPrestation.jsx";
 
 function CtaContact({craftsmanInfos}) {
     
@@ -49,7 +49,7 @@ function CtaContact({craftsmanInfos}) {
             }
 
             {isModalOpen &&  action === "prestation" &&
-                <ModalPrestation
+                <ModalAskPrestation
                     isOpen={isModalOpen}
                     closeModal={closeModal}
                     craftsmanInfos={craftsmanInfos}
