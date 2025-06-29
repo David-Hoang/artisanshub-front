@@ -1,0 +1,163 @@
+@use "../../../../../assets/scss/variables" as var;
+@use "../../../../../assets/scss/mixins" as mxn;
+@use "../../../../../assets/scss/extends" as ext;
+
+div.craftsman-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: var.$gap-xl;
+
+    div.dropzone-gallery {
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+            rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+        width: 100%;
+
+        align-self: center;
+        background: var.$full-white;
+        transition: 0.2s ease-out;
+
+        border: var.$gray dashed 2px;
+        border-radius: var.$rounded-lg;
+        overflow: hidden;
+        position: relative;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        gap: var.$gap-xl;
+        padding: 2rem;
+
+        @media screen and (min-width: var.$bp-md) {
+            width: 70%;
+        }
+
+        @media screen and (min-width: var.$bp-lg) {
+            width: 50%;
+        }
+
+        div.upload-animation {
+            display: flex;
+            flex-direction: column;
+            gap: var.$gap-sm;
+            cursor: pointer;
+
+            svg.fa-cloud {
+                font-size: var.$txt-3xl;
+            }
+
+            svg.fa-arrow-up {
+                font-size: var.$txt-2xl;
+                transition: 0.2s ease-out;
+                z-index: 1;
+            }
+        }
+
+        &:hover {
+            background-color: var.$light-gray;
+
+            div.upload-animation > svg.fa-arrow-up {
+                transform: translate(0, -30%);
+            }
+        }
+
+        label {
+            text-align: center;
+        }
+
+        input#gallery {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            opacity: 0;
+            cursor: pointer;
+        }
+    }
+
+    ul.gallery {
+        display: grid;
+        gap: var.$gap-xl;
+
+        &.gallery-photos {
+            grid-template-columns: repeat(2, 1fr);
+            grid-auto-rows: 10rem;
+            padding-bottom: 4rem;
+
+            @media screen and (min-width: var.$bp-md) {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            @media screen and (min-width: var.$bp-lg) {
+                grid-template-columns: repeat(6, 1fr);
+            }
+        }
+
+        &.preview-gallery {
+            grid-template-columns: repeat(3, 1fr);
+            grid-auto-rows: 6rem;
+            
+            @media screen and (min-width: var.$bp-md) {
+                grid-template-columns: repeat(6, 1fr);
+            }
+
+            @media screen and (min-width: var.$bp-lg) {
+                grid-template-columns: repeat(8, 1fr);
+            }
+        }
+
+        li {
+            border-radius: var.$rounded-lg;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: 50% 50%;
+            }
+
+            div.filter-opacity {
+                position: absolute;
+                inset: 0;
+                background-color: rgba(black, 0.35);
+                opacity: 1;
+                z-index: 1;
+
+                button.button-delete-preview {
+                    position: absolute;
+                    right: 0.5rem;
+                    top: 0.5rem;
+                    background-color: transparent;
+                    border: none;
+                    color: var.$danger;
+                    cursor: pointer;
+                    z-index: 2;
+
+                    svg {
+                        font-size: var.$txt-3xl;
+                        transition: all 0.1s ease-in-out;
+                    }
+                }
+
+                @media screen and (min-width: var.$bp-md) {
+                    transition: all 0.3s ease-out;
+                    opacity: 0;
+
+                    &:hover {
+                        opacity: 1;
+                    }
+
+                    button.button-delete-preview > svg {
+                        font-size: var.$txt-2xl;
+
+                        &:hover {
+                            font-size: var.$txt-3xl;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

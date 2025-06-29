@@ -14,4 +14,24 @@ div.user-infos-input{
     @media screen and (min-width : var.$bp-lg) {
         grid-template-columns: repeat(3, 1fr);
     }
+
+}
+
+div.region-mail-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap : var.$gap-xl;
+
+    @media screen and (min-width : var.$bp-md) {
+        flex-direction: row;
+    }
+
+    div {
+        width: 100%;
+    }
+
+    div > input {
+        background-color: var.$secondary-hover;
+    }
 }

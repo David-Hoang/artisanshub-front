@@ -3,6 +3,7 @@ import { useState, useContext } from "react";
 import axios from "axios";
 
 import { ApiServicesContext } from "../../../../../context/ApiServicesContext";
+import { AuthContext } from "../../../../../context/AuthContext";
 
 import Input from "../../../../../components/ui/Input";
 import Select from "../../../../../components/ui/Select";
@@ -10,10 +11,11 @@ import Button from "../../../../../components/ui/Button";
 import AlertMessage from "../../../../../components/AlertMessage";
 import SpinLoader from "../../../../../components/ui/SpinLoader";
 
-function UserInfosForm({userDatas, userToken}) {
+function UserInfosForm() {
     
     const apiBase = import.meta.env.VITE_MAIN_API_URI;
     const {regions} = useContext(ApiServicesContext);
+    const {userDatas, userToken, reFetchUserDatas} = useContext(AuthContext)
 
     const defaultAlertMessage = {type : "", message : ""};
     const defaultErrorForm = {
@@ -132,6 +134,7 @@ function UserInfosForm({userDatas, userToken}) {
 
             if(updateUserInfos.status === 200) {
                 setAlertMessage({...alertMessage, type : "success", message : "Vos informations ont été mises à jour."});
+                reFetchUserDatas();
             }
         } catch (error) {
 
@@ -207,7 +210,7 @@ function UserInfosForm({userDatas, userToken}) {
                         {errorInfosForm.zipcode && <AlertMessage type="error">{errorInfosForm.zipcode}</AlertMessage>}
                     </div>
                 </div>
-                <div>
+                <div className="region-mail-wrapper">
                     <Select 
                         label="Region*"
                         id="region"
@@ -216,6 +219,8 @@ function UserInfosForm({userDatas, userToken}) {
                         value={userInfosForm.region}
                         onChange={(e) => { setUserInfosForm({...userInfosForm, region : e.target.value}) }}/>
                     {errorInfosForm.region && <AlertMessage type="error">{errorInfosForm.region}</AlertMessage>}
+
+                    <Input label="Email" type="mail" value={userDatas.email} disabled/>
                 </div>
                 
                 <Button type="submit" className="btn-primary">

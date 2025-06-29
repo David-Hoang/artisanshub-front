@@ -1,12 +1,14 @@
 import './ModalMessage.scss';
 
-import { useState, useEffect, useRef  } from 'react';
+import { useState, useEffect, useRef, useContext  } from 'react';
 import axios from "axios";
+
+import { AuthContext } from "../../../../../context/AuthContext.jsx";
 
 import { firstCapitalize, dateMessageFormat } from "../../../../../utils/Helpers";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 
 import Modal from "../../../../../components/ui/Modal.jsx";
 import Badge from "../../../../../components/ui/Badge.jsx";
@@ -15,79 +17,79 @@ import SpinLoader from "../../../../../components/ui/SpinLoader.jsx";
 import Button from "../../../../../components/ui/Button.jsx";
 import AlertMessage from "../../../../../components/AlertMessage.jsx";
 
-function ModalMessage({isModalOpen, closeModal, selectedUserConversation, userId, userToken}) {
+function ModalMessage({isModalOpen, closeModal, selectedUserConversation}) {
         
-        const apiBase = import.meta.env.VITE_MAIN_API_URI;
+    const apiBase = import.meta.env.VITE_MAIN_API_URI;
+    const {userToken} = useContext(AuthContext)
 
-        const [isLoadingConversation, setIsLoadingConversation] = useState(false)
-        const [conversation, setConversation] = useState([])
+    const [isLoadingConversation, setIsLoadingConversation] = useState(false)
+    const [conversation, setConversation] = useState([])
 
-        const [messageToSend, setMessageToSend] = useState("");
-        const [alertMessage, setAlertMessage] = useState("");
+    const [messageToSend, setMessageToSend] = useState("");
+    const [alertMessage, setAlertMessage] = useState("");
 
-        const messageList = useRef(null);
+    const messageList = useRef(null);
 
-        const fetchConversation = async () => {
-            setIsLoadingConversation(true)
-            try {
-                const response = await axios.get(`${apiBase}/api/message/conversation/${selectedUserConversation.id}`, {
-                    headers: {
-                        "Authorization": "Bearer " + userToken,
-                    }
-                })
-
-                if(response.status === 200){
-                    setConversation(response.data)
-                }                
-
-            } catch (error) {
-                console.log(error);
-            } finally {
-                setIsLoadingConversation(false)
-            }
-            
-        }
-
-        useEffect(() => {
-            fetchConversation()
-        }, []);
-
-        useEffect(() => {
-            if (conversation.length > 0 && messageList.current) {
-                setTimeout(() => {
-                    messageList.current.scrollIntoView({ behavior: "smooth" });
-                }, 0);
-            }
-        }, [conversation]);
-
-        const handleSendMessage = async (e) => {
-            e.preventDefault()
-            setAlertMessage("");
-
-            if(!messageToSend) {
-                return;
-            } else if (messageToSend.length > 65535){
-                setAlertMessage("Votre message est trop long, maximum de caractère par message : 65535.");
-                return;
-            };
-
-            try {
-                const response = await axios.post(`${apiBase}/api/message/send/${selectedUserConversation.id}`,
-                                { content : messageToSend},
-                                {
-                                    headers: {
-                                        "Authorization": "Bearer " + userToken,
-                                    }
-                                })
-                if(response.status === 201){
-                    setMessageToSend("");
-                    fetchConversation();
+    const fetchConversation = async () => {
+        setIsLoadingConversation(true)
+        try {
+            const response = await axios.get(`${apiBase}/api/message/conversation/${selectedUserConversation.id}`, {
+                headers: {
+                    "Authorization": "Bearer " + userToken,
                 }
-            } catch (error) {
-                console.log(error);
-            }
-            
+            })
+
+            if(response.status === 200){
+                setConversation(response.data)
+            }                
+
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setIsLoadingConversation(false)
         }
+    }
+
+    useEffect(() => {
+        fetchConversation()
+    }, []);
+
+    useEffect(() => {
+        if (conversation.length > 0 && messageList.current) {
+            setTimeout(() => {
+                messageList.current.scrollIntoView({ behavior: "smooth" });
+            }, 0);
+        }
+    }, [conversation]);
+
+    const handleSendMessage = async (e) => {
+        e.preventDefault()
+        setAlertMessage("");
+
+        if(!messageToSend) {
+            return;
+        } else if (messageToSend.length > 65535){
+            setAlertMessage("Votre message est trop long, maximum de caractère par message : 65535.");
+            return;
+        };
+
+        try {
+            const response = await axios.post(`${apiBase}/api/message/send/${selectedUserConversation.id}`,
+                            { content : messageToSend},
+                            {
+                                headers: {
+                                    "Authorization": "Bearer " + userToken,
+                                }
+                            })
+            if(response.status === 201){
+                setMessageToSend("");
+                fetchConversation();
+            }
+        } catch (error) {
+            console.log(error);
+        }
+        
+    }
         
     return ( 
         <Modal isOpen={isModalOpen} closeModal={closeModal} className="modal-message">

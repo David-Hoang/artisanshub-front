@@ -8,6 +8,7 @@ import { faGears } from '@fortawesome/free-solid-svg-icons';
 import { firstCapitalize } from "../../../../../utils/Helpers.jsx";
 
 import { PrestationsContext } from "../../../context/PrestationsContext.jsx";
+import { AuthContext } from "../../../../../context/AuthContext.jsx";
 
 import Modal from "../../../../../components/ui/Modal.jsx";
 import SpinLoader from "../../../../../components/ui/SpinLoader.jsx";
@@ -20,12 +21,12 @@ import ContactClient from "./ContactClient.jsx";
 import ContactCraftsman from "./ContactCraftsman.jsx";
 import Actions from "./Actions.jsx";
 
-function ModalPrestation({isModalOpen, closeModal, selectedPrestation, userToken, userRole}) {
+function ModalPrestation({isModalOpen, closeModal, selectedPrestation}) {
 
     const apiBase = import.meta.env.VITE_MAIN_API_URI;
 
     const {setQuoteForm, setAlertMessage, setQuoteErrorForm} = useContext(PrestationsContext);
-
+    const {userToken, userRole} = useContext(AuthContext);
     const [detailsPrestation, setDetailsPrestation] = useState(null);
     const [isLoadingDetailsPrestation, setIsLoadingDetailsPrestation] = useState(false);
 

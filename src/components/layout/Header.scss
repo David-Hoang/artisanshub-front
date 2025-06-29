@@ -110,11 +110,12 @@ header {
             box-shadow: 0px 3px 8px 6px rgba(0,0,0,0.24);
             position : absolute;
             background-color: var.$full-white;
-            height: 98vh;
+            height: 80vh;
             width: 300px;
             animation : mobile-slider-in 0.3s ease-out;
             right : 1vw;
-            top : 1vh;
+            top : 50%;
+            transform: translate(0, -50%);
             border-radius: var.$rounded-lg;
 
             cursor: default;

@@ -1,6 +1,8 @@
 import './MessagesTab.scss';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import axios from "axios";
+
+import { AuthContext } from "../../../../context/AuthContext.jsx";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClock } from '@fortawesome/free-solid-svg-icons'
@@ -15,9 +17,10 @@ import Badge from "../../../../components/ui/Badge.jsx"
 
 import ModalMessage from './elements/ModalMessage.jsx';
 
-function MessagesTab({userDatas, userToken, userRole}) {
+function MessagesTab() {
 
     const apiBase = import.meta.env.VITE_MAIN_API_URI;
+    const {userRole, userDatas, userToken} = useContext(AuthContext);
 
     const [userConversations, setUserConversations] = useState(null);
     const [isLoadingConversations, setIsLoadingConversations] = useState(false);
@@ -143,8 +146,6 @@ function MessagesTab({userDatas, userToken, userRole}) {
                                             isModalOpen={isModalOpen} 
                                             closeModal={closeModal} 
                                             selectedUserConversation={selectedUserConversation}
-                                            userId={userDatas.id}
-                                            userToken={userToken}
                                         /> 
                         }
                     </>

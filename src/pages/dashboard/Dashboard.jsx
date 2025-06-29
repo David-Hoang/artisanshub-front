@@ -1,6 +1,6 @@
 import './Dashboard.scss';
-import { useContext, useState } from 'react';
-import { AuthContext } from "../../context/AuthContext.jsx";
+import { useState } from 'react';
+
 
 import { PrestationsProvider } from "./context/PrestationsContext.jsx";
 import Tabs from "../../components/ui/Tabs.jsx";
@@ -14,8 +14,6 @@ import PrestationsTab from "./tabs/prestations/PrestationsTab.jsx";
 
 function Dashboard() {
 
-    const {userRole, userDatas, userToken} = useContext(AuthContext);
-    
     const [selectedTab, setSelectedTab] = useState('Informations');
 
     return ( 
@@ -35,14 +33,14 @@ function Dashboard() {
             >
 
                 {selectedTab === 'Informations' &&
-                    <InformationsTab userDatas={userDatas} userToken={userToken} userRole={userRole} />
+                    <InformationsTab />
                 }
                 {selectedTab === 'Messages' &&
-                    <MessagesTab userDatas={userDatas} userToken={userToken} userRole={userRole} />
+                    <MessagesTab />
                 }
                 {selectedTab === 'Prestations' &&
                     <PrestationsProvider>
-                        <PrestationsTab userToken={userToken} userRole={userRole} />
+                        <PrestationsTab />
                     </PrestationsProvider>
                 }
             </Tabs>

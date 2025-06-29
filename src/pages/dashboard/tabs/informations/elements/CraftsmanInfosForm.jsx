@@ -2,35 +2,44 @@ import "./CraftsmanInfosForm.scss"
 import {useContext, useState} from 'react';
 import axios from 'axios'
 
-import { ApiServicesContext } from "../../../../../context/ApiServicesContext";
+import { ApiServicesContext } from "../../../../../context/ApiServicesContext.jsx";
+import { AuthContext } from "../../../../../context/AuthContext.jsx";
 
-import SelectJobs from "../../../../../components/ui/SelectJobs";
-import Input from "../../../../../components/ui/Input";
-import Switch from "../../../../../components/ui/Switch";
-import TextArea from "../../../../../components/ui/TextArea";
-import Button from "../../../../../components/ui/Button";
-import AlertMessage from "../../../../../components/AlertMessage";
-import SpinLoader from "../../../../../components/ui/SpinLoader";
+import SelectJobs from "../../../../../components/ui/SelectJobs.jsx";
+import Input from "../../../../../components/ui/Input.jsx";
+import Switch from "../../../../../components/ui/Switch.jsx";
+import TextArea from "../../../../../components/ui/TextArea.jsx";
+import Button from "../../../../../components/ui/Button.jsx";
+import AlertMessage from "../../../../../components/AlertMessage.jsx";
+import SpinLoader from "../../../../../components/ui/SpinLoader.jsx";
 
-function CraftsmanInfosForm({userDatas, userToken}) {
+import CraftsmanGallery from "./CraftsmanGallery.jsx";
+
+function CraftsmanInfosForm() {
 
     const apiBase = import.meta.env.VITE_MAIN_API_URI;
     const {jobsCategories} = useContext(ApiServicesContext);
-    
+    const {userDatas, userToken, reFetchUserDatas} = useContext(AuthContext)
+
     const [userCraftsmanForm, setUserCraftsmanForm] = useState({
         price : userDatas.craftsman?.price ?? "",
         description : userDatas.craftsman?.description ?? "",
-        available : userDatas.craftsman?.available ?? false,
+        available : userDatas.craftsman?.available ?? 0,
         craftsman_job_id : userDatas.craftsman?.craftsman_job_id,
         gallery : userDatas.craftsman?.gallery ?? []
     });
+
+    const [galleryToForm, setGalleryToForm] = useState([]); //state for gallery to send 
+    
+    const [resetPreview, setResetPreview] = useState(0);
 
     const defaultErrorForm = {
         price : "",
         description : "",
         available : "",
         craftsman_job_id : "",
-        gallery : "",
+        preview_gallery : "",
+        craftsman_gallery : ""
     };
     const [errorInfosForm, setErrorInfosForm] = useState(defaultErrorForm);
     const [isLoadingCraftsman, setIsLoadingCraftsman] = useState(false);
@@ -38,13 +47,35 @@ function CraftsmanInfosForm({userDatas, userToken}) {
     const defaultAlertMessage = {type : "", message : ""};
     const [alertMessage, setAlertMessage] = useState(defaultAlertMessage);
 
+    // alert message for gallery
+    const [alertGallery, setAlertGallery] = useState(defaultAlertMessage);
+
     const handleSubmitUserCraftsmanInfos = async (e) => {
         e.preventDefault();
-
+        setIsLoadingCraftsman(true);
+        
+        //using same variable to reset error
         setAlertMessage(defaultAlertMessage);
+        setAlertGallery(defaultAlertMessage);
+
         setErrorInfosForm(defaultErrorForm);
 
-        setIsLoadingCraftsman(true);
+        //validate gallery
+        let validateImgFile;
+        const allowedTypes = ["image/png", "image/jpeg", "image/jpg", "image/webp"];
+        const maxSize = 3 * 1024 * 1024; // 3Mo
+
+        for(let i = 0; i < galleryToForm.length; i++){
+
+            if (!allowedTypes.includes(galleryToForm[i].type)) {
+                validateImgFile = {type: "error",message: "Veuillez téléverser uniquement des images aux formats autorisés (JPG, PNG, WEBP)."};
+                break;
+            }
+            if (galleryToForm[i].size > maxSize) {
+                validateImgFile = {type: "error",message: "Un des fichiers est trop grand, maximum par fichier : 3 Mo."};
+                break;
+            }
+        }
 
          //Validation : Get userInfosForm and return object of error if no value in input
         const validateUserCraftsmanInputs = Object.entries(userCraftsmanForm).reduce((acc, [key, value]) => {
@@ -81,24 +112,58 @@ function CraftsmanInfosForm({userDatas, userToken}) {
 
         // Check if there is at least 1 error
         if(Object.keys(validateUserCraftsmanInputs).length > 0){
-            setErrorInfosForm(validateUserCraftsmanInputs);
-            setIsLoadingCraftsman(false);
+            setTimeout(() => {
+                setErrorInfosForm(validateUserCraftsmanInputs);
+                setIsLoadingCraftsman(false);
+            }, 500);
             return;
         }
 
+        // Check if there is at least 1 error in array gallery
+        if(validateImgFile) {
+            setTimeout(() => {
+                setAlertMessage(validateImgFile);
+                setIsLoadingCraftsman(false);
+            }, 500);
+            return;    
+        }
+
         try {
+            const formData = new FormData();
+
+            formData.append('price',userCraftsmanForm.price);
+            formData.append('description',userCraftsmanForm.description);
+            formData.append('available',userCraftsmanForm.available == true ? 1 : 0);
+            formData.append('craftsman_job_id',userCraftsmanForm.craftsman_job_id);
+
+            if(galleryToForm.length > 0){
+                galleryToForm.forEach(file =>{
+                    formData.append('gallery[]', file)}
+                )
+            }
+
             const updateCraftsmanInfos = await axios.post(apiBase + "/api/craftsman-infos", 
-                userCraftsmanForm,
+                formData,
                 { headers: {
                     "Authorization": "Bearer " + userToken,
                 }
             });
 
-            if(updateCraftsmanInfos.status === 200) {
-                setAlertMessage({...alertMessage, type : "success", message : "Vos informations ont été mises à jour avec succès."});
-            }else if (updateCraftsmanInfos.status === 201) {
-                setAlertMessage({...alertMessage, type : "success", message : "Vos informations ont été ajouté avec succès."});
+            if (updateCraftsmanInfos.status === 200 || updateCraftsmanInfos.status === 201) {
+                setAlertMessage({ 
+                    type: "success", 
+                    message: updateCraftsmanInfos.status === 200 
+                        ? "Vos informations ont été mises à jour avec succès." 
+                        : "Vos informations ont été ajoutées avec succès." 
+                });
+
+                // trigger gallery component render
+                setResetPreview(prev => prev + 1);
+                setGalleryToForm([]);
+
+                reFetchUserDatas()
             }
+
         } catch (error) {
 
             const { status, data } = error.response;
@@ -112,6 +177,9 @@ function CraftsmanInfosForm({userDatas, userToken}) {
                 }, {})
 
                 setErrorInfosForm(getErrors);
+            } else if (status === 413) {
+                setAlertMessage({...alertMessage, type : "error", message : "Le volume total de toutes les photos est trop grand, veuillez en supprimer."})
+
             } else {
                 setAlertMessage({...alertMessage, type : "error", message : "Une erreur est survenue durant la mise à jour de vos informations."})
             }
@@ -174,17 +242,16 @@ function CraftsmanInfosForm({userDatas, userToken}) {
                 />
                 {errorInfosForm.description && <AlertMessage type="error">{errorInfosForm.description}</AlertMessage>}
             </div>
-
-            <div className="craftsman-gallery">
-                <label htmlFor="gallery">Galerie de photo</label>
-                <input id="gallery" type="file" multiple 
-                    accept="image/png, image/jpeg, image/jpg, image/webp"/>
-                {userCraftsmanForm.gallery &&
-                    userCraftsmanForm.gallery.map((img, key) => 
-                        <p key={key}>{img.img_path}</p>
-                    )
-                }
-            </div>
+            
+            {/* Craftsman gallery */}
+            <CraftsmanGallery
+                galleryToForm={galleryToForm}
+                setGalleryToForm={setGalleryToForm}
+                alertGallery={alertGallery}
+                setAlertGallery={setAlertGallery}
+                resetPreview={resetPreview}
+                setAlertMessage={setAlertMessage}
+            />
 
             <Button type="submit" className="btn-primary">
                 {isLoadingCraftsman ? (

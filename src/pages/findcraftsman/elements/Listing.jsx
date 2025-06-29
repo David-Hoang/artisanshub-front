@@ -8,8 +8,6 @@ import { faLocationDot, faBriefcase} from '@fortawesome/free-solid-svg-icons'
 
 import SpinLoader from "../../../components/ui/SpinLoader";
 
-import DefaultCraftsman from '../../../assets/img/default-craftsman.svg';
-
 function Listing({isLoadingList, listing , ...props}) {
     return ( 
         <section className="craftsmen-content">
