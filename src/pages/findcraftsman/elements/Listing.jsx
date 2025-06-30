@@ -6,9 +6,15 @@ import { firstCapitalize } from "../../../utils/Helpers";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLocationDot, faBriefcase} from '@fortawesome/free-solid-svg-icons'
 
+import DefaultCraftsmanCover from "../../../assets/img/default-craftsman-cover.svg";
+
 import SpinLoader from "../../../components/ui/SpinLoader";
 
-function Listing({isLoadingList, listing , ...props}) {
+function Listing({isLoadingList, listing}) {
+    console.log(listing);
+    
+    const apiBase = import.meta.env.VITE_MAIN_API_URI;
+
     return ( 
         <section className="craftsmen-content">
             { isLoadingList && <SpinLoader /> }
@@ -21,7 +27,7 @@ function Listing({isLoadingList, listing , ...props}) {
                             <Link to={`/artisan/${craftsman.id}`} className="craftsman-link">
 
                                 <img className="image-craftsman"
-                                    src={`https://picsum.photos/500/300?random=${craftsman.id}`}
+                                    src={craftsman.cover ? `${apiBase}/storage/${craftsman.cover}` : DefaultCraftsmanCover}
                                     alt=""
                                 />
                                 <div className="filter-brightness"></div>

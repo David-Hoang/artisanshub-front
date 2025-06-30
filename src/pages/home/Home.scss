@@ -17,6 +17,7 @@ main.main-home {
             display : flex;
             align-items: center;
             padding : 1.5rem 2rem 0 2rem;
+            gap: var.$gap-5xl;
         }
 
         div.hero-content {
