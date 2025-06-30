@@ -43,6 +43,7 @@ function Login() {
                         label="Mot de passe"
                         id="password"
                         type="password"
+                        placeholder="*********"
                         onChange={(e) => {
                             setFormLogin({...formLogin, password : e.target.value})
                         }}

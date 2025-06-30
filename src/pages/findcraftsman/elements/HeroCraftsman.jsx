@@ -5,14 +5,18 @@ import { firstCapitalize } from "../../../utils/Helpers.jsx";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLocationDot, faBriefcase} from '@fortawesome/free-solid-svg-icons'
 
+import DefaultCraftsmanCover from '../../../assets/img/default-craftsman-cover.svg';
+
 function HeroCraftsman({craftsmanInfos, ...props}) {
+
+    const apiBase = import.meta.env.VITE_MAIN_API_URI;
 
     return ( 
         <section className="hero-craftsman">
             <div className="hero-content">
                 <img 
                     className="hero-img-craftsman"
-                    src={`https://picsum.photos/800/600?random=1`} 
+                    src={craftsmanInfos.cover ? `${apiBase}/storage/${craftsmanInfos.cover}` : DefaultCraftsmanCover}
                     alt="" 
                 />
                 <div className="filter-brightness"></div>

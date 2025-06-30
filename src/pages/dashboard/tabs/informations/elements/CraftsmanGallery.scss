@@ -125,19 +125,30 @@ div.craftsman-gallery {
                 opacity: 1;
                 z-index: 1;
 
-                button.button-delete-preview {
+                button {
                     position: absolute;
-                    right: 0.5rem;
-                    top: 0.5rem;
-                    background-color: transparent;
+                    top : 0.5rem;
                     border: none;
-                    color: var.$danger;
                     cursor: pointer;
+                    background-color: transparent;
                     z-index: 2;
+                    font-size: var.$txt-2xl;
 
-                    svg {
-                        font-size: var.$txt-3xl;
-                        transition: all 0.1s ease-in-out;
+                    &.button-set-cover{
+                        left : 0.5rem;
+
+                        svg {
+                            color : var.$orange;
+                        }
+                    }
+
+                    &.button-delete-preview{
+                        right : 0.5rem;
+
+                        svg {
+                            color: var.$danger;
+                        }
+
                     }
                 }
 
@@ -149,11 +160,10 @@ div.craftsman-gallery {
                         opacity: 1;
                     }
 
-                    button.button-delete-preview > svg {
-                        font-size: var.$txt-2xl;
-
-                        &:hover {
-                            font-size: var.$txt-3xl;
+                    button {
+                        svg:hover{
+                            transition: all 0.1s ease-in-out;
+                            font-size : var.$txt-3xl;
                         }
                     }
                 }

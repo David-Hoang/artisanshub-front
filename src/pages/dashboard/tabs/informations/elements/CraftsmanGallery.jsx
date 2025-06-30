@@ -5,7 +5,8 @@ import axios from "axios";
 import { AuthContext } from "../../../../../context/AuthContext";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowUp, faTrash, faCloud } from '@fortawesome/free-solid-svg-icons';
+import { faArrowUp, faTrash, faCloud, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faStar as faStarRegular } from '@fortawesome/free-regular-svg-icons';
 
 import Modal from "../../../../../components/ui/Modal";
 import AlertMessage from "../../../../../components/AlertMessage";
@@ -76,13 +77,44 @@ function CraftsmanGallery({galleryToForm, setGalleryToForm, alertGallery, setAle
                 reFetchUserDatas();
             } 
 
-        }catch(error) {
+        } catch(error) {
+
             const { status, data } = error.response;
 
             if(status === 404){
                 setAlertGallery({...alertGallery, type : "error", message : data.message})
             } else {
                 setAlertGallery({...alertGallery, type : "error", message : "Une erreur est survenue durant la suppression de la photo."})
+            }
+        }
+    }
+
+    const setCover = async (photoId) => {
+        
+        setAlertGallery({type : "", message : ""});
+        setAlertMessage({type : "", message : ""})
+
+        try{
+            const response = await axios.patch(`${apiBase}/api/cover/${photoId}`,
+                {},
+                { headers: 
+                    {"Authorization": `Bearer ${userToken}`
+                } 
+            })
+
+            if(response.status === 200){
+                setAlertGallery({...alertGallery, type:"success", message : "Votre photo de couverture a bien été mise à jour."});
+                reFetchUserDatas();
+            } 
+
+        }catch(error) {
+            
+            const { status, data } = error.response;
+
+            if(status === 404){
+                setAlertGallery({...alertGallery, type : "error", message : data.message})
+            } else {
+                setAlertGallery({...alertGallery, type : "error", message : "Une erreur est survenue durant la mise à jour de la photo de couverture."})
             }
         }
     }
@@ -100,7 +132,7 @@ function CraftsmanGallery({galleryToForm, setGalleryToForm, alertGallery, setAle
         setIsOpenModal(false);
         setSelectedPath(null)
     }
-
+    
     return (
         <div className="craftsman-gallery">
             <h2>Galerie de photo</h2>
@@ -116,10 +148,18 @@ function CraftsmanGallery({galleryToForm, setGalleryToForm, alertGallery, setAle
                                     <div className="filter-opacity">
                                         <button type="button" className="button-delete-preview"
                                             onClick={(e) => {deletePhotoGallery(photo.id); e.stopPropagation()}}>
-                                            <FontAwesomeIcon icon={faTrash}/>
+                                            <FontAwesomeIcon icon={faTrash} title="Supprimer cette photo ?"/>
+                                        </button>
+
+                                        <button type="button" className="button-set-cover" onClick={(e) => {setCover(photo.id); e.stopPropagation()}}>
+                                            {/* Add a star if its the cover */}
+                                            {userDatas.craftsman.cover == photo.img_path ? 
+                                                <FontAwesomeIcon icon={faStar} className="cover-selected" title="Cette photo est votre photo de couverture."/>
+                                                : 
+                                                <FontAwesomeIcon icon={faStarRegular} className="cover-not-selected" title="Je veux sélectionner cette photo comme photo de couverture."/>
+                                            }
                                         </button>
                                     </div>
-
                                 </li>
                             ))}
                         </ul>
@@ -167,6 +207,7 @@ function CraftsmanGallery({galleryToForm, setGalleryToForm, alertGallery, setAle
                         {previewGallery.map((imgPath, key) => (
                             <li key={key} className="preview-photo">
                                 <img src={imgPath}/>
+
                                 <div className="filter-opacity">
                                     <button type="button" className="button-delete-preview"
                                         onClick={() => removePreviewPicture(key)}>
