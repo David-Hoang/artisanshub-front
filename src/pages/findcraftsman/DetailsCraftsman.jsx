@@ -20,7 +20,7 @@ function DetailsCraftsman() {
     const navigate = useNavigate()
 
     const craftsmanId = useParams().craftsmanId;
-    const {userToken, userRole} = useContext(AuthContext)
+    const {userToken, userRole, isAdmin} = useContext(AuthContext)
 
     const [craftsmanInfos, setCraftsmanInfo] = useState(null);
     const [isLoadingInfos, setIsloadingInfos] = useState(false);
@@ -75,7 +75,7 @@ function DetailsCraftsman() {
                             <HeroCraftsman craftsmanInfos={craftsmanInfos} />
 
                             {/* Button contact + prestation */}
-                            {userRole === 'client' &&
+                            {userRole === 'client' || isAdmin &&
                                 <CtaContact craftsmanInfos={craftsmanInfos}/>
                             }
 

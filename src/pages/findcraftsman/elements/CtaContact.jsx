@@ -11,7 +11,7 @@ import ModalAskPrestation from "./modals/ModalAskPrestation.jsx";
 
 function CtaContact({craftsmanInfos}) {
 
-    const {hasCompletedProfile} = useContext(AuthContext);
+    const {hasCompletedProfile, isAdmin} = useContext(AuthContext);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [action, setAction] = useState(null);
     
@@ -28,6 +28,7 @@ function CtaContact({craftsmanInfos}) {
     return ( 
         <>
             <div className="cta-wrapper">
+                
                 <Button className="btn btn-primary"
                     onClick={() => openModal('message')}
                     disabled={!hasCompletedProfile}
@@ -37,14 +38,16 @@ function CtaContact({craftsmanInfos}) {
                     <FontAwesomeIcon icon={faPaperPlane} />
                 </Button>
 
-                <Button className="btn btn-secondary"
-                    onClick={() => openModal('prestation')}
-                    disabled={!hasCompletedProfile}
-                    title={!hasCompletedProfile && "Veuillez compléter votre profil pour utiliser cette fonctionnalité"}
-                    >
-                    Demande prestation
-                    <FontAwesomeIcon icon={faFilePen} />
-                </Button>
+                { !isAdmin &&
+                    <Button className="btn btn-secondary"
+                        onClick={() => openModal('prestation')}
+                        disabled={!hasCompletedProfile}
+                        title={!hasCompletedProfile && "Veuillez compléter votre profil pour utiliser cette fonctionnalité"}
+                        >
+                        Demande prestation
+                        <FontAwesomeIcon icon={faFilePen} />
+                    </Button>
+                }
             </div>
 
             {!hasCompletedProfile &&

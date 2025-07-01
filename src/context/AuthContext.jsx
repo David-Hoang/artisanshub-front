@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }) => {
     const [userDatas, setUserDatas] = useState(null);
     const [userRole, setUserRole] = useState(null);
     const [userToken, setUserToken] = useState(null);
-    const [userRoleInfos, setUserRoleInfos] = useState(false);
+    // const [userRoleInfos, setUserRoleInfos] = useState(false);
     const [hasCompletedProfile, setHasCompletedProfile] = useState(false);
 
     //To manage loading spinner
@@ -64,28 +64,16 @@ export const AuthProvider = ({ children }) => {
                 const userDatas = response.data;
 
                 setUserRole(userDatas.role);
-                setUserDatas(userDatas);
                 
                 // Check if user set his role infos
-                if(userDatas.profile){
-                    setUserRoleInfos(true);
-                }
+                // if(userDatas.profile){
+                //     setUserRoleInfos(true);
+                // }
+                
+                // Mount user info
+                setUserDatas(userDatas);
 
-                // check if user client has completed his profile
-                if (userDatas.client 
-                    && userDatas.client?.street_name //Check if its not null
-                    && userDatas.client?.street_name?.trim() //check if its not empty string
-                    && userDatas.client?.street_number //check if its not null
-                    && typeof userDatas.client?.street_number === "number" //check his type is number
-                    && userDatas.client?.street_number >= 0 //check if its more then 0
-                ) return setHasCompletedProfile(true);
-
-                // check if user craftsman has completed his profile
-                if (userDatas.craftsman 
-                    && userDatas.craftsman?.craftsman_job_id //check if its not null
-                    && typeof userDatas.craftsman?.craftsman_job_id === "number" //check his type is number
-                ) return setHasCompletedProfile(true);
-
+                setHasCompletedProfile(checkCompletedProfile(userDatas));
             }
         } catch (error) {
             console.log(error);
@@ -126,7 +114,7 @@ export const AuthProvider = ({ children }) => {
         fetchUserData()
     }, [])
 
-    const cleanUserDatasToken = () =>{
+    const cleanUserDatasToken = () => {
         localStorage.removeItem("artisansHubUserToken");
         setUserToken(null);
         setIsLogged(false);
@@ -134,6 +122,28 @@ export const AuthProvider = ({ children }) => {
         setUserRole(null);
         navigate('/connexion');
     }
+
+    const checkCompletedProfile = (datas) => {
+
+        if(datas.role === "admin") return true;
+
+        // check if user client has completed his profile
+        if (datas.client 
+            && datas.client?.street_name //Check if its not null
+            && datas.client?.street_name?.trim() //check if its not empty string
+            && datas.client?.street_number //check if its not null
+            && typeof datas.client?.street_number === "number" //check his type is number
+            && datas.client?.street_number >= 0 //check if its more then 0
+        ) return true;
+
+        // check if user craftsman has completed his profile
+        if (datas.craftsman 
+            && datas.craftsman?.craftsman_job_id //check if its not null
+            && typeof datas.craftsman?.craftsman_job_id === "number" //check his type is number
+        ) return true;
+
+        return false;
+    }    
 
     const handleLogin = async (e, formLogin) => {
         e.preventDefault();
@@ -156,13 +166,14 @@ export const AuthProvider = ({ children }) => {
                 })
 
             if(response.status === 200){
-                let token = response.data.token;
+                const {user, token} = response.data;
 
                 localStorage.setItem("artisansHubUserToken", token);
                 setUserToken(token);
-                setUserDatas(response.data.user);
-                setUserRole(response.data.user.role);
+                setUserDatas(user);
+                setUserRole(user.role);
                 setIsLogged(true);
+                setHasCompletedProfile(checkCompletedProfile(user));
                 setIsLoading(true);
                 navigate('/');
             }
@@ -188,8 +199,6 @@ export const AuthProvider = ({ children }) => {
     const handleLogout = async () => {
 
         try {
-            // const userToken = localStorage.getItem("artisansHubUserToken");
-
             const userLogout = await axios.post(apiBase + "/api/logout", {}, {
                 headers: {
                     "Authorization": "Bearer " + userToken,
@@ -269,12 +278,14 @@ export const AuthProvider = ({ children }) => {
         try {
             const register = await axios.post(apiBase + "/api/register", formRegister);
             if(register.status === 201){
-                let token = register.data.token;
+                const {user, token} = register.data;
+
                 localStorage.setItem("artisansHubUserToken", token);
                 setUserToken(token);
-                setUserDatas(register.data.user);
-                setUserRole(register.data.user.role);
-                setUserRoleInfos(true);
+                setUserDatas(user);
+                setUserRole(user.role);
+                // setUserRoleInfos(true);
+                setHasCompletedProfile(checkCompletedProfile(user));
                 setIsLogged(true);
                 navigate('/');
             }
@@ -307,8 +318,9 @@ export const AuthProvider = ({ children }) => {
                 userDatas, 
                 setUserDatas,
                 userRole,
-                userRoleInfos, 
-                setUserRoleInfos,
+                isAdmin : userRole === "admin" ? true : false,
+                // userRoleInfos, 
+                // setUserRoleInfos,
                 hasCompletedProfile,
 
                 reFetchUserDatas : fetchUserData,
