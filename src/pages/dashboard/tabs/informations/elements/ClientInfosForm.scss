@@ -11,6 +11,14 @@ div.client-infos-header{
         font-size : var.$txt-base;
         font-weight: 400;
         color : var.$gray;
+        
+        &.important-informations {
+            color: var.$orange;
+            font-weight: 500;
+            svg {
+                margin-right : 0.5rem;
+            }
+        }
     }
 }
 

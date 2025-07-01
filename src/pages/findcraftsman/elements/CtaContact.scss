@@ -26,3 +26,11 @@ div.cta-wrapper {
         }
     }
 }
+
+h4.important-informations {
+    color: var.$orange;
+    font-weight: 500;
+    svg {
+        margin-right: 0.5rem;
+    }
+}

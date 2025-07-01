@@ -43,6 +43,10 @@ ul {
 
 button{
     font-family: "Nunito", Avenir, Helvetica, Arial, sans-serif;
+
+    &:disabled {
+        cursor: not-allowed !important;
+    }
 }
 
 body {

@@ -1,8 +1,9 @@
 import './Dashboard.scss';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
-
+import { AuthContext } from "../../context/AuthContext.jsx";
 import { PrestationsProvider } from "./context/PrestationsContext.jsx";
+
 import Tabs from "../../components/ui/Tabs.jsx";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -14,8 +15,8 @@ import PrestationsTab from "./tabs/prestations/PrestationsTab.jsx";
 
 function Dashboard() {
 
+    const {hasCompletedProfile} = useContext(AuthContext);
     const [selectedTab, setSelectedTab] = useState('Informations');
-
     return ( 
         <main className="main-dashboard">
             <section className="dashboard-title">
@@ -26,8 +27,8 @@ function Dashboard() {
             <Tabs 
                 tabsList={[
                     {title : 'Informations', icon : <FontAwesomeIcon icon={faUserGear} />},
-                    {title : 'Messages', icon : <FontAwesomeIcon icon={faComments} />},
-                    {title : 'Prestations', icon : <FontAwesomeIcon icon={faReceipt} />},
+                    {title : 'Messages', icon : <FontAwesomeIcon icon={faComments} />, isLocked : !hasCompletedProfile, lockedMessage : "Veuillez compléter votre profil pour utiliser cette fonctionnalité"},
+                    {title : 'Prestations', icon : <FontAwesomeIcon icon={faReceipt} />, isLocked : !hasCompletedProfile, lockedMessage : "Veuillez compléter votre profil pour utiliser cette fonctionnalité"},
                 ]}
                 selectedTab={selectedTab} setSelectedTab={setSelectedTab}
             >

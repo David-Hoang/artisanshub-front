@@ -23,7 +23,7 @@ function CraftsmanGallery({galleryToForm, setGalleryToForm, alertGallery, setAle
 
     //refresh component on delete active gallery photo
     useEffect(() => {
-        setCraftsmanGallery(userDatas.craftsman.gallery);
+        setCraftsmanGallery(userDatas?.craftsman?.gallery ?? []);
     }, [userDatas]);
 
     //to refresh preview on upload infos

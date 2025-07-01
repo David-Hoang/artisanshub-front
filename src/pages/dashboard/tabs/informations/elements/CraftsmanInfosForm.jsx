@@ -5,6 +5,9 @@ import axios from 'axios'
 import { ApiServicesContext } from "../../../../../context/ApiServicesContext.jsx";
 import { AuthContext } from "../../../../../context/AuthContext.jsx";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
+
 import SelectJobs from "../../../../../components/ui/SelectJobs.jsx";
 import Input from "../../../../../components/ui/Input.jsx";
 import Switch from "../../../../../components/ui/Switch.jsx";
@@ -19,7 +22,7 @@ function CraftsmanInfosForm() {
 
     const apiBase = import.meta.env.VITE_MAIN_API_URI;
     const {jobsCategories} = useContext(ApiServicesContext);
-    const {userDatas, userToken, reFetchUserDatas} = useContext(AuthContext)
+    const {userDatas, userToken, reFetchUserDatas, hasCompletedProfile} = useContext(AuthContext);
 
     const [userCraftsmanForm, setUserCraftsmanForm] = useState({
         price : userDatas.craftsman?.price ?? "",
@@ -151,6 +154,7 @@ function CraftsmanInfosForm() {
 
             if (updateCraftsmanInfos.status === 200 || updateCraftsmanInfos.status === 201) {
                 setAlertMessage({ 
+                    ...alertMessage,
                     type: "success", 
                     message: updateCraftsmanInfos.status === 200 
                         ? "Vos informations ont été mises à jour avec succès." 
@@ -194,13 +198,19 @@ function CraftsmanInfosForm() {
             <div className="craftsman-infos-header">
                 <h2>Informations sur votre activité</h2>
                 <h3>Renseignez les détails de votre activité. Ces informations seront visibles sur votre profil d'artisan.</h3>
+                {!hasCompletedProfile &&
+                    <h3 className="important-informations">
+                        <FontAwesomeIcon icon={faCircleInfo} />
+                        Veuillez compléter ces informations pour accéder à toutes les fonctionnalités.
+                    </h3>
+                }
             </div>
 
             <div className="craftsman-infos-input">
 
                 <div className="wrapper">
                     <SelectJobs
-                        label="Votre activité"
+                        label="Votre activité *"
                         id="job"
                         placeholder="Sélectionnez votre activité"
                         datas={
@@ -215,7 +225,7 @@ function CraftsmanInfosForm() {
                 </div>
 
                 <div className="wrapper">
-                    <Input label="Tarifs" symbol="€" id="price" placeholder="199.99" type="number" autoComplete="off"
+                    <Input label="Tarifs horaire" symbol="€" id="price" placeholder="199.99" type="number" autoComplete="off"
                         value={userCraftsmanForm.price}
                         onChange={(e) => setUserCraftsmanForm({...userCraftsmanForm, price : e.target.value})}
                         />
@@ -223,7 +233,7 @@ function CraftsmanInfosForm() {
                 </div>
                 
                 <div className="wrapper">
-                    <Switch label="Disponibilité" id="available"
+                    <Switch label="Disponibilité *" id="available"
                         checked={userCraftsmanForm.available}
                         onChange={() => setUserCraftsmanForm({...userCraftsmanForm, available : !userCraftsmanForm.available})}
                         />

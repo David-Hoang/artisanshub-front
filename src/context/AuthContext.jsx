@@ -15,6 +15,7 @@ export const AuthProvider = ({ children }) => {
     const [userRole, setUserRole] = useState(null);
     const [userToken, setUserToken] = useState(null);
     const [userRoleInfos, setUserRoleInfos] = useState(false);
+    const [hasCompletedProfile, setHasCompletedProfile] = useState(false);
 
     //To manage loading spinner
     const [isLoading, setIsLoading] = useState(false);
@@ -60,13 +61,31 @@ export const AuthProvider = ({ children }) => {
                     }
                 })
             if(response.status === 200){
-                setUserRole(response.data.role);
-                setUserDatas(response.data);
+                const userDatas = response.data;
+
+                setUserRole(userDatas.role);
+                setUserDatas(userDatas);
                 
                 // Check if user set his role infos
-                if(response.data.profile){
+                if(userDatas.profile){
                     setUserRoleInfos(true);
                 }
+
+                // check if user client has completed his profile
+                if (userDatas.client 
+                    && userDatas.client?.street_name //Check if its not null
+                    && userDatas.client?.street_name?.trim() //check if its not empty string
+                    && userDatas.client?.street_number //check if its not null
+                    && typeof userDatas.client?.street_number === "number" //check his type is number
+                    && userDatas.client?.street_number >= 0 //check if its more then 0
+                ) return setHasCompletedProfile(true);
+
+                // check if user craftsman has completed his profile
+                if (userDatas.craftsman 
+                    && userDatas.craftsman?.craftsman_job_id //check if its not null
+                    && typeof userDatas.craftsman?.craftsman_job_id === "number" //check his type is number
+                ) return setHasCompletedProfile(true);
+
             }
         } catch (error) {
             console.log(error);
@@ -84,7 +103,7 @@ export const AuthProvider = ({ children }) => {
             }
         }
     }
-
+    
     const fetchUserData = async () => {
         try {
             const actualToken = localStorage.getItem("artisansHubUserToken");
@@ -290,6 +309,7 @@ export const AuthProvider = ({ children }) => {
                 userRole,
                 userRoleInfos, 
                 setUserRoleInfos,
+                hasCompletedProfile,
 
                 reFetchUserDatas : fetchUserData,
 
