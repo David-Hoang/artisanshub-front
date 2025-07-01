@@ -4,6 +4,9 @@ import axios from "axios";
 
 import { AuthContext } from "../../../../../context/AuthContext.jsx";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
+
 import Input from "../../../../../components/ui/Input.jsx";
 import Button from "../../../../../components/ui/Button.jsx";
 import AlertMessage from "../../../../../components/AlertMessage.jsx";
@@ -12,7 +15,7 @@ import SpinLoader from "../../../../../components/ui/SpinLoader.jsx";
 function ClientInfosForm() {
 
     const apiBase = import.meta.env.VITE_MAIN_API_URI;
-    const {userDatas, userToken} = useContext(AuthContext)
+    const {userDatas, userToken, reFetchUserDatas, hasCompletedProfile} = useContext(AuthContext)
 
     const defaultErrorForm = {
         street_number : "",
@@ -87,10 +90,16 @@ function ClientInfosForm() {
                 }
             });
 
-            if(updateClientInfos.status === 200) {
-                setAlertMessage({...alertMessage, type : "success", message : "Votre adresse a été mis à jour avec succès."});
-            }else if (updateClientInfos.status === 201) {
-                setAlertMessage({...alertMessage, type : "success", message : "Votre adresse a été ajouté avec succès."});
+            if(updateClientInfos.status === 200 || updateClientInfos.status === 201) {
+                setAlertMessage({
+                    ...alertMessage, 
+                    type : "success", 
+                    message : updateClientInfos.status === 200 
+                    ? "Votre adresse a été mis à jour avec succès."
+                    : "Votre adresse a été ajouté avec succès."
+                });
+
+                reFetchUserDatas()
             }
         } catch (error) {
             
@@ -119,17 +128,23 @@ function ClientInfosForm() {
             <div className="client-infos-header">
                 <h2>Adresse</h2>
                 <h3>Indiquez votre adresse complète pour que l'artisan puisse se déplacer facilement.</h3>
+                {!hasCompletedProfile &&
+                    <h3 className="important-informations">
+                        <FontAwesomeIcon icon={faCircleInfo} />
+                        Veuillez compléter ces informations pour accéder à toutes les fonctionnalités.
+                    </h3>
+                }
             </div>
             <div className="client-address-input">
                 <div className="wrapper">
-                    <Input label="Numéro de rue*" id="street_number" type="number" min="0" placeholder="12"
+                    <Input label="Numéro de rue *" id="street_number" type="number" min="0" placeholder="12"
                         value={userClientForm.street_number}
                         onChange={(e) => setUserClientForm({...userClientForm, street_number : parseInt(e.target.value)})}
                         />
                     {errorInfosForm.street_number && <AlertMessage type="error">{errorInfosForm.street_number}</AlertMessage>}
                 </div>
                 <div className="wrapper">
-                    <Input label="Nom de la rue*" id="street_name" type="text" placeholder="rue Verdun"
+                    <Input label="Nom de la rue *" id="street_name" type="text" placeholder="rue Verdun"
                         value={userClientForm.street_name}
                         onChange={(e) => setUserClientForm({...userClientForm, street_name : e.target.value})}
                         />

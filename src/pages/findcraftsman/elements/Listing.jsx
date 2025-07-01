@@ -11,7 +11,6 @@ import DefaultCraftsmanCover from "../../../assets/img/default-craftsman-cover.s
 import SpinLoader from "../../../components/ui/SpinLoader";
 
 function Listing({isLoadingList, listing}) {
-    console.log(listing);
     
     const apiBase = import.meta.env.VITE_MAIN_API_URI;
 
