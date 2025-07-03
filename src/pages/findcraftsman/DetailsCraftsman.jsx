@@ -24,7 +24,7 @@ function DetailsCraftsman() {
 
     const [craftsmanInfos, setCraftsmanInfo] = useState(null);
     const [isLoadingInfos, setIsloadingInfos] = useState(false);
-
+    
     const fetchCraftsmanInfos = async () => {
         setIsloadingInfos(true);
 
@@ -75,7 +75,7 @@ function DetailsCraftsman() {
                             <HeroCraftsman craftsmanInfos={craftsmanInfos} />
 
                             {/* Button contact + prestation */}
-                            {userRole === 'client' || isAdmin &&
+                            {(userRole === 'client' || isAdmin) &&
                                 <CtaContact craftsmanInfos={craftsmanInfos}/>
                             }
 

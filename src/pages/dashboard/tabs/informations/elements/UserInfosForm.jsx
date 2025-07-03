@@ -15,7 +15,7 @@ function UserInfosForm() {
     
     const apiBase = import.meta.env.VITE_MAIN_API_URI;
     const {regions} = useContext(ApiServicesContext);
-    const {userDatas, userToken, reFetchUserDatas} = useContext(AuthContext)
+    const {userDatas, userToken, reFetchUserDatas} = useContext(AuthContext);
 
     const defaultAlertMessage = {type : "", message : ""};
     const defaultErrorForm = {

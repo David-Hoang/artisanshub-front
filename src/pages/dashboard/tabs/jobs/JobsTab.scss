@@ -1,0 +1,96 @@
+@use "../../../../assets/scss/variables" as var;
+@use "../../../../assets/scss/mixins" as mxn;
+@use "../../../../assets/scss/extends" as ext;
+
+div#jobs-tab {
+    display: flex;
+    flex-direction: column;
+    gap : var.$gap-xl;
+
+    button.add-job {
+        display : flex;
+        align-items: center;
+        justify-content: center;
+        gap: var.$gap-xs;
+        width: 100%;
+
+        @media screen and (min-width : var.$bp-lg) {
+            width : fit-content;
+        }
+    }
+
+    svg.loading-list {
+        margin : 4rem auto;
+        display: block;
+    }
+
+    section.job-list {
+
+        display : grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap : var.$gap-xl;
+
+        @media screen and (min-width : var.$bp-lg) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        article.admin-job-card{
+            background-color: var.$full-white;
+            border : 1px #e6e6e6 solid ;
+            border-radius: var.$rounded-lg;
+
+            padding : 1rem;
+            display : flex;
+            flex-direction: column;
+            gap: var.$gap-xl;
+
+            p.job-description{
+                font-size: var.$txt-sm;
+                color : var.$gray;
+                @include mxn.limitLineText(2);
+            }
+            
+            div.job-dates{
+                display : flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                gap: var.$gap-lg;
+
+                p {
+                    font-size: var.$txt-sm;
+                    color : var.$black;
+                }
+            }
+
+            div.btn-wrapper {
+                display : flex;
+                align-items: center;
+                justify-content: end;
+                gap: var.$gap-lg;
+                flex-wrap: wrap;
+
+
+                p {
+                    font-size: var.$txt-sm
+                }
+
+                button {
+                    @include mxn.btn;
+                }
+
+                button.confirm-delete{
+                    @include mxn.danger($hover:true);
+                }
+
+                button.confirm-yes{
+                    @include mxn.success($hover:true);
+                }
+
+                button.confirm-no{
+                    @include mxn.danger($hover:true);
+                }
+            }
+        }
+    }
+
+}

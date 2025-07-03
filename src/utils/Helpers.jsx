@@ -53,6 +53,7 @@ export const dateShortTime = (date) => {
         minute: '2-digit'
     });
 
+    //format dd/mm/yyyy à hh/mm
     return `${dateShort} à ${time}`;
 }
 

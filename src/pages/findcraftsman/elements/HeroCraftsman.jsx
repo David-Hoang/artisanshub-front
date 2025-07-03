@@ -17,7 +17,7 @@ function HeroCraftsman({craftsmanInfos, ...props}) {
                 <img 
                     className="hero-img-craftsman"
                     src={craftsmanInfos.cover ? `${apiBase}/storage/${craftsmanInfos.cover}` : DefaultCraftsmanCover}
-                    alt="" 
+                    alt="Image bio de couverture pour l'artisan" 
                 />
                 <div className="filter-brightness"></div>
 

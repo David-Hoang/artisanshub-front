@@ -141,17 +141,17 @@ function MessagesTab() {
 
                             ))}
                         </ul>
-                        
-                        { isModalOpen && <ModalMessage 
-                                            isModalOpen={isModalOpen} 
-                                            closeModal={closeModal} 
-                                            selectedUserConversation={selectedUserConversation}
-                                        /> 
-                        }
                     </>
                 : <p>Vous n'avez aucun messages</p>
             }
 
+            { isModalOpen && 
+                <ModalMessage 
+                    isModalOpen={isModalOpen} 
+                    closeModal={closeModal} 
+                    selectedUserConversation={selectedUserConversation}
+                /> 
+            }
         </div>
     );
 }

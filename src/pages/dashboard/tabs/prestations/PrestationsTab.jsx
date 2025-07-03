@@ -53,15 +53,16 @@ function PrestationsTab() {
                             </article>
                         ))
                     }
-                    { isModalOpen && 
-                        <ModalPrestation 
-                            isModalOpen={isModalOpen}
-                            closeModal={closeModal} 
-                            selectedPrestation={selectedPrestation}
-                        />
-                    }
                 </>
             : <p>Vous n'avez actuellement aucune prestation.</p>
+            }
+
+            { isModalOpen && 
+                <ModalPrestation 
+                    isModalOpen={isModalOpen}
+                    closeModal={closeModal} 
+                    selectedPrestation={selectedPrestation}
+                />
             }
         </div>
     );

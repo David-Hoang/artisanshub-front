@@ -32,7 +32,7 @@ function CtaContact({craftsmanInfos}) {
                 <Button className="btn btn-primary"
                     onClick={() => openModal('message')}
                     disabled={!hasCompletedProfile}
-                    title={!hasCompletedProfile && "Veuillez compléter votre profil pour utiliser cette fonctionnalité"}
+                    title={!hasCompletedProfile ? "Veuillez compléter votre profil pour utiliser cette fonctionnalité" : undefined}
                     >
                     Envoyer un message
                     <FontAwesomeIcon icon={faPaperPlane} />
