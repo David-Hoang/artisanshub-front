@@ -6,8 +6,10 @@ import { AuthContext } from "../../../../../context/AuthContext";
 import { firstCapitalize, dateShortTime } from "../../../../../utils/Helpers";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faLocationDot, faAddressBook, faPhone, faEnvelope, faSliders } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faLocationDot, faAddressBook, faPhone, faEnvelope, faSliders, faScrewdriverWrench } from '@fortawesome/free-solid-svg-icons';
 
+import DefaultClient from "../../../../../assets/img/default-client.svg";
+import DefaultCraftsman from "../../../../../assets/img/default-craftsman.svg";
 
 import Modal from "../../../../../components/ui/Modal";
 import SpinLoader from "../../../../../components/ui/SpinLoader";
@@ -29,9 +31,17 @@ function ModalUser({ isModalOpen, closeModal, selectedUser }) {
                         "Authorization": "Bearer " + userToken,
                     }
                 })
-                
-                if(response.status === 200) setSelectedUserDetails(response.data);
-                console.log(response);
+            
+                const { data } = response;
+
+                if(response.status === 200) 
+                    setSelectedUserDetails({
+                ...data, 
+                defaultImage : data.role === "client" 
+                    ?  DefaultClient 
+                    : data.role === "craftsman" 
+                        ? DefaultCraftsman 
+                        : DefaultClient});
             
         } catch (error) {
             
@@ -43,27 +53,27 @@ function ModalUser({ isModalOpen, closeModal, selectedUser }) {
     useEffect(() => {
         fetchSelectedDetailsUser()
     }, []);
-    console.log(selectedUserDetails);
     
     return ( 
         <Modal isOpen={isModalOpen} closeModal={closeModal} className="details-user">
             {isLoadingDetailsUser
-                ? <SpinLoader/>
+                ? <SpinLoader className="loading-user"/>
                 : selectedUserDetails &&
                     <>
                         <div className="modal-header">
                             <div className="image-container">
                                 <img className="image-user" 
-                                    src={ selectedUserDetails.profile_img?.img_path ? `${apiBase}/storage/${selectedUserDetails.profile_img?.img_path}` : undefined} 
+                                    src={ selectedUserDetails.profile_img?.img_path ? `${apiBase}/storage/${selectedUserDetails.profile_img?.img_path}` : selectedUserDetails.defaultImage} 
                                     alt={ selectedUserDetails.profile_img?.img_title }
                                     />
                             </div>
                             <div className="user-name-role">
                                 <h4 className="user-name">{firstCapitalize(selectedUserDetails.first_name)} {firstCapitalize(selectedUserDetails.last_name)}</h4>
-                                <Badge color="info">{ selectedUserDetails.client ? 'Client' : selectedUserDetails.craftsman ? 'Artisan' : 'Inconnu'}</Badge>
+                                <Badge color="info">{ selectedUserDetails.role === "client" ? 'Client' : selectedUserDetails.role === "craftsman" ? 'Artisan' : 'Inconnu'}</Badge>
                             </div>
                         </div>
                         <div className="modal-main">
+                            {/* User infos */}
                             <div className="user-card user-name">
 
                                 <div className="wrapper">
@@ -96,7 +106,8 @@ function ModalUser({ isModalOpen, closeModal, selectedUser }) {
                                 </div>
                 
                             </div>
-
+                            
+                            {/* User contact */}
                             <div className="user-card user-contact">
 
                                 <div className="wrapper">
@@ -122,7 +133,57 @@ function ModalUser({ isModalOpen, closeModal, selectedUser }) {
                                 </div>
 
                             </div>
+                                        
+                            {/* Craftsman infos */}
+                            {selectedUserDetails.role === "craftsman" &&
+                                <div className="user-card craftsman-infos">
 
+                                    <div className="wrapper">
+                                        <div className="icon">
+                                            <FontAwesomeIcon icon={faScrewdriverWrench} className="icon-craftsman"/>
+                                        </div>
+                                        <h3>Informations artisan</h3>
+                                    </div>
+
+                                    <div className="content-craftsman-infos">
+                                        <div className="wrapper-infos">
+                                            <div>
+                                                <p className="label">Identifiant artisan</p>
+                                                <p>#{selectedUserDetails.craftsman?.id}</p>
+                                            </div>
+                                            <div>
+                                                <p className="label">Prix</p>
+                                                <p>{selectedUserDetails.craftsman?.price ? `${selectedUserDetails.craftsman.price} €/h` : "Non renseigné"}</p>
+                                            </div>
+                                            <div>
+                                                <p className="label">Disponibilité</p>
+                                                <p>
+                                                    {selectedUserDetails.craftsman?.available === true 
+                                                    ? (<>
+                                                            <span></span> Oui
+                                                        </>
+                                                    ) : ( <>
+                                                            <span></span> Non
+                                                        </>
+                                                    )}
+                                                </p>
+                                            </div>
+                                            <div>
+                                                <p className="label">Activité</p>
+                                                <p>{selectedUserDetails.craftsman?.job?.name ?? "Non renseigné"}</p>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <p className="label">Description</p>
+                                            <p>{selectedUserDetails.craftsman?.description ? selectedUserDetails.craftsman.description : "Non renseigné"}</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            }
+
+                            {/* User location */}
                             <div className="user-card user-location">
                                 <div className="wrapper">
                                     <div className="icon">
@@ -157,7 +218,8 @@ function ModalUser({ isModalOpen, closeModal, selectedUser }) {
                                     }
                                 </div>
                             </div>
-
+                            
+                            {/* User account */}
                             <div className="user-card user-account">
                                 <div className="wrapper">
                                     <div className="icon">
@@ -185,7 +247,7 @@ function ModalUser({ isModalOpen, closeModal, selectedUser }) {
                             </div>
                         </div>
                         <div className="btn-wrapper">
-                            <Button type="button" className="btn btn-secondary"
+                            <Button type="button" className="btn btn-primary"
                                 onClick={() => closeModal()}>
                                 Fermer
                             </Button>

@@ -51,8 +51,6 @@ function UsersTab() {
     const [selectedUser, setSelectedUser] = useState(null);
 
     const openModal = (selectedUser) => {
-        console.log(selectedUser);
-    
         setIsModalOpen(true);
         setSelectedUser(selectedUser);
     }
@@ -72,8 +70,6 @@ function UsersTab() {
     }
 
     const closeDelete = () => {
-        console.log('a');
-        
         setAlertMessage(defaultAlertMessage);
         setisOpenConfirmDelete(null);
     }
@@ -86,7 +82,7 @@ function UsersTab() {
             const response = await axios.delete(`${apiBase}/api/admin/user/${userId}`,
                 { headers: 
                     {"Authorization": `Bearer ${userToken}`
-                } 
+                }
             })
 
             if(response.status === 200){

@@ -1,0 +1,53 @@
+@use "../../../../assets/scss/variables" as var;
+@use "../../../../assets/scss/mixins" as mxn;
+@use "../../../../assets/scss/extends" as ext;
+
+td {
+    &.data-actions {
+        div.btn-wrapper-prestation {
+            display: flex;
+            gap: var.$gap-sm;
+
+            button.btn{
+                @include mxn.btn;
+
+                &.button-delete-prestation {
+                    @include mxn.danger($hover: true);
+                }
+                &.button-show-prestation {
+                    @include mxn.info($hover: true);
+                }
+            }
+        }
+
+        div.confirm-delete-prestation {
+            display: flex;
+            flex-direction: column;
+            gap: var.$gap-sm;
+
+            p {
+                color : var.$danger;
+            }
+            div {
+                display: flex;
+                gap: var.$gap-sm;
+
+                button {
+                    @include mxn.btn;
+                }
+
+                button.confirm-delete{
+                    @include mxn.danger($hover:true);
+                }
+
+                button.confirm-yes{
+                    @include mxn.success($hover:true);
+                }
+
+                button.confirm-no{
+                    @include mxn.danger($hover:true);
+                }
+            }
+        }
+    }
+}

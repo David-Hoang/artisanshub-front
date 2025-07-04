@@ -194,14 +194,14 @@ function CraftsmanInfosForm() {
     }
 
     return ( 
-        <form onSubmit={handleSubmitUserCraftsmanInfos} className="craftsman-infos-form">
+        <form onSubmit={handleSubmitUserCraftsmanInfos} className={hasCompletedProfile ? "craftsman-infos-form" : "craftsman-infos-form need-to-complete"}>
             <div className="craftsman-infos-header">
                 <h2>Informations sur votre activité</h2>
                 <h3>Renseignez les détails de votre activité. Ces informations seront visibles sur votre profil d'artisan.</h3>
                 {!hasCompletedProfile &&
                     <h3 className="important-informations">
                         <FontAwesomeIcon icon={faCircleInfo} />
-                        Veuillez compléter ces informations pour accéder à toutes les fonctionnalités.
+                        Veuillez mettre à jour votre activité avant de pouvoir accéder à toutes les fonctionnalités.
                     </h3>
                 }
             </div>
@@ -233,7 +233,7 @@ function CraftsmanInfosForm() {
                 </div>
                 
                 <div className="wrapper">
-                    <Switch label="Disponibilité *" id="available"
+                    <Switch label="Disponibilité" id="available"
                         checked={userCraftsmanForm.available}
                         onChange={() => setUserCraftsmanForm({...userCraftsmanForm, available : !userCraftsmanForm.available})}
                         />

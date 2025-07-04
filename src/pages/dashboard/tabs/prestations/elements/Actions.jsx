@@ -122,7 +122,7 @@ function Actions({detailsPrestation, closeModal, fetchDetailsPrestation, user}) 
                                             <SpinLoader />
                                         ) : (
                                             <>
-                                                Refuser la demande de {firstCapitalize(detailsPrestation.client.user.first_name)}
+                                                Refuser la demande de {firstCapitalize(detailsPrestation?.client?.user?.first_name ?? "inconnu")}
                                             </>
                                         )}
                                     </Button>

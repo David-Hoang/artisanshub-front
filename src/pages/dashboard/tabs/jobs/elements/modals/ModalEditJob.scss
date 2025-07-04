@@ -110,11 +110,19 @@ div.modal.edit-job {
         }
         
         div.btn-wrapper {
+            width : 100%;
             align-self: end;
             display: flex;
             flex-wrap: wrap;
             justify-content: end;
             gap: var.$gap-lg;
+
+            button {
+                width : 100%;
+                @media screen and (min-width : var.$bp-md) {
+                    width : fit-content;
+                }
+            }
         }
 
         @media screen and (min-width : var.$bp-md) {

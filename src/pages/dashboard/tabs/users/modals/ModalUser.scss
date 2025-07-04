@@ -12,6 +12,10 @@ div.modal.details-user {
         max-width: 75rem;
     }
 
+    svg.loading-user{
+        margin : 2rem
+    }
+
     div.modal-header {
         display: flex;
         align-items: center;
@@ -79,6 +83,10 @@ div.modal.details-user {
                     .icon-location{
                         color : var.$danger;
                     }
+
+                    .icon-craftsman{
+                        color : var.$success;
+                    }
                 }
 
                 h3 {
@@ -130,6 +138,24 @@ div.modal.details-user {
                 }
             }
 
+            &.craftsman-infos {
+                grid-column: 1/-1;
+                
+                div.content-craftsman-infos{
+                    display: flex;
+                    flex-direction: column;
+                    gap: var.$gap-lg;
+
+                    div.wrapper-infos{
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        flex-wrap: wrap;
+                        gap: var.$gap-base;
+                    }
+                }
+            }
+
             div.content-location {
                 display: flex;
                 flex-direction: column;
@@ -167,8 +193,15 @@ div.modal.details-user {
     div.btn-wrapper {
         width: 100%;
         display: flex;
-        justify-content: end;
         padding : 1.5rem;
+        justify-content: end;
+
+        button {
+            width: 100%;
+            @media screen and (min-width: var.$bp-md) {
+                    width: fit-content;
+            }
+        }
     }
 
     p{

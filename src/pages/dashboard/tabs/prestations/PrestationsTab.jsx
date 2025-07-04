@@ -2,6 +2,7 @@ import './PrestationsTab.scss';
 import { useState, useContext } from 'react';
 
 import { PrestationsContext } from "../../context/PrestationsContext.jsx";
+import { AuthContext } from "../../../../context/AuthContext.jsx";
 
 import { dateShort, firstCapitalize } from "../../../../utils/Helpers.jsx";
 import Button from "../../../../components/ui/Button.jsx";
@@ -12,6 +13,7 @@ import ModalPrestation from "./elements/ModalPrestation.jsx";
 
 function PrestationsTab() {
     
+    const {userRole} = useContext(AuthContext);
     const {isLoadingPrestations, userPrestations} = useContext(PrestationsContext);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedPrestation, setSelectedPrestation] = useState(null);
@@ -20,7 +22,8 @@ function PrestationsTab() {
         setIsModalOpen(true);
         setSelectedPrestation(selectedPrestation);
     }
-
+    console.log(userRole);
+    
     const closeModal = () => {
         setIsModalOpen(false);
         setSelectedPrestation(null);
@@ -38,7 +41,10 @@ function PrestationsTab() {
                                 <div className="wrapper">
                                     <div className="prestation-header">
                                         <h3 className="prestation-title">{firstCapitalize(pres.title)}</h3>
-                                        <p className="user-name">Artisan : {firstCapitalize(pres.user_last_name)} {firstCapitalize(pres.user_first_name)}</p>
+                                        <p className="user-name">
+                                            {userRole === "client" ? "Artisan : " : "Client : "} 
+                                            {firstCapitalize(pres.user_last_name ?? "Inconnu")} {firstCapitalize(pres.user_first_name ?? "Inconnu")}
+                                        </p>
                                     </div>
 
                                     {pres.state === "await-craftsman" && <Badge color="pending">En attente artisan</Badge> }

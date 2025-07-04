@@ -15,6 +15,7 @@ import MessagesTab from "./tabs/messages/MessagesTab.jsx";
 import PrestationsTab from "./tabs/prestations/PrestationsTab.jsx";
 import JobsTab from "./tabs/jobs/JobsTab.jsx";
 import UsersTab from "./tabs/users/UsersTab.jsx";
+import AdminPrestationsTab from "./tabs/prestations/AdminPrestationsTab.jsx";
 
 function Dashboard() {
 
@@ -63,7 +64,10 @@ function Dashboard() {
                 {selectedTab === 'Prestations' 
                     && hasCompletedProfile &&
                     <PrestationsProvider>
-                        <PrestationsTab />
+                        {isAdmin 
+                            ? <AdminPrestationsTab />
+                            : <PrestationsTab />
+                        }
                     </PrestationsProvider>
                 }
                 {selectedTab === 'Métiers' 

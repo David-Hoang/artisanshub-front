@@ -28,9 +28,9 @@ function ContactCraftsman({detailsPrestation}) {
                         />
                     </div>
                     <h4 className="client-name">
-                        {firstCapitalize(detailsPrestation.client.user.first_name)}
+                        {firstCapitalize(detailsPrestation?.client?.user?.first_name ?? "inconnu")}
                         {' '}
-                        {firstCapitalize(detailsPrestation.client.user.last_name)}
+                        {firstCapitalize(detailsPrestation?.client?.user?.last_name ?? "inconnu")}
                     </h4>
                 </div>
             </div>
