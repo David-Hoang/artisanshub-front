@@ -1,3 +1,108 @@
 @use "../../assets/scss/variables" as var;
 @use "../../assets/scss/mixins" as mxn;
 @use "../../assets/scss/extends" as ext;
+
+table {
+    width: 100%;
+    border-spacing: 0px;
+
+    thead {
+        display: none;
+
+        tr {
+            border: none;
+            th {
+                font-size: var.$txt-base;
+                border: none;
+                padding: 1.25rem;
+                font-weight: 600;
+            }
+        }
+    }
+
+    tbody {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: var.$gap-2xl;
+
+        @media screen and (min-width: var.$bp-sm) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        tr {
+            display: flex;
+            flex-direction: column;
+            gap: var.$gap-base;
+            padding: 1rem;
+            border: 1px #e6e6e6 solid;
+            border-radius: var.$rounded-lg;
+            background-color: var.$full-white;
+
+            td {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                font-size: var.$txt-sm;
+                color: var.$gray;
+                &:before {
+                    content: attr(data-label);
+                    font-weight: 700;
+                    color: var.$black;
+                }
+            }
+        }
+    }
+}
+
+//Remove mobile table property
+@media screen and (min-width: var.$bp-lg) {
+    table {
+        overflow: hidden;
+        border-radius: var.$rounded-lg;
+        @include mxn.shadow-thin;
+    // border-collapse: collapse;
+
+
+        thead{
+            background-color: var.$light-blue;
+            display: table-header-group;
+        }
+
+        tbody {
+            display: table-row-group;
+            grid-template-columns: none;
+            gap: 0;
+
+            tr {
+                display: table-row;
+                flex-direction: unset;
+                gap: 0;
+                padding: 0;
+                border: none;
+                border-radius: 0;
+                background-color: unset;
+
+                cursor: pointer;
+
+                &:hover{
+                    transition: all 0.3s ease-in-out;
+                    background-color: var.$secondary-hover;
+                }
+
+
+                td {
+                    display: table-cell;
+                    align-items: unset;
+                    justify-content: unset;
+                    font-size: var.$txt-sm;
+
+                    padding: 1.25rem;
+
+                    &:before {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -6,16 +6,18 @@ function Table({name, thead, children}) {
             {name && 
                 <caption>{name}</caption>
             }
+
             <thead>
                 <tr>
                     {thead &&
-                        thead.map( name => (
-                            <th scope="col">
+                        thead.map( (name, key) => (
+                            <th key={key} scope="col">
                                 {name}
                             </th>
                         ))}
                 </tr>
             </thead>
+
             <tbody>
                 {children}
             </tbody>

@@ -180,12 +180,17 @@ function ModalEditJob({isModalOpen, closeModal, selectedJob}) {
     
     return ( 
         <Modal isOpen={isModalOpen} closeModal={closeModal} className="edit-job">
-            <h3>
-                <FontAwesomeIcon icon={faPenToSquare} />
-                Modifier le métier
-            </h3>
+            <div className="modal-header">
+                <div className="icon-edit-job">
+                    <FontAwesomeIcon icon={faPenToSquare} />
+                </div>
+                <h3>
+                    Modifier le métier
+                </h3>
+            </div>
+
             {isLoadingJobDatas
-            ? <SpinLoader />
+            ? <SpinLoader className="loading-job" />
             : 
                 <>
                     <form onSubmit={handleEditJob} className="edit-job-form">

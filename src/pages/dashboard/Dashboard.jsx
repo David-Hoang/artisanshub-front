@@ -8,12 +8,13 @@ import { JobsProvider } from "./context/JobsContext.jsx";
 import Tabs from "../../components/ui/Tabs.jsx";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserGear, faComments, faReceipt, faScrewdriverWrench } from '@fortawesome/free-solid-svg-icons';
+import { faUserGear, faComments, faReceipt, faScrewdriverWrench, faClipboardUser } from '@fortawesome/free-solid-svg-icons';
 
 import InformationsTab from "./tabs/informations/InformationsTab.jsx";
 import MessagesTab from "./tabs/messages/MessagesTab.jsx";
 import PrestationsTab from "./tabs/prestations/PrestationsTab.jsx";
 import JobsTab from "./tabs/jobs/JobsTab.jsx";
+import UsersTab from "./tabs/users/UsersTab.jsx";
 
 function Dashboard() {
 
@@ -27,7 +28,10 @@ function Dashboard() {
         ];
     
     if(isAdmin) {
-        tabsList.push({title : 'Métiers', icon : <FontAwesomeIcon icon={faScrewdriverWrench} />})
+        tabsList.push(
+            { title : 'Métiers', icon : <FontAwesomeIcon icon={faScrewdriverWrench} />},
+            { title : 'Utilisateurs', icon : <FontAwesomeIcon icon={faClipboardUser} />}
+        )
     }
 
     return ( 
@@ -43,6 +47,7 @@ function Dashboard() {
             </section>
 
             <Tabs 
+                className="dashboard-tabs"
                 tabsList={tabsList}
                 selectedTab={selectedTab} 
                 setSelectedTab={setSelectedTab}
@@ -51,19 +56,27 @@ function Dashboard() {
                 {selectedTab === 'Informations' &&
                     <InformationsTab />
                 }
-                {selectedTab === 'Messages' && hasCompletedProfile &&
+                {selectedTab === 'Messages' 
+                    && hasCompletedProfile &&
                     <MessagesTab />
                 }
-                {selectedTab === 'Prestations' && hasCompletedProfile &&
+                {selectedTab === 'Prestations' 
+                    && hasCompletedProfile &&
                     <PrestationsProvider>
                         <PrestationsTab />
                     </PrestationsProvider>
                 }
-
-                {selectedTab === 'Métiers' && hasCompletedProfile && isAdmin &&
+                {selectedTab === 'Métiers' 
+                    && hasCompletedProfile 
+                    && isAdmin &&
                     <JobsProvider>
                         <JobsTab />
                     </JobsProvider>
+                }
+                {selectedTab === 'Utilisateurs' 
+                    && hasCompletedProfile 
+                    && isAdmin &&
+                    <UsersTab />
                 }
             </Tabs>
             

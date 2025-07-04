@@ -14,7 +14,7 @@ div#jobs-tab {
         gap: var.$gap-xs;
         width: 100%;
 
-        @media screen and (min-width : var.$bp-lg) {
+        @media screen and (min-width : var.$bp-md) {
             width : fit-content;
         }
     }
@@ -71,7 +71,8 @@ div#jobs-tab {
 
 
                 p {
-                    font-size: var.$txt-sm
+                    font-size: var.$txt-sm;
+                    color : var.$danger;
                 }
 
                 button {

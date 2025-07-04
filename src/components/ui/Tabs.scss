@@ -16,10 +16,11 @@ section.tabs {
     div.tab-list {
         background-color: #ebebeb;
         width: 100%;
+        justify-content: space-between;
 
         align-self: start;
         display: flex;
-        justify-content: space-between;
+        flex-wrap: wrap;
         gap: var.$gap-sm;
 
         padding: 0.25rem 0.5rem;
@@ -30,11 +31,13 @@ section.tabs {
         }
 
         button.tab-item {
+            flex-grow: 1;
+
             position: relative;
             color: #71717a;
             font-size: var.$txt-sm;
             font-weight: 600;
-            padding: 0.4rem 0.65rem;
+            padding: 0.4rem 1rem;
             cursor: pointer;
             background-color: transparent;
 
@@ -45,6 +48,7 @@ section.tabs {
 
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: var.$gap-xs;
             border: none;
             transition: 0.1s ease-out;
@@ -52,6 +56,13 @@ section.tabs {
             &:hover {
                 background-color: transparent;
                 color: var.$black;
+            }
+
+            span.tab-title {
+                display : none;
+                @media screen and (min-width: var.$bp-sm) {
+                    display : inline-block;
+                }
             }
 
             span.notification-tab-button {
@@ -64,6 +75,11 @@ section.tabs {
                 top: -0.2rem;
                 animation: pulse-animation 2s infinite;
                 box-shadow: 0px 0px 1px 1px var.$danger;
+            }
+
+            @media screen and (min-width: var.$bp-sm) {
+                flex-grow: 0;
+                padding: 0.4rem 0.65rem;
             }
         }
 

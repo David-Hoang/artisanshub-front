@@ -12,6 +12,7 @@ function TabsCraftsman({craftsmanInfos}) {
 
     return ( 
         <Tabs 
+            className="tabs-craftsman"
             tabsList={[
                 {title : 'Informations'},
                 {title : 'Galerie'},

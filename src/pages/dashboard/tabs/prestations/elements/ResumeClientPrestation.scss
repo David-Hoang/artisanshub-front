@@ -31,11 +31,13 @@ div.resume-client-prestation {
         flex-direction: column;
         gap: var.$gap-md;
 
+        
+        h4{
+            font-weight: 600;
+        }
+
         p {
             font-size: var.$txt-sm;
-            &:nth-child(1) {
-                font-weight: 600;
-            }
         }
     }
 
