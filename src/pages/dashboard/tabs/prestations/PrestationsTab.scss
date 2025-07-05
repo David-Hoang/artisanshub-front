@@ -2,7 +2,7 @@
 @use "../../../../assets/scss/mixins" as mxn;
 @use "../../../../assets/scss/extends" as ext;
 
-div.prestations-tab {
+div#prestations-tab {
 
     svg.loading-list {
         margin : 4rem auto;
@@ -48,7 +48,7 @@ div.prestations-tab {
                 h3.prestation-title {
                     font-size: var.$txt-lg;
                     font-weight: 700;
-                    @include mxn.limitLineText(2)
+                    @include mxn.limitLineText(2);
                 }
 
                 p.user-name{

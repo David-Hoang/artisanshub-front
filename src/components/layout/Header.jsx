@@ -12,7 +12,7 @@ import NavMenu from './NavMenu.jsx';
 
 function Header() {
 
-    const {isLogged, handleLogout} = useContext(AuthContext);
+    const {isLogged, handleLogout, ishasCompletedProfile} = useContext(AuthContext);
     const [toggleMobileMenu, setToggleMobileMenu] = useState(false);
 
     const openMobileMenu = () => setToggleMobileMenu(true);
@@ -20,10 +20,10 @@ function Header() {
     
     return (
         <header>
-            <nav className="main-menu">
+            <nav id="main-menu">
                 <div className="desktop-list">
                     <Link to="/" className="desktop-logo-menu">
-                        <img src={mainLogo} alt="Main logo" className="desktop-main-logo" width="38.4" height="45" />
+                        <img src={mainLogo} alt="Main logo" className="desktop-main-logo" width="38" height="45" />
                         <p>
                             rtisansHub
                         </p>
@@ -37,7 +37,10 @@ function Header() {
                 <div className="desktop-auth-btn">
                     { isLogged ? (
                         <>
-                            <Link to="/dashboard" className="a-btn-secondary" onClick={closeMobileMenu}>Dashboard</Link>
+                            <Link to="/dashboard" className="a-btn-secondary" onClick={closeMobileMenu}>
+                                Dashboard
+                                {ishasCompletedProfile && <span className="red-notification-circle"></span> }
+                            </Link>
                             <Button className="btn-primary" onClick={handleLogout}>Déconnexion</Button>
                         </>
                     )
@@ -59,7 +62,7 @@ function Header() {
                 </Button>
             </nav>
             { toggleMobileMenu &&
-                <div className="mobile-menu"
+                <div id="mobile-menu"
                     role="dialog"
                     aria-modal="true"
                     aria-label="Menu principal"
@@ -85,7 +88,10 @@ function Header() {
                         <div className="mobile-auth-btn">
                             { isLogged ? (
                                 <>
-                                    <Link to="/dashboard" className="a-btn-secondary" onClick={closeMobileMenu}>Dashboard</Link>
+                                    <Link to="/dashboard" className="a-btn-secondary" onClick={closeMobileMenu}>
+                                        Dashboard
+                                        {ishasCompletedProfile && <span className="red-notification-circle"></span> }
+                                    </Link>
                                     <Button className="btn-primary" onClick={handleLogout}>Déconnexion</Button>
                                 </>
                             ) : ( 

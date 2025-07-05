@@ -121,7 +121,7 @@ div.craftsman-gallery {
             div.filter-opacity {
                 position: absolute;
                 inset: 0;
-                background-color: rgba(black, 0.35);
+                background: rgba(var.$black, 0.5);
                 opacity: 1;
                 z-index: 1;
 

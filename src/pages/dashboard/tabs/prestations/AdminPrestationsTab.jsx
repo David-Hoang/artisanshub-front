@@ -12,7 +12,8 @@ import SpinLoader from "../../../../components/ui/SpinLoader";
 import Button from "../../../../components/ui/Button";
 import AlertMessage from "../../../../components/AlertMessage";
 import Badge from "../../../../components/ui/Badge";
-import ModalAdminPrestation from "./admin-elements/modal/ModalAdminPrestation";
+import ModalAdminPrestation from "./admin-elements/modals/ModalAdminPrestation";
+import { useStatusList } from "../../../../hooks/useStatusList";
 
 function AdminPrestationsTab() {
 
@@ -26,8 +27,9 @@ function AdminPrestationsTab() {
         confirmDelete,
         closeDelete} = useContext(PrestationsContext);
 
+    const { statusList } = useStatusList();
+    
     const titleCol = [ "Identifiant" ,"Client", "Artisan", "Titre", "État", "Créer le", "Actions" ];
-        
     
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedPrestation, setSelectedPrestation] = useState(null);
@@ -117,6 +119,7 @@ function AdminPrestationsTab() {
                         isModalOpen={isModalOpen}
                         closeModal={closeModal} 
                         selectedPrestation={selectedPrestation}
+                        statusList={statusList}
                     />
                     )
                 }

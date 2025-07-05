@@ -76,9 +76,9 @@ function JobsTab() {
             const { status, data } = error.response;
 
             if(status === 404){
-                setAlertMessage({...setAlertMessage, type : "error", message : data.message})
+                setAlertMessage({...alertMessage, type : "error", message : data.message})
             } else {
-                setAlertMessage({...setAlertMessage, type : "error", message : "Une erreur est survenue durant la suppression du métier."})
+                setAlertMessage({...alertMessage, type : "error", message : "Une erreur est survenue durant la suppression du métier."})
             }
         } finally {
             setIsLoadingJobDelete(false);

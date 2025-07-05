@@ -17,7 +17,7 @@ function Tabs({children, tabsList, selectedTab, setSelectedTab, className, ...pr
                         >
                             {tab.isLocked ? <FontAwesomeIcon icon={faLock}/> : tab.icon}
                             <span className="tab-title">{tab.title}</span>
-                            {tab.notification && <span className="notification-tab-button"></span>}
+                            {tab.notification && <span className="red-notification-circle"></span>}
                         </button>
                     ))
                 }

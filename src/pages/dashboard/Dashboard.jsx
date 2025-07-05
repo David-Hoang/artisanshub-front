@@ -36,12 +36,12 @@ function Dashboard() {
     }
 
     return ( 
-        <main className="main-dashboard">
+        <main id="main-dashboard">
             <section className="dashboard-title">
                 <h1>Bienvenue sur votre tableau de bord {isAdmin && "administrateur"}</h1>
                 <h2>
                     {isAdmin 
-                        ? "Consultez l’activité de la plateforme, gérez les utilisateurs et modérez les contenus."
+                        ? "Consultez l'activité de la plateforme, gérez les utilisateurs et modérez les contenus."
                         : "Accedez à vos informations, gérez vos messages et vos projets"
                     }
                     </h2>

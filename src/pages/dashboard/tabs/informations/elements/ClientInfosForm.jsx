@@ -124,7 +124,7 @@ function ClientInfosForm() {
     }
     
     return ( 
-        <form onSubmit={handleSubmitUserClientInfos} className="client-infos-form">
+        <form onSubmit={handleSubmitUserClientInfos} className={hasCompletedProfile ? "client-infos-form" : "client-infos-form need-to-complete"}>
             <div className="client-infos-header">
                 <h2>Adresse</h2>
                 <h3>Indiquez votre adresse complète pour que l'artisan puisse se déplacer facilement.</h3>

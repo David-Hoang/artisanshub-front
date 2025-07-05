@@ -1,9 +1,17 @@
-// make first letter capitalize
+/**
+ * make first letter capitalize
+ * @param {string} word 
+ * @returns {string}
+ */
 export const firstCapitalize = (word) => {
     return word.charAt(0).toUpperCase() + word.slice(1);
 }
 
-// format Vendredi 4 juillet 2025
+/**
+ * format Vendredi 4 juillet 2025
+ * @param {date} date 
+ * @returns {string}
+ */
 export const dateLong = (date) => {
     const dateFormat = new Date(date)
         .toLocaleDateString('fr-FR', {
@@ -15,7 +23,11 @@ export const dateLong = (date) => {
     return firstCapitalize(dateFormat);
 }
 
-// format Vendredi 4 juillet 2025 à 20:21
+/**
+ * format Vendredi 4 juillet 2025 à 20:21
+ * @param {date} date 
+ * @returns {string}
+ */
 export const dateFull = (date) => {
     const dateFormat = new Date(date)
         .toLocaleString('fr-FR', {
@@ -29,12 +41,21 @@ export const dateFull = (date) => {
     return firstCapitalize(dateFormat);
 }
 
-//format 04/07/2025
+/**
+ * format 04/07/2025
+ * @param {date} date 
+ * @returns {string}
+ */
 export const dateShort = (date) => {
     return new Date(date).toLocaleDateString('fr-FR');
 }
 
-//format 04/07/2025 à 20:21
+
+/**
+ * format 04/07/2025 à 20:21
+ * @param {date} date 
+ * @returns {string}
+ */
 export const dateShortTime = (date) => {
 
     const dateTime = new Date(date);
@@ -54,7 +75,11 @@ export const dateShortTime = (date) => {
     return `${dateShort} à ${time}`;
 }
 
-// format : 4 juillet 2025 à 20:24
+/**
+ * format : 4 juillet 2025 à 20:24
+ * @param {date} date 
+ * @returns {string}
+ */
 export const dateLongTime = (date) => {
     const dateTime = new Date(date);
 
@@ -74,7 +99,11 @@ export const dateLongTime = (date) => {
     return `${firstCapitalize(dateLong)} à ${time}`;
 }
 
-//format Juillet 2025
+/**
+ * format Juillet 2025
+ * @param {date} date 
+ * @returns {string}
+ */
 export const dateMonthYear = (date) => {
     const dateFormat = new Date(date)
         .toLocaleDateString('fr-FR', {
@@ -85,6 +114,11 @@ export const dateMonthYear = (date) => {
     return firstCapitalize(dateFormat);
 }
 
+/**
+ * Return times for message
+ * @param {date} date 
+ * @returns {string}
+ */
 export const dateMessageFormat = (date) => {
 
     const messageDate = new Date(date);
@@ -115,4 +149,22 @@ export const dateMessageFormat = (date) => {
     });
     
     return `${dayMonth} à ${time}`;
+}
+
+import DefaultCraftsmanCover1 from "../assets/img/covers/default-craftsman-cover-1.svg";
+import DefaultCraftsmanCover2 from "../assets/img/covers/default-craftsman-cover-2.svg";
+import DefaultCraftsmanCover3 from "../assets/img/covers/default-craftsman-cover-3.svg";
+import DefaultCraftsmanCover4 from "../assets/img/covers/default-craftsman-cover-4.svg";
+
+/**
+ * Return random default craftsman image
+ * @returns 
+ */
+export const randomCraftsmanCover = () => {
+
+    const covers = [ DefaultCraftsmanCover1, DefaultCraftsmanCover2, DefaultCraftsmanCover3, DefaultCraftsmanCover4 ];
+
+    const randomIndex = Math.floor(Math.random() * covers.length);
+    const cover = covers[randomIndex];
+    return cover;
 }

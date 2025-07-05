@@ -58,7 +58,7 @@ function DetailsCraftsman() {
     }, []);
     
     return ( 
-        <main className="main-details-craftsman">
+        <main id="main-details-craftsman">
 
             <div className="btn-container">
                 <Button className="btn-primary" onClick={() => navigate(-1)}>

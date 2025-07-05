@@ -14,7 +14,7 @@ import Parties from "../Parties";
 import Traceability from "../Traceability";
 import Actions from "../Actions";
 
-function ModalAdminPrestation({ isModalOpen, closeModal, selectedPrestation }) {
+function ModalAdminPrestation({ isModalOpen, closeModal, selectedPrestation, statusList }) {
 
     const apiBase = import.meta.env.VITE_MAIN_API_URI;
     const [isLoadingPresDetails, setIsLoadingPresDetails] = useState(false);
@@ -67,7 +67,12 @@ function ModalAdminPrestation({ isModalOpen, closeModal, selectedPrestation }) {
 
                         <aside className="aside">
                             <Traceability selectedPresDetails={selectedPresDetails} />
-                            <Actions selectedPresDetails={selectedPresDetails} closeModal={closeModal} />
+                            <Actions 
+                                selectedPresDetails={selectedPresDetails} 
+                                closeModal={closeModal} 
+                                statusList={statusList} 
+                                fetchSelectedDetailsPrestation={fetchSelectedDetailsPrestation}
+                            />
                         </aside>
                     </div>
                     </>

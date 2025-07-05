@@ -16,7 +16,7 @@ function Home() {
     const { jobsCategories } = useContext(ApiServicesContext);
 
     return ( 
-        <main className="main-home">
+        <main id="main-home">
                 <section className="hero">
                     <div className="hero-content">
                         <h1 className="hero-title">
@@ -44,7 +44,7 @@ function Home() {
                         }
                     />
 
-                    {/* <JobCard jobsCategories={jobsCategories}/> */}
+                    <JobCard jobsCategories={jobsCategories}/>
 
                 </div>
                 <div className="content-work">

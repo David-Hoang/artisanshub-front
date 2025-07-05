@@ -36,7 +36,7 @@ function FindCraftsman() {
     }, []);
 
     return ( 
-        <main className="main-find-craftsman">
+        <main id="main-find-craftsman">
             <section className="find-craftsman-header">
                 <h1>Trouvez votre artisan</h1>
                 <h2>Parcourez notre réseau d'artisans qualifiés et faites une demande en quelques clics</h2>

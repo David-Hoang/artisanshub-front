@@ -33,7 +33,7 @@ function Register() {
     }, []);
 
     return ( 
-        <main className="main-register">
+        <main id="main-register">
             <form onSubmit={handleRegister} className="register-form">
                 <div className="register-header">
                     <h1>Créez votre compte</h1>

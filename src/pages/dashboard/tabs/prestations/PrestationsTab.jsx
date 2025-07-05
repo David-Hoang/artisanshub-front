@@ -9,7 +9,7 @@ import Button from "../../../../components/ui/Button.jsx";
 import Badge from "../../../../components/ui/Badge.jsx";
 import SpinLoader from "../../../../components/ui/SpinLoader";
 
-import ModalPrestation from "./elements/ModalPrestation.jsx";
+import ModalPrestation from "./elements/modals/ModalPrestation.jsx";
 
 function PrestationsTab() {
     
@@ -22,7 +22,6 @@ function PrestationsTab() {
         setIsModalOpen(true);
         setSelectedPrestation(selectedPrestation);
     }
-    console.log(userRole);
     
     const closeModal = () => {
         setIsModalOpen(false);
@@ -30,7 +29,7 @@ function PrestationsTab() {
     }
     
     return ( 
-        <div className="prestations-tab">
+        <div id="prestations-tab">
             {isLoadingPrestations 
             ? <SpinLoader className="loading-list"/>
             : userPrestations && userPrestations.length > 0 

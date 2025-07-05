@@ -5,21 +5,21 @@ import axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGears } from '@fortawesome/free-solid-svg-icons';
 
-import { firstCapitalize } from "../../../../../utils/Helpers.jsx";
+import { firstCapitalize } from "../../../../../../utils/Helpers.jsx";
 
-import { PrestationsContext } from "../../../context/PrestationsContext.jsx";
-import { AuthContext } from "../../../../../context/AuthContext.jsx";
+import { PrestationsContext } from "../../../../context/PrestationsContext.jsx";
+import { AuthContext } from "../../../../../../context/AuthContext.jsx";
 
-import Modal from "../../../../../components/ui/Modal.jsx";
-import SpinLoader from "../../../../../components/ui/SpinLoader.jsx";
+import Modal from "../../../../../../components/ui/Modal.jsx";
+import SpinLoader from "../../../../../../components/ui/SpinLoader.jsx";
 
-import ResumeClientPrestation from "./ResumeClientPrestation.jsx";
-import StatePrestationClient from "./StatePrestationClient.jsx";
-import StatePrestationCraftsman from "./StatePrestationCraftsman.jsx";
+import ResumeClientPrestation from "../ResumeClientPrestation.jsx";
+import StatePrestationClient from "../StatePrestationClient.jsx";
+import StatePrestationCraftsman from "../StatePrestationCraftsman.jsx";
 
-import ContactClient from "./ContactClient.jsx";
-import ContactCraftsman from "./ContactCraftsman.jsx";
-import Actions from "./Actions.jsx";
+import ContactClient from "../ContactClient.jsx";
+import ContactCraftsman from "../ContactCraftsman.jsx";
+import Actions from "../Actions.jsx";
 
 function ModalPrestation({isModalOpen, closeModal, selectedPrestation}) {
 

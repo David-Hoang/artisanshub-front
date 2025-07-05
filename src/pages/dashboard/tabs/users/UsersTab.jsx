@@ -7,10 +7,9 @@ import { dateShort } from "../../../../utils/Helpers";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faTrash } from '@fortawesome/free-solid-svg-icons';
 
-
 import Table from "../../../../components/ui/Table";
 import SpinLoader from "../../../../components/ui/SpinLoader";
-import ModalUser from "./modals/ModalUser";
+import ModalUser from "./elements/modals/ModalUser";
 import Button from "../../../../components/ui/Button";
 import AlertMessage from "../../../../components/AlertMessage";
 
@@ -94,9 +93,9 @@ function UsersTab() {
             const { status, data } = error.response;
 
             if(status === 404){
-                setAlertMessage({...setAlertMessage, type : "error", message : data.message})
+                setAlertMessage({...alertMessage, type : "error", message : data.message})
             } else {
-                setAlertMessage({...setAlertMessage, type : "error", message : "Une erreur est survenue durant la suppression de l'utilisateur."})
+                setAlertMessage({...alertMessage, type : "error", message : "Une erreur est survenue durant la suppression de l'utilisateur."})
             }
         } finally {
             setIsLoadingUserDelete(false);
@@ -105,6 +104,7 @@ function UsersTab() {
 
     return ( 
         <div id="users-tab" onClick={() => isOpenconfirmDelete !== false && closeDelete()}>
+            
             <Table
                 thead={titleCol}>
                     { isLoadingUsersList 

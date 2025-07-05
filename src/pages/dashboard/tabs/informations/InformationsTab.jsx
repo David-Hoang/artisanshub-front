@@ -13,7 +13,7 @@ function InformationsTab() {
     const {userRole, isAdmin} = useContext(AuthContext);
 
     return ( 
-        <div className="informations-tab">
+        <div id="informations-tab">
 
             <UserInfosForm />
             

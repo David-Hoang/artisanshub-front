@@ -1,20 +1,20 @@
 import "./ModalUser.scss";
 import { useContext, useState, useEffect } from "react";
 import axios from "axios";
-import { AuthContext } from "../../../../../context/AuthContext";
+import { AuthContext } from "../../../../../../context/AuthContext";
 
-import { firstCapitalize, dateShortTime } from "../../../../../utils/Helpers";
+import { firstCapitalize, dateShortTime } from "../../../../../../utils/Helpers";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLocationDot, faAddressBook, faPhone, faEnvelope, faSliders, faScrewdriverWrench } from '@fortawesome/free-solid-svg-icons';
 
-import DefaultClient from "../../../../../assets/img/default-client.svg";
-import DefaultCraftsman from "../../../../../assets/img/default-craftsman.svg";
+import DefaultClient from "../../../../../../assets/img/default-client.svg";
+import DefaultCraftsman from "../../../../../../assets/img/default-craftsman.svg";
 
-import Modal from "../../../../../components/ui/Modal";
-import SpinLoader from "../../../../../components/ui/SpinLoader";
-import Badge from "../../../../../components/ui/Badge";
-import Button from "../../../../../components/ui/Button";
+import Modal from "../../../../../../components/ui/Modal";
+import SpinLoader from "../../../../../../components/ui/SpinLoader";
+import Badge from "../../../../../../components/ui/Badge";
+import Button from "../../../../../../components/ui/Button";
 
 function ModalUser({ isModalOpen, closeModal, selectedUser }) {
     

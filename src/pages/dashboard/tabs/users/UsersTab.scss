@@ -2,50 +2,54 @@
 @use "../../../../assets/scss/mixins" as mxn;
 @use "../../../../assets/scss/extends" as ext;
 
-td{
-    &.data-actions{
-        div.btn-wrapper-user{
-            display: flex;
-            gap: var.$gap-sm;
+div#users-tab {
+    table {
+        td {
+            &.data-actions {
+                div.btn-wrapper-user {
+                    display: flex;
+                    gap: var.$gap-sm;
 
-            button.btn{
-                @include mxn.btn;
+                    button.btn {
+                        @include mxn.btn;
 
-                &.button-delete-user{
-                    @include mxn.danger($hover: true);
-                }
-                &.button-show-user{
-                    @include mxn.info($hover: true);
-                }
-            }
-        }
-
-        div.confirm-delete-user{
-            display: flex;
-            flex-direction: column;
-            gap: var.$gap-sm;
-
-            p {
-                color : var.$danger;
-            }
-            div {
-                display: flex;
-                gap: var.$gap-sm;
-
-                button {
-                    @include mxn.btn;
+                        &.button-delete-user {
+                            @include mxn.danger($hover: true);
+                        }
+                        &.button-show-user {
+                            @include mxn.info($hover: true);
+                        }
+                    }
                 }
 
-                button.confirm-delete{
-                    @include mxn.danger($hover:true);
-                }
+                div.confirm-delete-user {
+                    display: flex;
+                    flex-direction: column;
+                    gap: var.$gap-sm;
 
-                button.confirm-yes{
-                    @include mxn.success($hover:true);
-                }
+                    p {
+                        color: var.$danger;
+                    }
+                    div {
+                        display: flex;
+                        gap: var.$gap-sm;
 
-                button.confirm-no{
-                    @include mxn.danger($hover:true);
+                        button {
+                            @include mxn.btn;
+                        }
+
+                        button.confirm-delete {
+                            @include mxn.danger($hover: true);
+                        }
+
+                        button.confirm-yes {
+                            @include mxn.success($hover: true);
+                        }
+
+                        button.confirm-no {
+                            @include mxn.danger($hover: true);
+                        }
+                    }
                 }
             }
         }

@@ -2,7 +2,7 @@
 @use "../../assets/scss/mixins" as mxn;
 @use "../../assets/scss/extends" as ext;
 
-main.main-home {
+main#main-home {
     display: flex;
     flex-direction: column;
     align-items: center;

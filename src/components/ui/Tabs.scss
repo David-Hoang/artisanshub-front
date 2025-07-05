@@ -65,18 +65,6 @@ section.tabs {
                 }
             }
 
-            span.notification-tab-button {
-                position: absolute;
-                background-color: var.$danger;
-                height: 0.6rem;
-                width: 0.6rem;
-                border-radius: var.$rounded-full;
-                right: -0.2rem;
-                top: -0.2rem;
-                animation: pulse-animation 2s infinite;
-                box-shadow: 0px 0px 1px 1px var.$danger;
-            }
-
             @media screen and (min-width: var.$bp-sm) {
                 flex-grow: 0;
                 padding: 0.4rem 0.65rem;
