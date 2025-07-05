@@ -105,7 +105,8 @@ function ModalMessage({isModalOpen, closeModal, selectedUserConversation}) {
                     { selectedUserConversation.job_name && <Badge color="info">{selectedUserConversation.job_name}</Badge> }
                 </div>
             </div>
-            <section className="messages-content">
+            <section className={isLoadingConversation ? "messages-content messages-loading" : "messages-content"}>
+
                 {isLoadingConversation 
                     ? <SpinLoader/>
                     : conversation && conversation.length > 0 

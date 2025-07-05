@@ -1,8 +1,9 @@
+// make first letter capitalize
 export const firstCapitalize = (word) => {
-    // make first letter capitalize
     return word.charAt(0).toUpperCase() + word.slice(1);
 }
 
+// format Vendredi 4 juillet 2025
 export const dateLong = (date) => {
     const dateFormat = new Date(date)
         .toLocaleDateString('fr-FR', {
@@ -11,11 +12,10 @@ export const dateLong = (date) => {
             month: 'long',
             year: 'numeric'
         });
-
-    // format day number month year
     return firstCapitalize(dateFormat);
 }
 
+// format Vendredi 4 juillet 2025 à 20:21
 export const dateFull = (date) => {
     const dateFormat = new Date(date)
         .toLocaleString('fr-FR', {
@@ -26,16 +26,15 @@ export const dateFull = (date) => {
             hour: '2-digit',
             minute: '2-digit',
         });
-    
-    // format day number month year time
     return firstCapitalize(dateFormat);
 }
 
+//format 04/07/2025
 export const dateShort = (date) => {
-    //format dd/mm/yyyy
     return new Date(date).toLocaleDateString('fr-FR');
 }
 
+//format 04/07/2025 à 20:21
 export const dateShortTime = (date) => {
 
     const dateTime = new Date(date);
@@ -52,11 +51,30 @@ export const dateShortTime = (date) => {
         hour: '2-digit',
         minute: '2-digit'
     });
-
-    //format dd/mm/yyyy à hh/mm
     return `${dateShort} à ${time}`;
 }
 
+// format : 4 juillet 2025 à 20:24
+export const dateLongTime = (date) => {
+    const dateTime = new Date(date);
+
+    // jj/mm/aa
+    const dateLong = dateTime.toLocaleDateString('fr-FR', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+    });
+
+    // hh:mmm
+    const time = dateTime.toLocaleTimeString('fr-FR', {
+        hour: '2-digit',
+        minute: '2-digit',
+    });
+
+    return `${firstCapitalize(dateLong)} à ${time}`;
+}
+
+//format Juillet 2025
 export const dateMonthYear = (date) => {
     const dateFormat = new Date(date)
         .toLocaleDateString('fr-FR', {

@@ -12,6 +12,7 @@ import SpinLoader from "../../../../components/ui/SpinLoader";
 import Button from "../../../../components/ui/Button";
 import AlertMessage from "../../../../components/AlertMessage";
 import Badge from "../../../../components/ui/Badge";
+import ModalAdminPrestation from "./admin-elements/modal/ModalAdminPrestation";
 
 function AdminPrestationsTab() {
 
@@ -24,12 +25,25 @@ function AdminPrestationsTab() {
         isOpenconfirmDelete,
         confirmDelete,
         closeDelete} = useContext(PrestationsContext);
-    console.log(prestationsList);
 
     const titleCol = [ "Identifiant" ,"Client", "Artisan", "Titre", "État", "Créer le", "Actions" ];
+        
     
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedPrestation, setSelectedPrestation] = useState(null);
+
+    const openModal = (pres) => {
+        setIsModalOpen(true);
+        setSelectedPrestation(pres);
+    }
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+        setSelectedPrestation(null);
+    }
+
     return ( 
-        <div id="admin-prestations-tab">
+        <div id="admin-prestations-tab" onClick={() => isOpenconfirmDelete !== false && closeDelete()}>
             <Table thead={titleCol}>
                 {isLoadingPrestations
                     ?  ( <tr>
@@ -39,7 +53,7 @@ function AdminPrestationsTab() {
                         </tr>
                     ) : prestationsList && prestationsList.length > 0
                         ?  prestationsList.map((pres, index) => (
-                            <tr key={pres.id}>
+                            <tr key={pres.id} onClick={() => openModal(pres)}>
                                 <td data-label={titleCol[0]}>#{pres.id}</td>
                                 <td data-label={titleCol[1]}>{firstCapitalize(pres.client_first_name ?? "inconnu")} {firstCapitalize(pres.client_last_name ?? "inconnu")}</td>
                                 <td data-label={titleCol[2]}>{firstCapitalize(pres.craftsman_first_name ?? "inconnu")} {firstCapitalize(pres.craftsman_last_name ?? "inconnu")}</td>
@@ -97,6 +111,15 @@ function AdminPrestationsTab() {
                     )
                 }
             </Table>
+
+            {isModalOpen && (
+                    <ModalAdminPrestation
+                        isModalOpen={isModalOpen}
+                        closeModal={closeModal} 
+                        selectedPrestation={selectedPrestation}
+                    />
+                    )
+                }
         </div>
     );
 }

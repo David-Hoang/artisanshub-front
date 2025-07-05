@@ -44,7 +44,7 @@ function ModalUser({ isModalOpen, closeModal, selectedUser }) {
                         : DefaultClient});
             
         } catch (error) {
-            
+            console.log(error);
         } finally {
             setIsLoadingDetailsUser(false);
         }
@@ -93,7 +93,7 @@ function ModalUser({ isModalOpen, closeModal, selectedUser }) {
                                         <p>{ selectedUserDetails.last_name }</p>
                                     </div>
                                     <div>
-                                        <p>Role</p>
+                                        <p className="label">Role</p>
                                         <Badge color="info">
                                             { selectedUserDetails.client 
                                                 ? 'Client' 

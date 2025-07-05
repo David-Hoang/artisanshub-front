@@ -1,0 +1,72 @@
+@use "../../../../../assets/scss/variables" as var;
+@use "../../../../../assets/scss/mixins" as mxn;
+@use "../../../../../assets/scss/extends" as ext;
+
+div.parties-prestation{
+
+    background-color: var.$light-gray;
+
+    div.wrapper {
+        display: flex;
+        align-items: center;
+        gap: var.$gap-base;
+
+        div.icon {
+            color: var.$gray;
+            font-size: var.$txt-xl;
+        }
+
+        h3 {
+            font-size: var.$txt-lg;
+            font-weight: 600;
+        }
+    }
+
+    div.parties {
+        display: flex;
+        flex-direction: column;
+        gap: var.$gap-base;
+
+        @media screen and (min-width: var.$bp-lg) {
+            flex-direction: row;
+        }
+
+        div.client-part,
+        div.craftsman-part {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: var.$gap-base;
+            background-color: var.$full-white;
+            border-radius: var.$rounded-lg;
+            padding: 1.5rem;
+
+            div.icon {
+                font-size: var.$txt-lg;
+                padding: 1.2rem;
+                border-radius: var.$rounded-lg;
+                height: 2rem;
+                width: 2rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            p.label{
+                font-size: var.$txt-sm;
+                color: var.$gray;
+            }
+            
+            p.user-name{
+                font-weight: 600;
+            }
+
+        }
+        div.client-part > div.icon {
+            @include mxn.success;
+        }
+        div.craftsman-part > div.icon {
+            @include mxn.pending;
+        }
+    }
+}

@@ -1,9 +1,9 @@
-@use "../../../../../assets/scss/variables" as var;
-@use "../../../../../assets/scss/mixins" as mxn;
-@use "../../../../../assets/scss/extends" as ext;
+@use "../../../../../../assets/scss/variables" as var;
+@use "../../../../../../assets/scss/mixins" as mxn;
+@use "../../../../../../assets/scss/extends" as ext;
 
-div.modal{
-    &.prestation-details {
+div.modal {
+    &.admin-prestation {
         width: 100%;
 
         min-height: 10rem;
@@ -11,10 +11,10 @@ div.modal{
             max-width: 75rem;
         }
 
-        svg.loading-prestations {
+        svg.loading-admin-prestations {
             padding : 5rem;
         }
-        
+
         div.modal-header {
             display : flex; 
             align-items: center;
@@ -28,7 +28,7 @@ div.modal{
 
             z-index: 1;
 
-            div.icon-bg{
+            div.icon-bg {
                 background-color: var.$primary;
                 color: var.$full-white;
                 padding: 0.8rem;
@@ -39,18 +39,11 @@ div.modal{
                 display: flex;
                 justify-content: center;
                 align-items: center;
+
             }
 
-            div.modal-title {
-                h3{
-                    font-size: var.$txt-xl;
-                    @include mxn.limitLineText(1)
-                }
-
-                h4{
-                    font-size: var.$txt-sm;
-                    color : var.$gray;
-                }
+            h3 {
+                font-size: var.$txt-xl;
             }
         }
 
@@ -77,5 +70,31 @@ div.modal{
                 }
             }
         }
+
+        aside {
+            grid-column: span 1;
+            display: flex;
+            flex-direction: column;
+            gap: var.$gap-2xl;
+
+            @media screen and (min-width: var.$bp-md) {
+                grid-column: span 3;
+            }
+        }
+    }
+}
+
+div.card-admin-prestation {
+    border: 1px #e6e6e6 solid;
+    border-radius: var.$rounded-lg;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: var.$gap-2xl;
+
+    div.wrapper {
+        display: flex;
+        align-items: center;
+        gap: var.$gap-base;
     }
 }

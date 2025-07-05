@@ -66,7 +66,7 @@ function ModalPrestation({isModalOpen, closeModal, selectedPrestation}) {
             </div>
             
             {isLoadingDetailsPrestation 
-                ? <SpinLoader/>
+                ? <SpinLoader className="loading-prestations"/>
                 : detailsPrestation 
                     ? 
                         <div className="modal-main">

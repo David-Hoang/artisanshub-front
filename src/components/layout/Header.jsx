@@ -1,5 +1,5 @@
 import './Header.scss';
-import mainLogo from '../../assets/img/logo/logo-192x192.png';
+import mainLogo from '../../assets/img/logo/logo-192x192.webp';
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGripLines, faXmark } from '@fortawesome/free-solid-svg-icons';
@@ -23,7 +23,7 @@ function Header() {
             <nav className="main-menu">
                 <div className="desktop-list">
                     <Link to="/" className="desktop-logo-menu">
-                        <img src={mainLogo} alt="Main logo" className="desktop-main-logo" />
+                        <img src={mainLogo} alt="Main logo" className="desktop-main-logo" width="38.4" height="45" />
                         <p>
                             rtisansHub
                         </p>
