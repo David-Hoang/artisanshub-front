@@ -1,5 +1,5 @@
 import "./UserPictureForm.scss";
-import { useState, useContext } from "react";
+import { useState, useContext, useRef } from "react";
 import axios from "axios";
 
 import DefaultClient from '../../../../../assets/img/default-client.svg';
@@ -138,6 +138,8 @@ function UserpictureForm() {
         })
     }
 
+    const profilePictureInput = useRef(null)
+    
     return ( 
         <form onSubmit={handleSubmitUserPicture} className="user-picture-form">
             <h2>Photo de profil</h2>
@@ -154,7 +156,9 @@ function UserpictureForm() {
                                         img_path : URL.createObjectURL(e.target.files[0]),
                                         profile_picture : e.target.files[0]
                                     })
-                                }/>
+                                }
+                            ref={profilePictureInput}
+                            />
                         <img src={userPictureForm.img_path} alt={userPictureForm.img_title ?? ""} className="profile-picture"/>
                     </div>
                     {userPictureForm.profile_picture &&
@@ -164,6 +168,12 @@ function UserpictureForm() {
                         </button>
                     }
                 </div>
+
+                <Button className="btn-secondary mobile-button-picture"
+                    onClick={() => profilePictureInput.current.click()}
+                    >
+                    Ajouter une photo
+                </Button>
                 
                 {errorInfosForm.profile_picture && 
                     <div>

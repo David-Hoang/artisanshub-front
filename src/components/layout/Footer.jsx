@@ -3,6 +3,7 @@ import './Footer.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF, faInstagram, faLinkedinIn, faYoutube } from '@fortawesome/free-brands-svg-icons';
 
+import { thisYear } from "../../utils/Helpers";
 
 function Footer() {
     return ( 
@@ -11,7 +12,7 @@ function Footer() {
 
                 <div className="footer-main-section">
                     <div className="footer-about-us">
-                        <h4>Qui somme nous ?</h4>
+                        <h3>Qui somme nous ?</h3>
                         <p>
                             Derrière ArtisansHub, il y a une équipe engagée qui veut remettre l’humain au cœur des projets.
                             Nous avons conçu cet espace pour connecter des particuliers à des artisans de qualité, dans un esprit de confiance et de proximité.
@@ -52,22 +53,22 @@ function Footer() {
                 <div className="footer-social">
                     <ul>
                         <li>
-                            <a href="#">
+                            <a href="#" aria-label="Facebook">
                                 <FontAwesomeIcon icon={faFacebookF} />
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="#" aria-label="Instagram">
                             <FontAwesomeIcon icon={faInstagram} />
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="#" aria-label="LinkedIn">
                             <FontAwesomeIcon icon={faLinkedinIn} />
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="#" aria-label="Youtube">
                             <FontAwesomeIcon icon={faYoutube} />
                             </a>
                         </li>
@@ -75,7 +76,7 @@ function Footer() {
                 </div>
 
                 <div className="footer-signature">
-                    <p>© ArtisansHub 2025</p>
+                    <p>© {thisYear()} ArtisansHub. Tous droits réservés.</p>
                     <p>Fait avec amour et passion ❤️</p>
                 </div>
             </div>

@@ -214,7 +214,7 @@ function UserInfosForm() {
                     <Select 
                         label="Region*"
                         id="region"
-                        placeholder="Sélectionnez votre région"
+                        selectPlaceholder="Sélectionnez votre région"
                         datas={regions}
                         value={userInfosForm.region}
                         onChange={(e) => { setUserInfosForm({...userInfosForm, region : e.target.value}) }}/>

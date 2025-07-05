@@ -64,12 +64,7 @@ export const AuthProvider = ({ children }) => {
                 const userDatas = response.data;
 
                 setUserRole(userDatas.role);
-                
-                // Check if user set his role infos
-                // if(userDatas.profile){
-                //     setUserRoleInfos(true);
-                // }
-                
+
                 // Mount user info
                 setUserDatas(userDatas);
 
@@ -85,7 +80,7 @@ export const AuthProvider = ({ children }) => {
             
             if (status === 401) {
                 setErrorMessage("Votre session a expiré. Veuillez vous reconnecter.");
-                cleanUserDatasToken()
+                cleanUserDatasToken(true)
             } else {
                 return setErrorMessage("Une erreur s'est produite lors de la récupération des informations de l'utilisateur.");
             }
@@ -114,15 +109,25 @@ export const AuthProvider = ({ children }) => {
         fetchUserData()
     }, [])
 
-    const cleanUserDatasToken = () => {
+
+    /**
+     * Cleaing user token and redirect to login page or not
+     * @param {boolean} shouldRedirect 
+     */
+    const cleanUserDatasToken = (shouldRedirect = false) => {
         localStorage.removeItem("artisansHubUserToken");
         setUserToken(null);
         setIsLogged(false);
         setUserDatas(null);
         setUserRole(null);
-        navigate('/connexion');
+        if(shouldRedirect) navigate('/connexion');
     }
 
+    /**
+     * Check if the user completely update his profile
+     * @param {object} datas 
+     * @returns boolean
+     */
     const checkCompletedProfile = (datas) => {
 
         if(datas.role === "admin") return true;
@@ -319,8 +324,6 @@ export const AuthProvider = ({ children }) => {
                 setUserDatas,
                 userRole,
                 isAdmin : userRole === "admin" ? true : false,
-                // userRoleInfos, 
-                // setUserRoleInfos,
                 hasCompletedProfile,
 
                 reFetchUserDatas : fetchUserData,

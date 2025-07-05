@@ -6,7 +6,7 @@ function Select({label, selectPlaceholder, datas, datasValues, ...props}) {
     return ( 
         <div className="select-wrapper">
             <label htmlFor={props.id}>{label}</label>
-            <select {...props}>
+            <select id={props.id} {...props}>
                 <option value="">{selectPlaceholder}</option>
                 {datas &&
                     datas.map( (data, key) => (

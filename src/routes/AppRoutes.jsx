@@ -7,6 +7,7 @@ import Home from '../pages/home/Home.jsx';
 import Dashboard from '../pages/dashboard/Dashboard.jsx';
 import FindCraftsmanList from '../pages/findcraftsman/FindCraftsmanList.jsx';
 import DetailsCraftsman from "../pages/findcraftsman/DetailsCraftsman.jsx";
+import PageNotFound from "../pages/pagenotfound/PageNotFound.jsx";
 
 import { AuthContext } from "../context/AuthContext.jsx";
 
@@ -24,6 +25,7 @@ function AppRouters() {
                 <Route path="/artisan/:craftsmanId" element={<DetailsCraftsman/>} /> 
 
                 <Route path="/dashboard" element={isLogged ? <Dashboard /> : <Navigate to="/" />} />
+                <Route path="*" element={<PageNotFound />} />
 
             </Routes>
         </>

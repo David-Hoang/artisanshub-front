@@ -24,12 +24,12 @@ footer {
 
             div.footer-about-us, div.footer-list {
                 text-align: center;
-                h4 {
+                h3 {
                     padding-bottom: 0.3rem;
                 }
                 p {
                     font-size: var.$txt-sm;
-                    color : rgba(var.$full-white, 0.5);
+                    color : rgba(var.$full-white, 0.7);
                 }
             }
 
@@ -41,7 +41,7 @@ footer {
                     display : flex;
                     flex-direction: column;
                     li a {
-                        color : rgba(var.$full-white, 0.5);
+                        color : rgba(var.$full-white, 0.7);
                         font-size: var.$txt-sm;
 
                         &:hover {
@@ -87,7 +87,7 @@ footer {
         div.footer-signature {
             font-size: var.$txt-sm;
             text-align: center;
-            color : rgba(var.$full-white, 0.5);
+            color : rgba(var.$full-white, 0.7);
 
         }
 

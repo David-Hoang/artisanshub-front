@@ -16,6 +16,7 @@ function Listing({isLoadingList, listing}) {
 
     return ( 
         <section className="craftsmen-content">
+            
             { isLoadingList && <SpinLoader /> }
 
             {listing && listing.length > 0 
@@ -48,7 +49,7 @@ function Listing({isLoadingList, listing}) {
                                             <p>{craftsman.user.region}</p>
                                         </div>
 
-                                        <p className="price-craftsman">{craftsman.price ? `${craftsman.price}€/h` : "Non renseigné"}</p>
+                                        <p className="price-craftsman">{craftsman.price ? `${craftsman.price}€/h` : "Tarif non renseigné"}</p>
                                     </div>
                                 </div>
                             </Link>

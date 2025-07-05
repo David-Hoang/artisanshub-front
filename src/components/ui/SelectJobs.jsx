@@ -4,7 +4,7 @@ function SelectJobs({datas, label, ...props}) {
     return ( 
         <div className="select-wrapper">
             <label htmlFor={props.id}>{label}</label>
-            <select {...props}>
+            <select id={props.id} {...props}>
                 <option value="">
                     {props.placeholder}
                 </option>
