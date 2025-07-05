@@ -7,7 +7,7 @@ import { faFacebookF, faInstagram, faLinkedinIn, faYoutube } from '@fortawesome/
 function Footer() {
     return ( 
         <footer>
-            <div className="footer-wrapper">
+            <div id="footer-wrapper">
 
                 <div className="footer-main-section">
                     <div className="footer-about-us">

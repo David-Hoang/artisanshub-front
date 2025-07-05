@@ -2,18 +2,27 @@
 @use "../../../../assets/scss/mixins" as mxn;
 @use "../../../../assets/scss/extends" as ext;
 
-div.prestations-tab {
+div#prestations-tab {
 
     svg.loading-list {
         margin : 4rem auto;
+        grid-column: 1 / -1;
+    }
+
+    p {
+        grid-column: 1 / -1;
     }
 
     display : grid;
     grid-template-columns: repeat(1, 1fr);
     gap : var.$gap-xl;
 
-    @media screen and (min-width : var.$bp-lg) {
+    @media screen and (min-width : var.$bp-md) {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media screen and (min-width : var.$bp-lg) {
+        grid-template-columns: repeat(3, 1fr);
     }
 
     article.prestation-card{
@@ -39,7 +48,7 @@ div.prestations-tab {
                 h3.prestation-title {
                     font-size: var.$txt-lg;
                     font-weight: 700;
-                    @include mxn.limitLineText(2)
+                    @include mxn.limitLineText(2);
                 }
 
                 p.user-name{

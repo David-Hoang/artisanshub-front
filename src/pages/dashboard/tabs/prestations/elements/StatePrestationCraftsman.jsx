@@ -26,7 +26,7 @@ function StatePrestationCraftsman({detailsPrestation}) {
                                 <h4>
                                     Vous avez une nouvelle demande de la part d'un client
                                 </h4>
-                                <p className="state-description">{firstCapitalize(detailsPrestation.client.user.first_name)} attend une proposition de votre part</p>
+                                <p className="state-description">{firstCapitalize(detailsPrestation?.client?.user?.first_name ?? "inconnu")} attend une proposition de votre part</p>
                             </div>
                         </div>
 
@@ -39,9 +39,9 @@ function StatePrestationCraftsman({detailsPrestation}) {
                                     Prochaines étapes
                                 </h4>
                                 <ul className="info-list">
-                                    <li><FontAwesomeIcon icon={faCaretRight} /> Étudiez la demande de {firstCapitalize(detailsPrestation.client.user.first_name)} puis répondez</li>
-                                    <li><FontAwesomeIcon icon={faCaretRight} /> Soumettez votre proposition à {firstCapitalize(detailsPrestation.client.user.first_name)}</li>
-                                    <li><FontAwesomeIcon icon={faCaretRight} /> {firstCapitalize(detailsPrestation.client.user.first_name)} acceptera ou déclinera votre proposition</li>
+                                    <li><FontAwesomeIcon icon={faCaretRight} /> Étudiez la demande de {firstCapitalize(detailsPrestation?.client?.user?.first_name ?? "inconnu")} puis répondez</li>
+                                    <li><FontAwesomeIcon icon={faCaretRight} /> Soumettez votre proposition à {firstCapitalize(detailsPrestation?.client?.user?.first_name ?? "inconnu")}</li>
+                                    <li><FontAwesomeIcon icon={faCaretRight} /> {firstCapitalize(detailsPrestation?.client?.user?.first_name ?? "inconnu")} acceptera ou déclinera votre proposition</li>
                                 </ul>
                             </div>
                         </div>
@@ -58,7 +58,7 @@ function StatePrestationCraftsman({detailsPrestation}) {
                                 <h4>
                                     En attente du client
                                 </h4>
-                                <p className="state-description">Vous avez envoyé une proposition à {firstCapitalize(detailsPrestation.client.user.first_name)}, attendez sa réponse</p>
+                                <p className="state-description">Vous avez envoyé une proposition à {firstCapitalize(detailsPrestation?.client?.user?.first_name ?? "inconnu") }, attendez sa réponse</p>
                             </div>
                         </div>
 
@@ -72,7 +72,7 @@ function StatePrestationCraftsman({detailsPrestation}) {
                                 </h4>
                                 <ul className="info-list">
                                     <li><FontAwesomeIcon icon={faCaretRight} /> Attendez la décision concernant votre proposition</li>
-                                    <li><FontAwesomeIcon icon={faCaretRight} /> {firstCapitalize(detailsPrestation.client.user.first_name)} pourrait accepter ou décliner la proposition</li>
+                                    <li><FontAwesomeIcon icon={faCaretRight} /> {firstCapitalize(detailsPrestation?.client?.user?.first_name ?? "inconnu")} pourrait accepter ou décliner la proposition</li>
                                     <li><FontAwesomeIcon icon={faCaretRight} /> Restez disponible en cas de question ou d'échange</li>
                                 </ul>
                             </div>

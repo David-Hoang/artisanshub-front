@@ -1,5 +1,5 @@
 import './Home.scss';
-import HeroImg from '../../assets/img/home-hero.jpg';
+import HeroImg from '../../assets/img/home-hero-small.webp';
 
 import { Link } from "react-router-dom";
 import { useContext } from "react";
@@ -16,7 +16,7 @@ function Home() {
     const { jobsCategories } = useContext(ApiServicesContext);
 
     return ( 
-        <main className="main-home">
+        <main id="main-home">
                 <section className="hero">
                     <div className="hero-content">
                         <h1 className="hero-title">

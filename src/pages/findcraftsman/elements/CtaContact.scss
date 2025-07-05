@@ -30,7 +30,14 @@ div.cta-wrapper {
 h4.important-informations {
     color: var.$orange;
     font-weight: 500;
+    width: 100%;
+    padding: 0 2rem;
+    text-align: center;
     svg {
         margin-right: 0.5rem;
+    }
+
+    @media screen and (min-width: var.$bp-lg) {
+        max-width: var.$bp-2xl;
     }
 }

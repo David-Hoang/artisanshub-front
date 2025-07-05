@@ -5,8 +5,8 @@
 div.background-modal {
     position: fixed;
     inset: 0;
-    background-color: rgba(var.$black, 0.4);
-    backdrop-filter: blur(0.1rem);
+    background-color: rgba(var.$black, 0.7);
+    backdrop-filter: blur(0.2rem);
     z-index: 999;
     
     display: flex;

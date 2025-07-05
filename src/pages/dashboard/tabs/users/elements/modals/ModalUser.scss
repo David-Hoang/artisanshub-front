@@ -1,0 +1,217 @@
+@use "../../../../../../assets/scss/variables" as var;
+@use "../../../../../../assets/scss/mixins" as mxn;
+@use "../../../../../../assets/scss/extends" as ext;
+
+div.modal {
+    &.details-user {
+        display: flex;
+        flex-direction: column;
+
+        width: 100%;
+
+        @media screen and (min-width: var.$bp-md) {
+            max-width: 75rem;
+        }
+
+        svg.loading-user{
+            margin : 2rem
+        }
+
+        div.modal-header {
+            display: flex;
+            align-items: center;
+            gap: var.$gap-base;
+            padding: 1.5rem;
+            background-color: var.$light-gray;
+
+            -webkit-box-shadow: 0px -2px 5px 0px var.$black;
+            -moz-box-shadow: 0px -2px 5px 0px var.$black;
+            box-shadow: 0px -2px 5px 0px var.$black;
+
+            z-index: 1;
+
+            div.image-container > img.image-user {
+                border-radius: 100%;
+                width: 4rem;
+                height: 4rem;
+                object-fit: cover;
+            }
+
+            div.user-name-role {
+                display: flex;
+                flex-direction: column;
+                gap: var.$gap-xs;
+            }
+        }
+
+        div.modal-main {
+            padding: 1.5rem;
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: var.$gap-2xl;
+            overflow-y: auto;
+
+            @media screen and (min-width: var.$bp-md) {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            div.user-card {
+                border: 1px #e6e6e6 solid;
+                border-radius: var.$rounded-lg;
+                padding: 1.5rem;
+                display: flex;
+                flex-direction: column;
+                gap: var.$gap-2xl;
+
+                div.wrapper {
+                    display: flex;
+                    align-items: center;
+                    gap: var.$gap-base;
+
+                    div.icon {
+                        color: var.$primary;
+                        font-size: var.$txt-xl;
+
+                        .icon-user{
+                            color : var.$orange;
+                        }
+
+                        .icon-address,
+                        .icon-account{
+                            color : var.$primary;
+                        }
+
+                        .icon-location{
+                            color : var.$danger;
+                        }
+
+                        .icon-craftsman{
+                            color : var.$success;
+                        }
+                    }
+
+                    h3 {
+                        font-size: var.$txt-base;
+                        font-weight: 600;
+                    }
+                }
+
+                div.content-user {
+                    display: grid;
+                    grid-template-columns: repeat(1, 1fr);
+                    gap: var.$gap-base;
+
+                    @media screen and (min-width: var.$bp-md) {
+                        grid-template-columns: repeat(2, 1fr);
+                        gap: var.$gap-3xl;
+                    }
+                }
+
+                div.content-contact {
+                    display: flex;
+                    flex-direction: column;
+                    gap: var.$gap-3xl;
+
+                    div {
+                        display: flex;
+                        align-items: center;
+                        gap: var.$gap-base;
+
+                        a {
+                            font-size: var.$txt-lg;
+                            padding: 1.2rem;
+                            border-radius: var.$rounded-lg;
+                            height: 2rem;
+                            width: 2rem;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            transition: 0.2s ease-in-out;
+
+                            &.phone {
+                                @include mxn.info($hover: true);
+                            }
+
+                            &.email {
+                                @include mxn.success($hover: true);
+                            }
+                        }
+                    }
+                }
+
+                &.craftsman-infos {
+                    grid-column: 1/-1;
+                    
+                    div.content-craftsman-infos{
+                        display: flex;
+                        flex-direction: column;
+                        gap: var.$gap-lg;
+
+                        div.wrapper-infos{
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                            flex-wrap: wrap;
+                            gap: var.$gap-base;
+                        }
+                    }
+                }
+
+                div.content-location {
+                    display: flex;
+                    flex-direction: column;
+                    gap: var.$gap-base;
+
+                    div.wrapper-city-zip {
+                        display: grid;
+                        grid-template-columns: repeat(1, 1fr);
+                        gap: var.$gap-base;
+                    }
+
+                    @media screen and (min-width: var.$bp-md) {
+                        gap: var.$gap-3xl;
+
+                        div.wrapper-city-zip {
+                            grid-template-columns: repeat(2, 1fr);
+                            gap: var.$gap-3xl;
+                        }
+                    }
+                }
+
+                div.content-account {
+                    display: flex;
+                    flex-direction: column;
+                    gap: var.$gap-base;
+
+                    @media screen and (min-width: var.$bp-md) {
+                        grid-template-columns: repeat(2, 1fr);
+                        gap: var.$gap-3xl;
+                    }
+                }
+            }
+        }
+
+        div.btn-wrapper {
+            width: 100%;
+            display: flex;
+            padding : 1.5rem;
+            justify-content: end;
+
+            button {
+                width: 100%;
+                @media screen and (min-width: var.$bp-md) {
+                        width: fit-content;
+                }
+            }
+        }
+
+        p{
+            font-size: var.$txt-sm;
+
+            &.label {
+                font-size: var.$txt-sm;
+                color: var.$gray;
+            }
+        }
+    }
+}

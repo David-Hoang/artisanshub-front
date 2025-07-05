@@ -16,7 +16,7 @@ function ResumeClientPrestation({detailsPrestation, userRole}) {
             </div>
 
             <div className="description-client-prestation">
-                <p>Description</p>
+                <h4>Description</h4>
                 {detailsPrestation.description && 
                     <p>{detailsPrestation.description}</p>
                 }

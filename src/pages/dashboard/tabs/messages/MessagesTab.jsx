@@ -15,12 +15,12 @@ import DefaultClient from '../../../../assets/img/default-client.svg';
 import SpinLoader from "../../../../components/ui/SpinLoader.jsx";
 import Badge from "../../../../components/ui/Badge.jsx"
 
-import ModalMessage from './elements/ModalMessage.jsx';
+import ModalMessage from './elements/modals/ModalMessage.jsx';
 
 function MessagesTab() {
 
     const apiBase = import.meta.env.VITE_MAIN_API_URI;
-    const {userRole, userDatas, userToken} = useContext(AuthContext);
+    const {userRole, userToken} = useContext(AuthContext);
 
     const [userConversations, setUserConversations] = useState(null);
     const [isLoadingConversations, setIsLoadingConversations] = useState(false);
@@ -109,7 +109,7 @@ function MessagesTab() {
     }
 
     return ( 
-        <div className="messages-tab">
+        <div id="messages-tab">
 
             { isLoadingConversations
                 ? <SpinLoader className="loading-list"/>
@@ -141,17 +141,17 @@ function MessagesTab() {
 
                             ))}
                         </ul>
-                        
-                        { isModalOpen && <ModalMessage 
-                                            isModalOpen={isModalOpen} 
-                                            closeModal={closeModal} 
-                                            selectedUserConversation={selectedUserConversation}
-                                        /> 
-                        }
                     </>
-                : <p>Vous n'avez aucun messages</p>
+                : <p>Vous n'avez actuellement aucun message.</p>
             }
 
+            { isModalOpen && 
+                <ModalMessage 
+                    isModalOpen={isModalOpen} 
+                    closeModal={closeModal} 
+                    selectedUserConversation={selectedUserConversation}
+                /> 
+            }
         </div>
     );
 }

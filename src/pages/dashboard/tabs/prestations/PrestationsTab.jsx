@@ -2,16 +2,18 @@ import './PrestationsTab.scss';
 import { useState, useContext } from 'react';
 
 import { PrestationsContext } from "../../context/PrestationsContext.jsx";
+import { AuthContext } from "../../../../context/AuthContext.jsx";
 
 import { dateShort, firstCapitalize } from "../../../../utils/Helpers.jsx";
 import Button from "../../../../components/ui/Button.jsx";
 import Badge from "../../../../components/ui/Badge.jsx";
 import SpinLoader from "../../../../components/ui/SpinLoader";
 
-import ModalPrestation from "./elements/ModalPrestation.jsx";
+import ModalPrestation from "./elements/modals/ModalPrestation.jsx";
 
 function PrestationsTab() {
     
+    const {userRole} = useContext(AuthContext);
     const {isLoadingPrestations, userPrestations} = useContext(PrestationsContext);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedPrestation, setSelectedPrestation] = useState(null);
@@ -20,14 +22,14 @@ function PrestationsTab() {
         setIsModalOpen(true);
         setSelectedPrestation(selectedPrestation);
     }
-
+    
     const closeModal = () => {
         setIsModalOpen(false);
         setSelectedPrestation(null);
     }
     
     return ( 
-        <div className="prestations-tab">
+        <div id="prestations-tab">
             {isLoadingPrestations 
             ? <SpinLoader className="loading-list"/>
             : userPrestations && userPrestations.length > 0 
@@ -38,7 +40,10 @@ function PrestationsTab() {
                                 <div className="wrapper">
                                     <div className="prestation-header">
                                         <h3 className="prestation-title">{firstCapitalize(pres.title)}</h3>
-                                        <p className="user-name">Artisan : {firstCapitalize(pres.user_last_name)} {firstCapitalize(pres.user_first_name)}</p>
+                                        <p className="user-name">
+                                            {userRole === "client" ? "Artisan : " : "Client : "} 
+                                            {firstCapitalize(pres.user_last_name ?? "Inconnu")} {firstCapitalize(pres.user_first_name ?? "Inconnu")}
+                                        </p>
                                     </div>
 
                                     {pres.state === "await-craftsman" && <Badge color="pending">En attente artisan</Badge> }
@@ -53,15 +58,16 @@ function PrestationsTab() {
                             </article>
                         ))
                     }
-                    { isModalOpen && 
-                        <ModalPrestation 
-                            isModalOpen={isModalOpen}
-                            closeModal={closeModal} 
-                            selectedPrestation={selectedPrestation}
-                        />
-                    }
                 </>
             : <p>Vous n'avez actuellement aucune prestation.</p>
+            }
+
+            { isModalOpen && 
+                <ModalPrestation 
+                    isModalOpen={isModalOpen}
+                    closeModal={closeModal} 
+                    selectedPrestation={selectedPrestation}
+                />
             }
         </div>
     );

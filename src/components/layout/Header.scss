@@ -12,7 +12,7 @@ header {
     -moz-box-shadow: 0 -1px 3px rgba(57, 63, 72, 0.3);
     box-shadow: 0 -1px 3px rgba(57, 63, 72, 0.3);
 
-    nav.main-menu{
+    nav#main-menu{
         width: 100%;
         max-width: var.$bp-2xl;
         padding : 1.5rem 2rem;
@@ -66,6 +66,7 @@ header {
             display : none;
 
             a.a-btn-secondary {
+                position : relative;
                 @include mxn.a-btn("secondary", var.$txt-sm);
             }
 
@@ -95,9 +96,9 @@ header {
         }
     }
 
-    div.mobile-menu {
+    div#mobile-menu {
         position : fixed;
-        background-color: rgba(#000000, 0.35);
+        background: rgba(var.$black, 0.7);
         inset : 0;
 
         cursor: pointer;
@@ -169,6 +170,7 @@ header {
                 gap : var.$gap-sm;
 
                 a.a-btn-secondary {
+                    position : relative;
                     @include mxn.a-btn("secondary", var.$txt-sm);
                     width : 100%;
                 }

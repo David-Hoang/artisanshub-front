@@ -3,10 +3,10 @@ import './Tabs.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
 
-function Tabs({children, tabsList, selectedTab, setSelectedTab, ...props})
+function Tabs({children, tabsList, selectedTab, setSelectedTab, className, ...props})
 {
     return ( 
-        <section className="tabs">
+        <section className={className ? `tabs ${className}`: "tabs"}>
             <div className="tab-list">
                 {tabsList && 
                     tabsList.map( (tab, index) => (
@@ -16,7 +16,8 @@ function Tabs({children, tabsList, selectedTab, setSelectedTab, ...props})
                             title={tab.isLocked ? tab.lockedMessage : undefined}
                         >
                             {tab.isLocked ? <FontAwesomeIcon icon={faLock}/> : tab.icon}
-                            {tab.title}
+                            <span className="tab-title">{tab.title}</span>
+                            {tab.notification && <span className="red-notification-circle"></span>}
                         </button>
                     ))
                 }

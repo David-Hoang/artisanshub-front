@@ -1,6 +1,6 @@
-@use "../../../../../assets/scss/variables" as var;
-@use "../../../../../assets/scss/mixins" as mxn;
-@use "../../../../../assets/scss/extends" as ext;
+@use "../../../../../../assets/scss/variables" as var;
+@use "../../../../../../assets/scss/mixins" as mxn;
+@use "../../../../../../assets/scss/extends" as ext;
 
 div.modal-message {
     width: 100%;
@@ -40,10 +40,17 @@ div.modal-message {
     }
 
     section.messages-content{
+
         flex-grow: 1;
         padding : 1.5rem;
         overflow-y: auto;
         
+        &.messages-loading{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
         ul.conversation {
             display: flex;
             flex-direction: column;

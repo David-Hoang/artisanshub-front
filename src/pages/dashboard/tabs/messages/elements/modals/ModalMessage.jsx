@@ -3,19 +3,19 @@ import './ModalMessage.scss';
 import { useState, useEffect, useRef, useContext  } from 'react';
 import axios from "axios";
 
-import { AuthContext } from "../../../../../context/AuthContext.jsx";
+import { AuthContext } from "../../../../../../context/AuthContext.jsx";
 
-import { firstCapitalize, dateMessageFormat } from "../../../../../utils/Helpers";
+import { firstCapitalize, dateMessageFormat } from "../../../../../../utils/Helpers.jsx";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 
-import Modal from "../../../../../components/ui/Modal.jsx";
-import Badge from "../../../../../components/ui/Badge.jsx";
-import TextArea from "../../../../../components/ui/TextArea.jsx";
-import SpinLoader from "../../../../../components/ui/SpinLoader.jsx";
-import Button from "../../../../../components/ui/Button.jsx";
-import AlertMessage from "../../../../../components/AlertMessage.jsx";
+import Modal from "../../../../../../components/ui/Modal.jsx";
+import Badge from "../../../../../../components/ui/Badge.jsx";
+import TextArea from "../../../../../../components/ui/TextArea.jsx";
+import SpinLoader from "../../../../../../components/ui/SpinLoader.jsx";
+import Button from "../../../../../../components/ui/Button.jsx";
+import AlertMessage from "../../../../../../components/AlertMessage.jsx";
 
 function ModalMessage({isModalOpen, closeModal, selectedUserConversation}) {
         
@@ -105,7 +105,8 @@ function ModalMessage({isModalOpen, closeModal, selectedUserConversation}) {
                     { selectedUserConversation.job_name && <Badge color="info">{selectedUserConversation.job_name}</Badge> }
                 </div>
             </div>
-            <section className="messages-content">
+            <section className={isLoadingConversation ? "messages-content messages-loading" : "messages-content"}>
+
                 {isLoadingConversation 
                     ? <SpinLoader/>
                     : conversation && conversation.length > 0 

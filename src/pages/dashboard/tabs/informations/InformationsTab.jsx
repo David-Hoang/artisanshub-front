@@ -10,10 +10,10 @@ import UserPictureForm from "./elements/UserPictureForm.jsx";
 
 function InformationsTab() {
 
-    const {userRole} = useContext(AuthContext);
+    const {userRole, isAdmin} = useContext(AuthContext);
 
     return ( 
-        <div className="informations-tab">
+        <div id="informations-tab">
 
             <UserInfosForm />
             
@@ -27,7 +27,9 @@ function InformationsTab() {
                         : null
             }
 
-            <UserPictureForm />
+            { !isAdmin &&
+                <UserPictureForm />
+            }
 
         </div>
     );

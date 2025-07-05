@@ -5,7 +5,7 @@ import { firstCapitalize } from "../../../utils/Helpers.jsx";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLocationDot, faBriefcase} from '@fortawesome/free-solid-svg-icons'
 
-import DefaultCraftsmanCover from '../../../assets/img/default-craftsman-cover.svg';
+import { randomCraftsmanCover } from "../../../utils/Helpers.jsx";
 
 function HeroCraftsman({craftsmanInfos, ...props}) {
 
@@ -16,8 +16,8 @@ function HeroCraftsman({craftsmanInfos, ...props}) {
             <div className="hero-content">
                 <img 
                     className="hero-img-craftsman"
-                    src={craftsmanInfos.cover ? `${apiBase}/storage/${craftsmanInfos.cover}` : DefaultCraftsmanCover}
-                    alt="" 
+                    src={craftsmanInfos.cover ? `${apiBase}/storage/${craftsmanInfos.cover}` : randomCraftsmanCover()}
+                    alt="Image bio de couverture pour l'artisan" 
                 />
                 <div className="filter-brightness"></div>
 

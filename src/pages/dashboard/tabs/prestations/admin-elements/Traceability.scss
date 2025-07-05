@@ -1,0 +1,40 @@
+@use "../../../../../assets/scss/variables" as var;
+@use "../../../../../assets/scss/mixins" as mxn;
+@use "../../../../../assets/scss/extends" as ext;
+
+div.traceability-admin-prestation{
+
+    div.wrapper {
+        display: flex;
+        align-items: center;
+        gap: var.$gap-base;
+
+        div.icon {
+            color: var.$black;
+            font-size: var.$txt-xl;
+        }
+
+        h3 {
+            font-size: var.$txt-lg;
+            font-weight: 600;
+        }
+    }
+
+    div.traceability-dates {
+        display: flex;
+        flex-direction: column;
+        gap: var.$gap-md;
+
+        div {
+            p.label {
+                font-size: var.$txt-sm;
+                color: var.$gray;
+            }
+            
+            p {
+                font-size: var.$txt-sm;
+
+            }
+        }
+    }
+}

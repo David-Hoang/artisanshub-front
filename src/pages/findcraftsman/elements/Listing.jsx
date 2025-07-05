@@ -6,7 +6,7 @@ import { firstCapitalize } from "../../../utils/Helpers";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLocationDot, faBriefcase} from '@fortawesome/free-solid-svg-icons'
 
-import DefaultCraftsmanCover from "../../../assets/img/default-craftsman-cover.svg";
+import { randomCraftsmanCover } from "../../../utils/Helpers";
 
 import SpinLoader from "../../../components/ui/SpinLoader";
 
@@ -26,7 +26,7 @@ function Listing({isLoadingList, listing}) {
                             <Link to={`/artisan/${craftsman.id}`} className="craftsman-link">
 
                                 <img className="image-craftsman"
-                                    src={craftsman.cover ? `${apiBase}/storage/${craftsman.cover}` : DefaultCraftsmanCover}
+                                    src={craftsman.cover ? `${apiBase}/storage/${craftsman.cover}` : randomCraftsmanCover()}
                                     alt=""
                                 />
                                 <div className="filter-brightness"></div>

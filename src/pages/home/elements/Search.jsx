@@ -15,7 +15,7 @@ function Search({jobsCategories, ...props}) {
                     <Select 
                         label="Que recherchez-vous ?"
                         id="job"
-                        placeholder="Sélectionnez une catégorie"
+                        selectPlaceholder="Sélectionnez une catégorie"
                         datas={jobsCategories}
                     />
 

@@ -19,7 +19,7 @@ function Login() {
     })
 
     return (
-        <main className="main-login">
+        <main id="main-login">
             <form onSubmit={(e) => handleLogin(e, formLogin)} className="login-form">
                 <div className="login-header">
                     <h1>Connectez vous à ArtisansHub</h1>
