@@ -1,0 +1,37 @@
+@use "../../../../../assets/scss/variables" as var;
+@use "../../../../../assets/scss/mixins" as mxn;
+@use "../../../../../assets/scss/extends" as ext;
+
+div.user-infos-input{
+    display : grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap : var.$gap-xl;
+
+    @media screen and (min-width : var.$bp-md) and (max-width : var.$bp-lg) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    @media screen and (min-width : var.$bp-lg) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+}
+
+div.region-mail-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap : var.$gap-xl;
+
+    @media screen and (min-width : var.$bp-md) {
+        flex-direction: row;
+    }
+
+    div {
+        width: 100%;
+    }
+
+    div > input {
+        background-color: var.$secondary-hover;
+    }
+}

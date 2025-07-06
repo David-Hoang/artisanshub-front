@@ -1,0 +1,78 @@
+@use 'variables' as var;
+@use "mixins" as mxn;
+@use "extends" as ext;
+
+:root {
+    //Font setting
+    font-family: "Nunito", Avenir, Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    font-optical-sizing: auto;
+    font-style: normal;
+    line-height: 1.5;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+    margin: 0;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color : rgba(var.$black, 0.2);
+}
+
+a, a:visited {
+    color : var.$black;
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+button{
+    font-family: "Nunito", Avenir, Helvetica, Arial, sans-serif;
+
+    &:disabled {
+        cursor: not-allowed !important;
+    }
+}
+
+body {
+    margin: 0;
+    color : var.$black;
+
+    #root {
+        display : flex;
+        flex-direction: column;
+        min-height: 100vh;
+
+        main {
+            flex-grow: 1;
+            background-color : var.$tiertiary;
+        }
+    }
+}
+
+span.red-notification-circle {
+    position: absolute;
+    background-color: var.$danger;
+    height: 0.6rem;
+    width: 0.6rem;
+    border-radius: var.$rounded-full;
+    right: -0.2rem;
+    top: -0.2rem;
+    animation: pulse-animation 2s infinite;
+    box-shadow: 0px 0px 1px 1px var.$danger;
+}

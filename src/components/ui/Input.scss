@@ -1,0 +1,29 @@
+@use "../../assets/scss/variables" as var;
+@use "../../assets/scss/mixins" as mxn;
+@use "../../assets/scss/extends" as ext;
+
+div.input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap : var.$gap-sm;
+    position : relative;
+
+    label {
+        font-size : var.$txt-sm;
+        font-weight: 500;
+    }
+
+    input {
+        @include mxn.default-input;
+    }
+
+    span.symbol {
+        position: absolute;
+        right: 3rem;
+        top: 2.05rem;
+        font-weight: 700;
+        font-size: var.$txt-lg;
+        color: var.$gray;
+    }
+
+}
