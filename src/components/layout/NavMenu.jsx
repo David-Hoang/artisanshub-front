@@ -11,7 +11,7 @@ function NavMenu({closeMobileMenu}) {
                 <Link to="/trouver-artisan" onClick={closeMobileMenu}>Trouver mon artisan</Link>
             </li>
             <li>
-                <Link to="/" onClick={closeMobileMenu}>Contact</Link>
+                <Link to="/contactez-nous" onClick={closeMobileMenu}>Contact</Link>
             </li>
         </>
     );

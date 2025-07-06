@@ -8,6 +8,10 @@ import Dashboard from '../pages/dashboard/Dashboard.jsx';
 import FindCraftsmanList from '../pages/findcraftsman/FindCraftsmanList.jsx';
 import DetailsCraftsman from "../pages/findcraftsman/DetailsCraftsman.jsx";
 import PageNotFound from "../pages/pagenotfound/PageNotFound.jsx";
+import Contact from "../pages/contact/Contact.jsx";
+import Legal from "../pages/legal/Legal.jsx";
+import PrivacyPolicy from "../pages/legal/PrivacyPolicy.jsx";
+import Terms from "../pages/legal/Terms.jsx";
 
 import { AuthContext } from "../context/AuthContext.jsx";
 
@@ -19,12 +23,20 @@ function AppRouters() {
         <>
             <Routes>
                 <Route path="/" element={<Home />} />
+
+                <Route path="/contactez-nous" element={<Contact />} />
+                <Route path="/mentions-legales" element={<Legal />} />
+                <Route path="/politique-de-confidentialite" element={<PrivacyPolicy />} />
+                <Route path="/conditions-utilisation" element={<Terms />} />
+
                 <Route path="/inscription" element={isLogged ? <Navigate to="/" /> : <Register />} />
                 <Route path="/connexion" element={isLogged ? <Navigate to="/" /> : <Login />} /> 
+
                 <Route path="/trouver-artisan" element={<FindCraftsmanList/>} /> 
                 <Route path="/artisan/:craftsmanId" element={<DetailsCraftsman/>} /> 
 
                 <Route path="/dashboard" element={isLogged ? <Dashboard /> : <Navigate to="/" />} />
+
                 <Route path="*" element={<PageNotFound />} />
 
             </Routes>

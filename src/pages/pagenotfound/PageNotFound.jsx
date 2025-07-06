@@ -1,20 +1,15 @@
 import "./PageNotFound.scss";
-import { useNavigate } from "react-router-dom";
-import NotFound from "../../assets/img/404-not-found.svg";
-import Button from "../../components/ui/Button";
+import { Link } from "react-router-dom";
+import NotFoundImg from "../../assets/img/404-not-found.svg";
 
 function PageNotFound() {
 
-    const navigate = useNavigate()
-
     return ( 
-        <main id="main-not-found" 
-            style={{backgroundImage : `url(${NotFound})`}}
-            >
-            
+        <main id="main-not-found">
+            <img className="not-found-picture" src={NotFoundImg} alt="SVG illustration pour la page 404" />
             <div className="content">
                 <h1>Oops ! La page que vous recherchez n'existe pas sur ArtisansHub.</h1>
-                <Button className="btn-primary" onClick={() => navigate("/")}>Accueil</Button>
+                <Link to="/" className="a-btn-primary">Acceuil</Link>
             </div>
         </main>
     );

@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF, faInstagram, faLinkedinIn, faYoutube } from '@fortawesome/free-brands-svg-icons';
 
 import { thisYear } from "../../utils/Helpers";
+import { Link } from "react-router-dom";
 
 function Footer() {
     return ( 
@@ -41,10 +42,10 @@ function Footer() {
                         <div className="footer-legals">
                             <h4>Informations légales</h4>
                             <ul>
-                                <li><a href="#">Mentions légales</a></li>
-                                <li><a href="#">Politique de confidentialité</a></li>
-                                <li><a href="#">Conditions d’utilisation</a></li>
-                                <li><a href="#">Contact</a></li>
+                                <li><Link to={"/mentions-legales"}>Mentions légales</Link></li>
+                                <li><Link to={"/politique-de-confidentialite"}>Politique de confidentialité</Link></li>
+                                <li><Link to={"/conditions-utilisation"}>Conditions d’utilisation</Link></li>
+                                <li><Link to={"/contactez-nous"}>Contact</Link></li>
                             </ul>
                         </div>
                     </div>

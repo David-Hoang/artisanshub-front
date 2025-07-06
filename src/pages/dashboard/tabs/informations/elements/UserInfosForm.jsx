@@ -55,7 +55,9 @@ function UserInfosForm() {
 
         //Validation : Get userInfosForm and return object of error if no value in input
         const validateUserInfosInputs = Object.entries(userInfosForm).reduce((acc, [key, value]) => {
+            //start with 0 and should have 9 numbers = total 10 numbers
             const phoneRegex = /^0\d{9}$/;
+            // only need 5 numbers
             const zipcodeRegex = /^\d{5}$/;
 
             if (!value) {
