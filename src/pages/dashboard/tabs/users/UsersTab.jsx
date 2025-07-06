@@ -22,7 +22,7 @@ function UsersTab() {
     const [errorMessage, setErrorMessage] = useState("");
 
     const fetchUsersList = async () => {
-        setIsLoadingUsersList(false);
+        setIsLoadingUsersList(true);
 
         try {
             const users = await axios.get(`${apiBase}/api/admin/all-users`, {
@@ -110,8 +110,8 @@ function UsersTab() {
                     { isLoadingUsersList 
                         ? (
                             <tr>
-                                <td colSpan={7}>
-                                    <SpinLoader />
+                                <td colSpan={8}>
+                                    <SpinLoader className="loading-user-list"/>
                                 </td>
                             </tr>
                             

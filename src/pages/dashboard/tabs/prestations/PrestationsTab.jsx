@@ -59,7 +59,7 @@ function PrestationsTab() {
                         ))
                     }
                 </>
-            : <p>Vous n'avez actuellement aucune prestation.</p>
+            : <p className="no-prestation">Vous n'avez actuellement aucune prestation.</p>
             }
 
             { isModalOpen && 

@@ -5,6 +5,11 @@
 div#users-tab {
     table {
         td {
+            
+            svg.loading-user-list{
+                text-align: center;
+            }
+
             &.data-actions {
                 div.btn-wrapper-user {
                     display: flex;

@@ -6,6 +6,11 @@ div#admin-prestations-tab{
     table {
         td {
             &.data-actions {
+
+                svg.loading-admin-prestations{
+                    text-align: center;
+                }
+
                 div.btn-wrapper-prestation {
                     display: flex;
                     gap: var.$gap-sm;

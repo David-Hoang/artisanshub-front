@@ -1,5 +1,8 @@
 import './JobCard.scss';
 import { Link } from "react-router-dom";
+
+import {randomCraftsmanCover} from "../../../utils/Helpers.jsx"
+
 import SpinLoader from "../../../components/ui/SpinLoader.jsx";
 import Button from "../../../components/ui/Button.jsx";
 
@@ -23,7 +26,7 @@ function JobCard({jobsCategories, ...props}) {
                             <div className="image-container">
                                 <div className="filter-brightness"></div>
                                 <img
-                                src={`${apiBase}/storage/${job.img_path}`} alt={`${job.name ?? "Métier"} : ${job.img_title}`} 
+                                src={job?.img_path ? `${apiBase}/storage/${job.img_path}` : randomCraftsmanCover()} alt={`${job.name ?? "Métier"} : ${job.img_title}`} 
                                 className="image-artisan"
                                 />
                             </div>

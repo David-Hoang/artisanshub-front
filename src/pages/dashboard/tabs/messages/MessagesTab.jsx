@@ -142,7 +142,7 @@ function MessagesTab() {
                             ))}
                         </ul>
                     </>
-                : <p>Vous n'avez actuellement aucun message.</p>
+                : <p className="no-message">Vous n'avez actuellement aucun message.</p>
             }
 
             { isModalOpen && 

@@ -9,6 +9,10 @@ div#messages-tab{
         display: block;
     }
 
+    p.no-message{
+        font-size: var.$txt-sm;
+    }
+
     ul.conversation-list{
         display: flex;
         flex-direction: column;
