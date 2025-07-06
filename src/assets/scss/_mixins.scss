@@ -1,0 +1,137 @@
+@use "variables" as var;
+@use "extends" as ext;
+
+@mixin btn ($color : null, $fs : var.$txt-sm){
+    padding : 0.5rem 1rem;
+
+    font-size : $fs;
+    font-weight : 500;
+    border-radius: var.$rounded-lg;
+    border : 1px transparent solid;
+
+    transition : background-color 0.1s ease-in-out;
+    cursor: pointer;
+
+    @if $color == primary {
+        background-color : var.$primary;
+        color : var.$full-white;
+        border : 1px var.$primary solid;
+        &:hover {
+            background: rgba(var.$primary, 0.8);
+        }
+
+    } @else if $color == secondary {
+        background-color : var.$secondary;
+        color : var.$black;
+        border : 1px #e6e6e6 solid;
+        &:hover {
+            background: rgba(var.$secondary-hover, 0.8);
+        }
+
+    }
+}
+
+@mixin a-btn ($color : primary, $fs : var.$txt-sm){
+    padding : 0.5rem 1rem;
+
+    display: inline-block;
+
+    font-size : $fs;
+    font-weight : 500;
+    line-height: normal;
+    text-align: center;
+    text-decoration: none;
+
+    border-radius: var.$rounded-lg;
+
+    transition-duration: 0.1s;
+    transition-property: background-color;
+
+    cursor: pointer;
+
+    @if $color == primary {
+        background : var.$primary;
+        color : var.$full-white;
+        border : 1px solid;
+        &:hover {
+            background: rgba(var.$primary, 0.8);
+        }
+
+    } @else if $color == secondary {
+        background : var.$secondary;
+        color : var.$black;
+        border : 1px #e6e6e6 solid;
+        &:hover {
+            background: rgba(var.$secondary-hover, 0.8);
+        }
+
+    }
+}
+
+@mixin default-input() {
+    padding : 0.5rem 1rem;
+    border : 1px #e6e6e6 solid ;
+    border-radius: var.$rounded-lg;
+}
+
+@mixin shadow-thin () {
+    box-shadow: 
+    rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+    rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+}
+
+@mixin pending($hover : false) {
+    background-color: #fef3c7;
+    color: #d97706;
+
+    @if $hover{
+        transition : background-color 0.1s ease-in-out;
+        &:hover{
+            background-color : #fde68a
+        }
+    }
+}
+
+@mixin info($hover : false) {
+    background-color: #dbeafe;
+    color: #2563eb;
+
+    @if $hover{
+        transition : background-color 0.1s ease-in-out;
+        &:hover{
+            background-color : #bfdbfe
+        }
+    }
+}
+
+@mixin success($hover : false) {
+    background-color: #dcfce7;
+    color: #16a34a;
+
+    @if $hover{
+        transition : background-color 0.1s ease-in-out;
+        &:hover{
+            background-color : #bbf7d0
+        }
+    }
+}
+
+@mixin danger($hover : false) {
+    background-color: #ffe4e6;
+    color: #ef4444;
+
+    @if $hover{
+        transition : background-color 0.1s ease-in-out;
+        &:hover{
+            background-color : #fecdd3
+        }
+    }
+}
+
+@mixin limitLineText($limit : 2) {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: $limit;
+    line-clamp: $limit;
+    -webkit-box-orient: vertical;
+}

@@ -1,0 +1,15 @@
+@use "../assets/scss/variables" as var;
+@use "../assets/scss/mixins" as mxn;
+@use "../assets/scss/extends" as ext;
+
+div.error-wrapper {
+    display : flex;
+    align-items: center;
+    gap : var.$gap-sm;
+    color : #ef4444;
+    padding : 0;
+
+    p.error-text {
+        font-size: var.$txt-sm;
+    }
+}

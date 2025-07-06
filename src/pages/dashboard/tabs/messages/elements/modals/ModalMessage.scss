@@ -1,0 +1,129 @@
+@use "../../../../../../assets/scss/variables" as var;
+@use "../../../../../../assets/scss/mixins" as mxn;
+@use "../../../../../../assets/scss/extends" as ext;
+
+div.modal-message {
+    width: 100%;
+    height: 100%;
+
+    @media screen and (min-width : var.$bp-md) {
+        max-width: 75rem;
+    }
+
+    div.modal-header {
+        display : flex; 
+        align-items: center;
+        gap: var.$gap-base;
+        padding : 1.5rem;
+        background-color: var.$light-gray;
+        
+        -webkit-box-shadow: 0px -2px 5px 0px var.$black;
+        -moz-box-shadow: 0px -2px 5px 0px var.$black;
+        box-shadow: 0px -2px 5px 0px var.$black;
+
+        z-index: 1;
+
+        div.image-container{
+            img.image-craftsman{
+                border-radius: 100%;
+                width: 4rem;
+                height : 4rem;
+                object-fit : cover;
+            }
+        }
+
+        div.user-name-job{
+            display : flex; 
+            flex-direction: column;
+            gap: var.$gap-xs;
+        }
+    }
+
+    section.messages-content{
+
+        flex-grow: 1;
+        padding : 1.5rem;
+        overflow-y: auto;
+        
+        &.messages-loading{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        ul.conversation {
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+            gap: var.$gap-2xl;
+
+            li.message-content{
+                max-width: 35rem;
+                display : flex;
+                flex-direction: column;
+                gap: var.$gap-xs;
+
+                &.sender{
+                    align-self: self-end;
+                    
+                    p.date-time{
+                        align-self: self-end;
+                    }
+                }
+
+                &.receiver{
+                    align-self: self-start;
+                }
+
+                div.message-badge{
+                    padding : 0.85rem;
+                    border-radius: var.$rounded-lg;
+
+                    p.message{
+                        font-size: var.$txt-sm;
+                        font-weight: 600;
+                    }
+
+                    &.sender{
+                        background-color: var.$primary;
+                        color : var.$full-white;
+                    }
+
+                    &.receiver{
+                        background-color: var.$light-gray;
+                        color : var.$black;
+                    }
+                }
+
+                
+                p.date-time{
+                    font-size: var.$txt-xs;
+                    color : var.$gray;
+                }
+            }
+        }
+    }
+
+    form.send-message {
+        padding : 0 1.5rem 1.5rem;
+        position: relative;
+
+        div.textarea-wrapper > textarea{
+            resize: none;
+            padding-right: 8rem;
+        }
+        
+        button.btn-primary{
+            position : absolute;
+            right : 2.5rem;
+            bottom : 2.8rem;
+
+            display: flex;
+            align-items: center;
+            gap: var.$gap-xs;
+            svg {
+                font-size: var.$txt-sm;
+            }
+        }
+    }
+}

@@ -1,0 +1,89 @@
+@use "../../../assets/scss/variables" as var;
+@use "../../../assets/scss/mixins" as mxn;
+@use "../../../assets/scss/extends" as ext;
+
+
+section.home-jobs-categories{
+    display: flex;
+    flex-direction: column;
+    gap: var.$gap-3xl;
+
+    div.jobs-category-title {
+            
+        h2 {
+            font-size: var.$txt-2xl;
+            font-weight: 800;
+        }
+        
+        h2, h3 {
+            text-align: center;
+        }
+    }
+
+    div.jobs-categories-list {
+        display : grid;
+        gap: var.$gap-base;
+        grid-template-columns: 1fr;
+        
+        @media screen and (min-width : var.$bp-sm) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @media screen and (min-width : var.$bp-lg) {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        a.job-category-card{
+            border : 1px #e6e6e6 solid ;
+            border-radius: var.$rounded-lg;
+            overflow: hidden;
+            background-color: var.$full-white;
+
+            &:hover{
+                div.image-container{
+                    img.image-artisan {
+                        transform: scale(1.1);
+                    }
+                    div.filter-brightness{
+                        background: rgba(var.$black, 0.2);
+                    }
+                }
+            }
+
+            div.image-container{
+                height: 12rem;
+                overflow: hidden;
+                position: relative;
+                
+                div.filter-brightness{
+                    position: absolute;
+                    inset : 0;
+                    z-index : 1;
+                    transition: all 0.1s ease-out;
+                }
+
+                img.image-artisan{
+                    width : 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    transition: all 0.2s ease-out;
+                }
+            }
+
+            div.infos-container{
+                padding : 1rem;
+            }
+        }
+    }
+
+    button.btn-primary {
+        width : 100%
+    }
+
+    @media screen and (min-width : var.$bp-md) {
+        button.btn-primary {
+            width : 15rem;
+            align-self: center;
+        }
+    }
+}

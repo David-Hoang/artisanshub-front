@@ -1,0 +1,13 @@
+@use "../../../assets/scss/variables" as var;
+@use "../../../assets/scss/mixins" as mxn;
+@use "../../../assets/scss/extends" as ext;
+
+section.tabs-craftsman > div.tab-list {
+    // width: 100%;
+    button.tab-item{
+        padding: 0.4rem 1rem;
+        span.tab-title {
+            display : inline-block !important;
+        }
+    }
+}

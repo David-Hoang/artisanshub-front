@@ -1,0 +1,21 @@
+@use "../../assets/scss/mixins" as mxn;
+@use "../../assets/scss/variables" as var;
+@use "../../assets/scss/extends" as ext;
+
+span.badge{
+    border : 1px #e6e6e6 solid ;
+    border-radius: var.$rounded-lg;
+    width: fit-content;
+    min-width: fit-content;
+    height: fit-content;
+    font-size: var.$txt-sm;
+    padding: 0.25rem 0.60rem;
+    background-color: var.$tiertiary;
+    border: none;
+
+    &.pending { @include mxn.pending; }
+    &.info    { @include mxn.info; }
+    &.success { @include mxn.success; }
+    &.danger  { @include mxn.danger; }
+
+}

@@ -1,0 +1,22 @@
+@use "../assets/scss/variables" as var;
+@use "../assets/scss/mixins" as mxn;
+@use "../assets/scss/extends" as ext;
+
+div.alert-wrapper {
+    display : flex;
+    align-items: center;
+    gap : var.$gap-sm;
+    padding : 0;
+
+    &.success {
+        color : #22c55e;
+    }
+
+    &.error {
+        color : #ef4444;
+    }
+
+    p.alert-text {
+        font-size: var.$txt-sm;
+    }
+}
