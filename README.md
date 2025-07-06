@@ -1,12 +1,51 @@
-# React + Vite
+# ArtisansHub - FrontEnd (React)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern React application for the ArtisansHub platform, designed to connect clients and craftsmen by region and facilitate service requests.
 
-Currently, two official plugins are available:
+## About the project
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+FrontEnd of the platform ArtisansHub. The front-end project provide an easier way to communicate between client and craftsman. This project is made with ReactJs and Vite.
 
-## Expanding the ESLint configuration
+ArtisansHub handle : 
+- Registration and authentication for both client and craftsman
+- Management of prestations
+- Client and Craftsman can send messages
+- Listings of craftsmans and details of a craftsman
+- Admin features : users management, prestations management, job category management
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Getting Started
+
+### Dependencies
+
+- Node.js >= 20.15
+- npm >= 10.8
+- React >= 19.0
+- Vite >= 6.2
+- Axios >= 1.8
+
+### Installing
+
+1. Clone the repository
+```
+git clone https://github.com/David-Hoang/artisanshub-front.git
+cd artisanshub-front
+```
+
+3. Install dependencies
+```
+npm install
+```
+3. Copy `.env.example` and rename to `.env`. 
+Configure the `.env` file the variable `VITE_MAIN_API_URI` with the base URL of the api.
+
+### Executing program (local development)
+After setting up, launch the front-end application :
+`npm run dev` to run the application.
+Default local URL is `http://localhost:5173/`.
+
+## Authors
+
+Contributors names and contact info
+
+David Hoang
+[LinkedIn](https://www.linkedin.com/in/dav-hoang/)
