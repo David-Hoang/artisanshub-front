@@ -12,9 +12,9 @@ import NavMenu from './NavMenu.jsx';
 
 function Header() {
 
-    const {isLogged, handleLogout, ishasCompletedProfile} = useContext(AuthContext);
+    const {isLogged, handleLogout, hasCompletedProfile} = useContext(AuthContext);
     const [toggleMobileMenu, setToggleMobileMenu] = useState(false);
-
+    
     const openMobileMenu = () => setToggleMobileMenu(true);
     const closeMobileMenu = () => setToggleMobileMenu(false);
     
@@ -39,7 +39,7 @@ function Header() {
                         <>
                             <Link to="/dashboard" className="a-btn-secondary" onClick={closeMobileMenu}>
                                 Dashboard
-                                {ishasCompletedProfile && <span className="red-notification-circle"></span> }
+                                {!hasCompletedProfile && <span className="red-notification-circle"></span> }
                             </Link>
                             <Button className="btn-primary" onClick={handleLogout}>Déconnexion</Button>
                         </>
@@ -90,7 +90,7 @@ function Header() {
                                 <>
                                     <Link to="/dashboard" className="a-btn-secondary" onClick={closeMobileMenu}>
                                         Dashboard
-                                        {ishasCompletedProfile && <span className="red-notification-circle"></span> }
+                                        {!hasCompletedProfile && <span className="red-notification-circle"></span> }
                                     </Link>
                                     <Button className="btn-primary" onClick={handleLogout}>Déconnexion</Button>
                                 </>

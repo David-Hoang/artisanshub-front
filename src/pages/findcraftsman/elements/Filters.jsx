@@ -21,15 +21,16 @@ function Filters({setSearchParams, searchParams, ...props}) {
                         jobsCategories : 
                         null
                     }
-                    value={searchParams.get('catId')}
+                    value={searchParams.get('catId') ?? ""}
                     onChange={(e) => setSearchParams({...Object.fromEntries(searchParams), catId : e.target.value})}
                 />
 
                 <Select
+                    id="region"
                     label="Région"
                     datas={regions}
-                    placeholder="Toutes les régions"
-                    value={searchParams.get('region')}
+                    selectPlaceholder="Toutes les régions"
+                    value={searchParams.get('region') ?? ""}
                     onChange={(e) => setSearchParams({...Object.fromEntries(searchParams), region : e.target.value})}
                 />
             </div>

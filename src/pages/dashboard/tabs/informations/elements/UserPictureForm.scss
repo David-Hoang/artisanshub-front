@@ -89,6 +89,13 @@ div.user-picture-wrapper{
         }
     }
     
+    button.mobile-button-picture{
+        width: 100%;
+        @media screen and (min-width : var.$bp-md) {
+            display: none;
+        }
+    }
+
     div.wrapper {
         width: 100%;
         @media screen and (min-width : var.$bp-md) {

@@ -8,6 +8,16 @@ export const firstCapitalize = (word) => {
 }
 
 /**
+ * return this year only
+ * @return {string}
+ */
+export const thisYear = () => {
+    const thisYear = new Date().getFullYear();
+    return thisYear;
+}
+
+
+/**
  * format Vendredi 4 juillet 2025
  * @param {date} date 
  * @returns {string}

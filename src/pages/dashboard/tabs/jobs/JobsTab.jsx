@@ -69,6 +69,7 @@ function JobsTab() {
             })
 
             if(response.status === 200){
+                closeDelete();
                 fetchJobs();
             } 
 

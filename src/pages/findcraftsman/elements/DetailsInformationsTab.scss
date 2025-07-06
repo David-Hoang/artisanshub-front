@@ -87,9 +87,16 @@ div.details-tab-craftsman {
 
                 &.email-wrapper{
                     @include mxn.success;
+
+                    p {
+                        font-size: var.$txt-sm;
+                    }
                 }
                 &.phone-wrapper{
                     @include mxn.info;
+                    p {
+                        font-size: var.$txt-sm;
+                    }
                 }
 
                 a.contact,

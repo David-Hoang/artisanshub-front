@@ -97,7 +97,7 @@ function Register() {
                         <Select 
                             label="Region*"
                             id="region"
-                            placeholder="Sélectionnez votre région"
+                            selectPlaceholder="Sélectionnez votre région"
                             datas={regions}
                             value={formRegister.region}
                             onChange={(e) => { setFormRegister({...formRegister, region : e.target.value}) }}/>

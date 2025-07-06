@@ -57,7 +57,7 @@ function ModalMessage({isModalOpen, closeModal, selectedUserConversation}) {
     useEffect(() => {
         if (conversation.length > 0 && messageList.current) {
             setTimeout(() => {
-                messageList.current.scrollIntoView({ behavior: "smooth" });
+                messageList.current.lastElementChild.scrollIntoView(false);
             }, 0);
         }
     }, [conversation]);
@@ -105,13 +105,13 @@ function ModalMessage({isModalOpen, closeModal, selectedUserConversation}) {
                     { selectedUserConversation.job_name && <Badge color="info">{selectedUserConversation.job_name}</Badge> }
                 </div>
             </div>
-            <section className={isLoadingConversation ? "messages-content messages-loading" : "messages-content"}>
+            <section className={isLoadingConversation ? "messages-content messages-loading" : "messages-content"} ref={messageList}>
 
                 {isLoadingConversation 
                     ? <SpinLoader/>
                     : conversation && conversation.length > 0 
                         ? 
-                        <ul className="conversation" ref={messageList}>
+                        <ul className="conversation">
                             {conversation.map((message, key) => (
                                 <li key={key} className={`message-content ${selectedUserConversation.id === message.sender_id  ? 'receiver' : ' sender'}`}>
                                     <div className={`message-badge ${selectedUserConversation.id === message.sender_id  ? 'receiver' : ' sender'}`}>

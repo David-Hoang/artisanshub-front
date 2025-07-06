@@ -1,0 +1,32 @@
+@use "../../assets/scss/variables" as var;
+@use "../../assets/scss/mixins" as mxn;
+@use "../../assets/scss/extends" as ext;
+
+main#main-not-found{
+    display : flex;
+    flex-direction: column;
+    
+    padding: 3rem;
+
+    img.not-found-picture{
+        width: 100%;
+        height: auto;
+        max-height: 25rem;
+    }
+    div.content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var.$gap-lg;
+
+        h1 {
+            font-size: var.$txt-2xl;
+            text-align: center;
+        }
+
+        a.a-btn-primary{
+            @include mxn.a-btn("primary", var.$txt-sm);
+            width : fit-content;
+        }
+    }
+}

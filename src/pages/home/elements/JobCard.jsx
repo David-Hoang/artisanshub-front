@@ -22,7 +22,10 @@ function JobCard({jobsCategories, ...props}) {
                         <Link to='/' key={job.id} className="job-category-card">
                             <div className="image-container">
                                 <div className="filter-brightness"></div>
-                                <img src={`${apiBase}/storage/${job.img_path}`} alt={job.name} className="image-artisan" />
+                                <img
+                                src={`${apiBase}/storage/${job.img_path}`} alt={`${job.name ?? "Métier"} : ${job.img_title}`} 
+                                className="image-artisan"
+                                />
                             </div>
                             <div className="infos-container">
                                 <h4>{job.name}</h4>

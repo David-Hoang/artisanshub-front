@@ -1,0 +1,76 @@
+@use "../../assets/scss/variables" as var;
+@use "../../assets/scss/mixins" as mxn;
+@use "../../assets/scss/extends" as ext;
+
+main#main-contact-page{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var.$gap-3xl;
+    padding : 4rem 1.5rem;
+
+    div.contact-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var.$gap-base;
+
+        h1 {
+            font-size : var.$txt-3xl;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        h2 {
+            font-size : var.$txt-base;
+            font-weight: 400;
+            text-align: center;
+            color : var.$gray;
+        }
+    }
+
+    form#guess-contact-form {
+        display: flex;
+        flex-direction: column;
+        gap: var.$gap-2xl;
+
+        @include mxn.shadow-thin;
+        background-color: var.$full-white;
+        padding : 2.5rem;
+        border : 1px #e6e6e6 solid ;
+        border-radius: var.$rounded-lg;
+
+        h3 {
+            font-size : var.$txt-xl;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        div.wrapper {
+            display: flex;
+            flex-direction: column;
+            gap : var.$gap-sm;
+
+            @media screen and (min-width : var.$bp-sm) {
+                flex-direction: row;
+                align-items: center;
+                gap : var.$gap-xl;
+            }
+        }
+
+
+
+        button.btn-primary {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var.$gap-xs;
+            
+            @media screen and (min-width : var.$bp-sm) {
+                width: fit-content;
+                align-self: center;
+            }
+        }
+    }
+}
