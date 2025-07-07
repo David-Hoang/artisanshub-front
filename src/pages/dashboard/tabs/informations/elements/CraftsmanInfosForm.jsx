@@ -66,7 +66,19 @@ function CraftsmanInfosForm() {
         //validate gallery
         let validateImgFile;
         const allowedTypes = ["image/png", "image/jpeg", "image/jpg", "image/webp"];
-        const maxSize = 3 * 1024 * 1024; // 3Mo
+        const maxSizePerFile = 3 * 1024 * 1024; // 3Mo
+        const maxTotalSize = 6 * 1024 * 1024 //6Mo
+
+        const countSizeGallery = galleryToForm.reduce((sum, file) => sum + file.size, 0)
+
+        if(countSizeGallery > maxTotalSize) {
+            setTimeout(() => {
+                setAlertMessage({type: "error",message: "Le volume total des fichiers sélectionnés est trop important (max. 6 Mo). Veuillez en supprimer avant de continuer."});
+                setIsLoadingCraftsman(false);
+            }, 500);
+            return;    
+        }
+
 
         for(let i = 0; i < galleryToForm.length; i++){
 
@@ -74,7 +86,7 @@ function CraftsmanInfosForm() {
                 validateImgFile = {type: "error",message: "Veuillez téléverser uniquement des images aux formats autorisés (JPG, PNG, WEBP)."};
                 break;
             }
-            if (galleryToForm[i].size > maxSize) {
+            if (galleryToForm[i].size > maxSizePerFile) {
                 validateImgFile = {type: "error",message: "Un des fichiers est trop grand, maximum par fichier : 3 Mo."};
                 break;
             }
