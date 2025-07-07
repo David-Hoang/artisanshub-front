@@ -8,8 +8,6 @@ import Input from "../../components/ui/Input";
 import TextArea from "../../components/ui/TextArea";
 import Button from "../../components/ui/Button";
 
-
-
 function Contact() {
 
     const [guessContact, setGuessContact] = useState({
@@ -20,8 +18,6 @@ function Contact() {
         message_content : ""
     })
 
-    console.log(guessContact);
-    
     return ( 
         <main id="main-contact-page">
             <div className="contact-header">
