@@ -1,5 +1,5 @@
 import './Header.scss';
-import mainLogo from '../../assets/img/logo/logo-192x192.webp';
+import mainLogo from '../../assets/img/logo/logo-50x50.webp';
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGripLines, faXmark } from '@fortawesome/free-solid-svg-icons';
