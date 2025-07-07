@@ -66,7 +66,10 @@ function Contact() {
                 </div>
                 
                 <TextArea 
+                    id="message"
                     label="Message *"  
+                    rows="6"
+                    placeholder="Votre demande ..."
                     value={guessContact.message_content}
                     onChange={(e) => { setGuessContact({...guessContact, message_content : e.target.value}) }}
                 />
