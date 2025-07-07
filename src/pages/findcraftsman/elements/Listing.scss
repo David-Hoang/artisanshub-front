@@ -13,6 +13,14 @@ section.craftsmen-content {
         max-width: var.$bp-2xl;
     }
     
+    p.result-message {
+        font-size: var.$txt-sm;
+        span {
+            font-size: var.$txt-lg;
+            font-weight: 600;
+        }
+    }
+
     ul.craftsmen-list {
         display: grid;
         grid-template-columns: repeat(1, 1fr);
