@@ -190,7 +190,11 @@ function CraftsmanGallery({galleryToForm, setGalleryToForm, alertGallery, setAle
                     <FontAwesomeIcon icon={faCloud} />
                     <FontAwesomeIcon icon={faArrowUp} />
                 </div>
-                <label htmlFor="gallery">Déposez ou sélectionnez vos images</label>
+                <label htmlFor="gallery">
+                    <span className="label">Déposez ou sélectionnez vos images</span>
+                    <br/>
+                    <span className="info-size"><i>Taille maximum par fichier (3Mo).</i></span>
+                </label>
                 <input
                     id="gallery"
                     type="file"

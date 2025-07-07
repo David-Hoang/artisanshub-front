@@ -168,13 +168,14 @@ function UserpictureForm() {
                         </button>
                     }
                 </div>
+                
+                <p className="info-size">Taille maximum par fichier (3Mo).</p>
 
                 <Button className="btn-secondary mobile-button-picture"
                     onClick={() => profilePictureInput.current.click()}
                     >
                     Ajouter une photo
                 </Button>
-                
                 {errorInfosForm.profile_picture && 
                     <div>
                         <AlertMessage type="error">{errorInfosForm.profile_picture}</AlertMessage>

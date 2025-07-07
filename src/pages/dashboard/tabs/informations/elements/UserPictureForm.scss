@@ -89,6 +89,10 @@ div.user-picture-wrapper{
         }
     }
     
+    p.info-size {
+        font-size: var.$txt-sm;
+        color : var.$danger;
+    }
     button.mobile-button-picture{
         width: 100%;
         @media screen and (min-width : var.$bp-md) {
