@@ -33,8 +33,7 @@ header {
                 display : flex;
                 
                 img.desktop-main-logo{
-                    width : 2.4rem;
-                    height : auto;
+                    aspect-ratio: 1/1;
                     transform: translate(-1px, -9px);
                 }
             }
@@ -146,8 +145,7 @@ header {
                     display : flex;
                     
                     & img.mobile-main-logo{
-                        width : 2.4rem;
-                        height : auto;
+                        aspect-ratio: 1/1;
                         transform: translate(-1px, -9px);
                     }
                 }
