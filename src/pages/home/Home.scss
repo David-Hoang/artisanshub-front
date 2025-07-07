@@ -105,11 +105,12 @@ main#main-home {
 
             img{
                 object-fit: cover;
-                width: 100vw;
+                width: 100%;
                 height: 15rem;
                 
                 @media screen and (min-width : var.$bp-md) {
                     height : 22rem;
+                    width: 100vw;
                 }
 
                 @media screen and (min-width : var.$bp-lg) {

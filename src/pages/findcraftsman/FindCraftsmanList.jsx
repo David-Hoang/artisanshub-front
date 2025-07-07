@@ -5,6 +5,7 @@ import axios from "axios";
 
 import Filters from "./elements/Filters.jsx";
 import Listing from "./elements/Listing.jsx";
+import { filterCraftsmanList } from "../../utils/FilterCraftsmanList.jsx";
 
 function FindCraftsman() {
 
@@ -20,8 +21,11 @@ function FindCraftsman() {
         try {
             const response = await axios.get(`${apiBase}/api/craftsmen`);
 
-            if(response.status === 200){
-                setListing(response.data);
+            const {status, data} = response;
+
+            if(status === 200){
+                //front filtering craftsman list
+                setListing(filterCraftsmanList(searchParams, data));
             }
             
         } catch (error) {
@@ -33,7 +37,7 @@ function FindCraftsman() {
 
     useEffect(() => {
         fetchCraftsmen()
-    }, []);
+    }, [setSearchParams]);
 
     return ( 
         <main id="main-find-craftsman">

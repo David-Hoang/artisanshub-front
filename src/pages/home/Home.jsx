@@ -35,15 +35,10 @@ function Home() {
                     </div>
                 </section>
                 <div className="content">
-                    <Search
-                        //Transform to an array of name only
-                        jobsCategories={
-                            jobsCategories.length > 1 ?
-                            jobsCategories.map(job => job.name) : 
-                            null
-                        }
-                    />
+                    {/* Search form */}
+                    <Search />
 
+                    {/* Jobs cards */}
                     <JobCard jobsCategories={jobsCategories}/>
 
                 </div>
