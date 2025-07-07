@@ -1,5 +1,6 @@
 import './Home.scss';
-import HeroImg from '../../assets/img/home-hero-small.webp';
+import HeroImgMobile from '../../assets/img/home-hero-mobile.webp';
+import HeroImgDesktop from '../../assets/img/home-hero-small.webp';
 
 import { Link } from "react-router-dom";
 import { useContext } from "react";
@@ -31,7 +32,15 @@ function Home() {
                         </div>
                     </div>
                     <div className="hero-img">
-                        <img src={HeroImg} alt="Hero Image" />
+                        <picture>
+                            <source srcSet={HeroImgMobile} media="(max-width: 1023px)" />
+                            <img
+                                src={HeroImgDesktop}
+                                loading="eager"
+                                alt="Hero image d'un artisan avec une casquette bleue."
+                                fetchPriority="high"
+                            />
+                        </picture>
                     </div>
                 </section>
                 <div className="content">
