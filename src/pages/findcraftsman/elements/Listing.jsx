@@ -29,8 +29,6 @@ function Listing({isLoadingList, listing}) {
         const jobIdParam = parseInt(searchParams.get('catId'));
         const regionParam = searchParams.get('region');
 
-        console.log(regions);
-        
         let jobName = null;
         let regionName = null;
         let message = "";

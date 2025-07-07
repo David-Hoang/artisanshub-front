@@ -2,22 +2,31 @@
 @use "../../assets/scss/mixins" as mxn;
 @use "../../assets/scss/extends" as ext;
 
-li a {
-    font-size : var.$txt-base;
-    text-decoration: none;
-    color : var.$gray;
-    letter-spacing: -0.5px;
-
-    &:visited {
-        color : var.$gray;
+li {
+    &.active-menu {
+        border-bottom: 1px var.$primary solid;
+        &>a {
+            color : var.$primary !important;
+            // font-weight: 600;
+        }
     }
+    a {
+        font-size: var.$txt-base;
+        text-decoration: none;
+        color: var.$gray;
+        letter-spacing: -0.5px;
 
-    &:hover {
-        color : var.$primary;
-        transition: all 0.1s;
-    }
+        &:visited {
+            color: var.$gray;
+        }
 
-    @media screen and (min-width : var.$bp-lg) {
-        letter-spacing: normal;
+        &:hover {
+            color: var.$primary;
+            transition: all 0.1s;
+        }
+
+        @media screen and (min-width: var.$bp-lg) {
+            letter-spacing: normal;
+        }
     }
 }
