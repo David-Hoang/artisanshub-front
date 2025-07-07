@@ -63,6 +63,10 @@ div.craftsman-gallery {
 
         label {
             text-align: center;
+            span.info-size{
+                color: var.$danger;
+                font-size: var.$txt-sm;
+            }
         }
 
         input#gallery {
