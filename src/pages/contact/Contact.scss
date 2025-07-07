@@ -30,15 +30,19 @@ main#main-contact-page{
     }
 
     form#guess-contact-form {
-        display: flex;
-        flex-direction: column;
-        gap: var.$gap-2xl;
-
         @include mxn.shadow-thin;
+        
         background-color: var.$full-white;
         padding : 2.5rem;
         border : 1px #e6e6e6 solid ;
         border-radius: var.$rounded-lg;
+
+        display: flex;
+        flex-direction: column;
+        gap: var.$gap-2xl;
+
+        width: 100%;
+        max-width: 34rem;
 
         h3 {
             font-size : var.$txt-xl;
@@ -50,11 +54,15 @@ main#main-contact-page{
             display: flex;
             flex-direction: column;
             gap : var.$gap-sm;
-
+            
             @media screen and (min-width : var.$bp-sm) {
                 flex-direction: row;
                 align-items: center;
                 gap : var.$gap-xl;
+            }
+
+            div.input-wrapper {
+                width: 100%;
             }
         }
 
