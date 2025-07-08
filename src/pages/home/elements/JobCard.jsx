@@ -40,9 +40,9 @@ function JobCard({jobsCategories, ...props}) {
 
                         ))}
                     </div>
-                    <Button className="btn-primary">
+                    <Link to={'/trouver-artisan'} className="a-btn-primary">
                         Voir les catégories
-                    </Button>
+                    </Link>
                 </>
             ) : (
                 <SpinLoader/>
