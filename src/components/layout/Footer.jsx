@@ -7,6 +7,7 @@ import { thisYear } from "../../utils/Helpers";
 import { Link } from "react-router-dom";
 
 function Footer() {
+
     return ( 
         <footer>
             <div id="footer-wrapper">
@@ -26,16 +27,16 @@ function Footer() {
                             <h4>Catégories</h4>
                             <ul>
                                 <li>
-                                    <a href="#">Plombier</a>
+                                    <Link to={'/trouver-artisan?catId=1'}>Plombier</Link>
                                 </li>
                                 <li>
-                                    <a href="#">Électricien</a>
+                                    <Link to={'/trouver-artisan?catId=2'}>Électricien</Link>
                                 </li>
                                 <li>
-                                    <a href="#">Jardinier</a>
+                                    <Link to={'/trouver-artisan?catId=6'}>Jardinier</Link>
                                 </li>
                                 <li>
-                                    <a href="#">Menusier</a>
+                                    <Link to={'/trouver-artisan?catId=5'}>Menusier</Link>
                                 </li>
                             </ul>
                         </div>
