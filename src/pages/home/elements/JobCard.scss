@@ -76,12 +76,13 @@ section.home-jobs-categories{
         }
     }
 
-    button.btn-primary {
-        width : 100%
+    a.a-btn-primary {
+        width: 100%;
+        @include mxn.a-btn("primary", var.$txt-sm);
     }
 
     @media screen and (min-width : var.$bp-md) {
-        button.btn-primary {
+        a.a-btn-primary {
             width : 15rem;
             align-self: center;
         }
