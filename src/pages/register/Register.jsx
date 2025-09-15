@@ -7,6 +7,7 @@ import axios from 'axios';
 
 import Button from "../../components/ui/Button.jsx";
 import Input from "../../components/ui/Input.jsx";
+import InputPwd from "../../components/ui/InputPwd.jsx";
 import Select from "../../components/ui/Select.jsx";
 import Error from "../../components/Error.jsx";
 import SpinLoader from "../../components/ui/SpinLoader.jsx";
@@ -76,7 +77,7 @@ function Register() {
 
                 <div className="register-contact">
                     <div className="wrapper">
-                        <Input label="Téléphone*" id="phone" type="phone"
+                        <Input label="Téléphone*" id="phone" type="phone" placeholder="06 12 34 56 78"
                             value={formRegister.phone}
                             onChange={(e) => { setFormRegister({...formRegister, phone : e.target.value}) }}/>
                         {errorFormRegister.phone && <Error>{errorFormRegister.phone}</Error>}
@@ -123,13 +124,13 @@ function Register() {
                 
                 <div className="register-passwords">
                     <div className="wrapper">
-                        <Input label="Mot de passe*" id="password" type="password"
+                        <InputPwd label="Mot de passe*" id="password" placeholder="*********"
                             value={formRegister.password}
                             onChange={(e) => { setFormRegister({...formRegister, password : e.target.value}) }}/>
                         {errorFormRegister.password && <Error>{errorFormRegister.password}</Error>}
                     </div>
                     <div className="wrapper">
-                        <Input label="Confirmation mot de passe*" id="password_confirmation" type="password"
+                        <InputPwd label="Confirmation mot de passe*" id="password_confirmation" placeholder="*********"
                             value={formRegister.password_confirmation}
                             onChange={(e) => { setFormRegister({...formRegister, password_confirmation : e.target.value}) }}/>
                         {errorFormRegister.password_confirmation && <Error>{errorFormRegister.password_confirmation}</Error>}

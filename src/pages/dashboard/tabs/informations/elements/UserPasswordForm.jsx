@@ -4,7 +4,7 @@ import axios from "axios";
 
 import { AuthContext } from "../../../../../context/AuthContext";
 
-import Input from "../../../../../components/ui/Input";
+import InputPwd from "../../../../../components/ui/InputPwd";
 import Button from "../../../../../components/ui/Button";
 import AlertMessage from "../../../../../components/AlertMessage";
 import SpinLoader from "../../../../../components/ui/SpinLoader";
@@ -114,21 +114,22 @@ function UserPasswordForm() {
             <div className="user-password-input">
 
                 <div className="wrapper">
-                    <Input label="Mot de passe actuel*" id="password" type="password" autoComplete="off" minLength={8}
+                    <InputPwd label="Mot de passe actuel*" id="password" placeholder="*********" autoComplete="off" minLength={8}
                         value={userPasswordForm.password}
                         onChange={(e) => setUserPasswordForm({...userPasswordForm, password : e.target.value})}
                         />
+                        
                     {errorInfosForm.password && <AlertMessage type="error">{errorInfosForm.password}</AlertMessage>}
                 </div>
                 <div className="wrapper">
-                    <Input label="Nouveau mot de passe*" id="new_password" type="password" autoComplete="off" minLength={8}
+                    <InputPwd label="Nouveau mot de passe*" id="new_password" placeholder="*********" autoComplete="off" minLength={8}
                         value={userPasswordForm.new_password}
                         onChange={(e) => setUserPasswordForm({...userPasswordForm, new_password : e.target.value})}
                         />
                     {errorInfosForm.new_password && <AlertMessage type="error">{errorInfosForm.new_password}</AlertMessage>}
                 </div>
                 <div className="wrapper">
-                    <Input label="Confirmer nouveau mot de passe*" id="new_password_confirmation" type="password" autoComplete="off" minLength={8}
+                    <InputPwd label="Confirmer nouveau mot de passe*" id="new_password_confirmation" placeholder="*********" autoComplete="off" minLength={8}
                         value={userPasswordForm.new_password_confirmation}
                         onChange={(e) => setUserPasswordForm({...userPasswordForm, new_password_confirmation : e.target.value})}
                         />
