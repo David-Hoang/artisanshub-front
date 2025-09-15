@@ -8,6 +8,7 @@ import SpinLoader from "../../components/ui/SpinLoader.jsx";
 import Button from "../../components/ui/Button.jsx";
 import Input from "../../components/ui/Input.jsx";
 import Error from "../../components/Error.jsx";
+import InputPwd from "../../components/ui/InputPwd.jsx";
 
 
 function Login() {
@@ -39,10 +40,9 @@ function Login() {
                     />
                     {errorEmail && <Error>{errorEmail}</Error>}
 
-                    <Input
+                    <InputPwd 
                         label="Mot de passe"
                         id="password"
-                        type="password"
                         placeholder="*********"
                         onChange={(e) => {
                             setFormLogin({...formLogin, password : e.target.value})
@@ -52,7 +52,7 @@ function Login() {
                     {errorPassword && <Error>{errorPassword}</Error>}
                 </div>
 
-                <Button className="btn-primary" type="submit" disabled={isLoading}>
+                <Button className="btn-primary btn-login" type="submit" disabled={isLoading}>
                     {isLoading ? (
                             <SpinLoader />
                         ) : (
