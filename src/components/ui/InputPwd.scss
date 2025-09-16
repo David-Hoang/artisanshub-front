@@ -19,11 +19,16 @@ div.input-wrapper {
 
     button.show-pwd {
         position: absolute;
-        padding: 0.5rem;
         right: 0.8rem;
-        top: 1.8rem;
+        top: 2.3rem;
         background-color: transparent;
         border : transparent;
         cursor: pointer;
+        color : var.$black;
+        transition: all 0.2s ease-in-out;
+    }
+
+    button.show-pwd:hover {
+        color : var.$gray;
     }
 }
